@@ -466,11 +466,11 @@
         try {
           const parsed = JSON.parse(storedVocab);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            // อัปเกรดข้อมูลเก่าอัตโนมัติ: แทนที่คำที่มีประโยคบทละครโบราณหรือคำอ่านเก่าด้วยข้อมูลใหม่จากคลังหลัก
+            // อัปเกรดข้อมูลเก่าอัตโนมัติ: แทนที่คำที่มีในคลังหลักให้เป็นเวอร์ชันล่าสุดที่สมบูรณ์เสมอ
             const defaultMap = new Map(DEFAULT_TOEIC_VOCAB.map(item => [item.word, item]));
             vocabList = parsed.map(item => {
               const defItem = defaultMap.get(item.word);
-              if (defItem && (item.example_en.includes('/') || item.example_en.includes('Hamlet') || item.pronunciation === 'โคล-เล-กู')) {
+              if (defItem) {
                 return { ...defItem };
               }
               return item;
@@ -1032,18 +1032,17 @@
               for (const m of entry.meanings) {
                 if (Array.isArray(m.definitions)) {
                   rawDefinitions += " " + m.definitions.map(d => d.definition || "").join(" ");
-                  if (!exampleEn) {
-                    // กรองเฉพาะประโยคตัวอย่างที่สั้นกระชับ (ไม่เกิน 110 ตัวอักษร) และไม่มีบทกวี/บทละคร (เช่น /, Act, Scene)
+                    // กรองเฉพาะประโยคสมบูรณ์ (ขึ้นต้นตัวใหญ่ ลงท้ายด้วย . ! ? ยาว 25-110 ตัวอักษร) และไม่มีบทกวี/บทละคร
                     const defWithEx = m.definitions.find(d => {
                       if (!d.example) return false;
                       const ex = d.example.trim();
-                      return ex.length > 10 && ex.length <= 110 && !ex.includes('/') && !ex.includes('Scene') && !ex.includes('Act ');
+                      const isFullSentence = /^[A-Z].*[.!?]$/.test(ex);
+                      return isFullSentence && ex.length >= 25 && ex.length <= 110 && !ex.includes('/') && !ex.includes('Scene') && !ex.includes('Act ');
                     });
                     if (defWithEx) {
                       pos = mapPosToThai(m.partOfSpeech);
                       exampleEn = defWithEx.example.trim();
                     }
-                  }
                 }
               }
             }

@@ -1,0 +1,1057 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TOEIC Typing Master</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body {
+      font-family: 'Sarabun', sans-serif;
+      background-color: #0b0f19;
+    }
+    .font-mono-code {
+      font-family: 'JetBrains Mono', monospace;
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.6);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(51, 65, 85, 0.8);
+      border-radius: 4px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(71, 85, 105, 1);
+    }
+    @keyframes pulse-success {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.015); }
+      100% { transform: scale(1); }
+    }
+    .animate-success {
+      animation: pulse-success 0.25s ease-in-out;
+    }
+  </style>
+</head>
+<body class="text-slate-100 min-h-screen flex flex-col justify-between select-none">
+
+  <!-- TOP HEADER (ตรงตามแบบต้นฉบับ ไม่มีแถบสถิติ) -->
+  <header class="border-b border-slate-800/80 bg-[#0d121f] px-4 sm:px-8 py-3.5 flex-none">
+    <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
+      <!-- Left: Logo & Live Word Counter -->
+      <div class="flex items-center gap-3.5">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25">
+          <i class="fa-solid fa-keyboard text-lg"></i>
+        </div>
+        <div>
+          <h1 class="font-bold text-lg text-white leading-tight tracking-wide">TOEIC Typing Master</h1>
+          <p class="text-xs text-slate-400 mt-0.5">
+            คลังศัพท์พร้อมใช้ <span id="total-word-count" class="text-sky-400 font-bold font-mono text-sm">0</span> คำ
+          </p>
+        </div>
+      </div>
+
+      <!-- Right: Action Buttons -->
+      <div class="flex items-center gap-2.5">
+        <button onclick="openVocabManager(); switchModalTab('add');" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-emerald-600/20">
+          <i class="fa-solid fa-circle-plus"></i>
+          <span>เพิ่มคำศัพท์เอง (ไม่จำกัด)</span>
+        </button>
+
+        <button onclick="openVocabManager(); switchModalTab('list');" class="px-3.5 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 font-medium transition text-xs sm:text-sm flex items-center gap-2 border border-slate-700/80">
+          <i class="fa-solid fa-layer-group text-amber-400"></i>
+          <span>ดูคลังศัพท์</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="flex-1 flex flex-col items-center justify-center px-4 py-4 max-w-4xl mx-auto w-full">
+    
+    <!-- CONTROL BAR (กล่องแยกด้านบนตามภาพต้นฉบับ) -->
+    <div class="w-full bg-[#111726] border border-slate-800/90 rounded-2xl px-4 py-2.5 mb-4 flex flex-wrap items-center justify-between gap-3 shadow-md">
+      <!-- Category Selector -->
+      <div class="flex items-center gap-2.5 flex-1 min-w-[220px]">
+        <span class="text-xs text-slate-400 whitespace-nowrap">หมวดหมู่:</span>
+        <select id="category-filter" onchange="filterByCategory(this.value)" class="w-full max-w-[260px] bg-[#0b0f19] border border-slate-700/80 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-200 outline-none focus:border-indigo-500 cursor-pointer">
+          <option value="ALL">ทั้งหมด (All Categories)</option>
+        </select>
+      </div>
+
+      <!-- Mode, Auto-Speak & Speed Controls -->
+      <div class="flex flex-wrap items-center gap-2">
+        <button id="btn-toggle-hint" onclick="toggleHintMode()" class="px-3 py-1.5 rounded-xl bg-indigo-950/90 hover:bg-indigo-900/90 text-indigo-200 border border-indigo-700/60 transition text-xs flex items-center gap-1.5 font-medium">
+          <i id="hint-icon" class="fa-solid fa-eye text-amber-400"></i>
+          <span id="hint-text">โหมด: ปกติ (เห็นตัวสะกด)</span>
+        </button>
+
+        <button id="btn-auto-speak" onclick="toggleAutoSpeak()" class="px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 transition text-xs flex items-center gap-1.5 font-medium">
+          <i id="auto-speak-icon" class="fa-solid fa-volume-high text-sky-400"></i>
+          <span id="auto-speak-text">อ่านอัตโนมัติ: เปิด</span>
+        </button>
+
+        <button id="btn-speech-rate" onclick="cycleSpeechRate()" class="px-2.5 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 border border-slate-700 transition text-xs font-mono font-semibold" title="ปรับความเร็วเสียงอ่าน">
+          1.0x
+        </button>
+      </div>
+    </div>
+
+    <!-- MAIN PRACTICE CARD (ไม่มีกล่องสถิติคั่นกลาง) -->
+    <div id="flashcard-box" class="w-full bg-[#111726] border border-slate-800/90 rounded-2xl shadow-2xl p-5 sm:p-7 flex flex-col justify-between transition-all duration-200">
+      
+      <!-- Card Top Row: Category Badge & Speak Button -->
+      <div class="flex items-center justify-between">
+        <span id="card-category" class="bg-slate-800/90 text-slate-300 border border-slate-700/60 text-xs px-3 py-1 rounded-lg font-medium">
+          General
+        </span>
+
+        <button onclick="speakCurrentWord()" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition text-xs flex items-center gap-2 font-medium shadow-md shadow-indigo-600/20">
+          <i class="fa-solid fa-volume-high"></i>
+          <span>ฟังเสียงอ่าน (Tab)</span>
+        </button>
+      </div>
+
+      <!-- Center: Word, Pronunciation, POS, Meaning -->
+      <div class="text-center my-3">
+        <h2 id="target-word" class="text-4xl sm:text-5xl md:text-6xl font-bold font-mono-code tracking-wider text-white my-2 transition-all">
+          distribute
+        </h2>
+
+        <!-- Pronunciation & POS Pills -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-3">
+          <span id="target-pronunciation" class="bg-slate-800/90 text-slate-300 border border-slate-700/60 text-xs px-3 py-1 rounded-full">
+            คำอ่าน: <span class="text-sky-400 font-semibold">ดิส-ทริ-บิวท์</span>
+          </span>
+          <span id="card-pos" class="bg-indigo-950/90 text-indigo-300 border border-indigo-800/70 text-xs px-3 py-1 rounded-full font-medium">
+            คำกริยา (v.)
+          </span>
+        </div>
+
+        <!-- Yellow Meaning Box -->
+        <div class="mt-4 bg-[#0b0f19] border border-slate-800/90 rounded-xl py-3 px-4 max-w-2xl mx-auto">
+          <p class="text-[11px] text-slate-500 mb-0.5">ความหมายภาษาไทย</p>
+          <p id="target-meaning" class="text-lg sm:text-2xl font-bold text-amber-400">
+            แจกจ่าย, กระจายสินค้า
+          </p>
+        </div>
+
+        <!-- EXAMPLE SENTENCE BOX (ย้ายมาไว้ใต้ความหมายภาษาไทยตามภาพ) -->
+        <div class="mt-3 bg-[#0b0f19] border border-slate-800/90 rounded-2xl p-4 text-left max-w-2xl mx-auto">
+          <div class="flex items-center justify-between mb-1.5">
+            <div class="flex items-center gap-2 text-xs text-sky-400 font-semibold">
+              <i class="fa-solid fa-quote-left text-sky-400"></i>
+              <span>ตัวอย่างประโยค TOEIC:</span>
+            </div>
+            <button onclick="speakCurrentSentence()" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/70 transition text-[11px] flex items-center gap-1.5">
+              <i class="fa-solid fa-volume-low text-sky-400"></i>
+              <span>ฟังประโยค</span>
+            </button>
+          </div>
+          <p id="target-example-en" class="text-slate-100 text-sm sm:text-base leading-relaxed">
+            Logistics will <span class="text-amber-400 font-bold underline underline-offset-4">distribute</span> the goods across all branches.
+          </p>
+          <p id="target-example-th" class="text-slate-400 text-xs sm:text-sm mt-1">
+            ฝ่ายโลจิสติกส์จะกระจายสินค้าไปยังทุกสาขา
+          </p>
+        </div>
+      </div>
+
+      <!-- Typing Input & Shortcuts -->
+      <div class="mt-3 max-w-xl mx-auto w-full">
+        <div class="relative">
+          <input 
+            type="text" 
+            id="typing-input" 
+            autocomplete="off" 
+            autocorrect="off" 
+            autocapitalize="none" 
+            spellcheck="false"
+            placeholder="พิมพ์คำศัพท์ภาษาอังกฤษที่นี่ . . ." 
+            class="w-full bg-[#0b0f19] border-2 border-slate-700/80 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 rounded-xl px-4 py-3 text-lg sm:text-xl font-mono-code text-center tracking-wider text-white outline-none transition-all placeholder:text-slate-600 placeholder:font-sans placeholder:text-sm"
+          >
+          <div id="input-status-icon" class="absolute right-4 top-1/2 -translate-y-1/2 text-slate-600 text-base">
+            <i class="fa-solid fa-keyboard"></i>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between mt-2 text-[11px] text-slate-500 px-1">
+          <span>กด <kbd class="px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300 font-mono">Tab</kbd> เพื่อฟังเสียงซ้ำ</span>
+          <button onclick="skipWord()" class="hover:text-amber-400 transition font-medium">
+            ข้ามคำนี้ (Esc) &rarr;
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- VOCABULARY MANAGER MODAL -->
+  <div id="vocab-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
+    <div class="bg-[#111726] border border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
+      
+      <!-- Modal Header -->
+      <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-[#0b0f19]">
+        <div class="flex items-center gap-2.5">
+          <i class="fa-solid fa-database text-sky-400 text-lg"></i>
+          <div>
+            <h3 class="font-bold text-base text-white">จัดการคลังคำศัพท์ (ไม่จำกัดจำนวน)</h3>
+            <p class="text-xs text-slate-400">ตรวจคำซ้ำแบบสนตัวพิมพ์เล็ก-ใหญ่ (Case-Sensitive) และตัดช่องว่างเกินอัตโนมัติ</p>
+          </div>
+        </div>
+        <button onclick="closeVocabManager()" class="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Modal Tabs -->
+      <div class="flex border-b border-slate-800 bg-[#0d121f] px-5 text-xs font-semibold">
+        <button id="tab-btn-add" onclick="switchModalTab('add')" class="py-3 px-4 text-sky-400 border-b-2 border-sky-400 flex items-center gap-2">
+          <i class="fa-solid fa-file-circle-plus"></i> เพิ่มคำศัพท์ (ทีละคำ / วางทีละหลายพันคำ)
+        </button>
+        <button id="tab-btn-list" onclick="switchModalTab('list')" class="py-3 px-4 text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2">
+          <i class="fa-solid fa-list-check"></i> คลังคำศัพท์ทั้งหมด (<span id="modal-word-count">0</span>)
+        </button>
+      </div>
+
+      <!-- Modal Body -->
+      <div class="p-5 flex-1 overflow-y-auto space-y-4">
+        
+        <!-- TAB 1: BULK ADD -->
+        <div id="tab-content-add" class="space-y-4">
+          <div class="bg-sky-950/30 border border-sky-800/50 rounded-xl p-3.5 text-xs text-slate-300 leading-relaxed space-y-1">
+            <p class="font-semibold text-sky-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-circle-info"></i> วิธีเพิ่มคำศัพท์ (รองรับก๊อปปี้วางทีละ 5,000+ คำ):
+            </p>
+            <ul class="list-disc list-inside space-y-1 text-slate-300">
+              <li>พิมพ์หรือวางบรรทัดละ 1 คำ รูปแบบ: <code class="bg-slate-950 px-1.5 py-0.5 rounded font-mono text-amber-300">คำศัพท์, คำแปล</code> หรือคั่นด้วย Tab จาก Excel/Sheets ได้เลย</li>
+              <li><strong class="text-amber-400">สนตัวพิมพ์เล็ก-ใหญ่ (Case-Sensitive):</strong> <code class="bg-slate-950 px-1 rounded font-mono">March</code> กับ <code class="bg-slate-950 px-1 rounded font-mono">march</code> หรือ <code class="bg-slate-950 px-1 rounded font-mono">IT</code> กับ <code class="bg-slate-950 px-1 rounded font-mono">it</code> ถือเป็นคนละคำ ไม่ถูกตัดซ้ำ</li>
+              <li>ระบบจะสร้างตัวอย่างประโยค TOEIC และคำแปลประโยคให้อัตโนมัติหากไม่ได้กรอกมา</li>
+            </ul>
+          </div>
+
+          <div>
+            <textarea 
+              id="bulk-input" 
+              rows="8" 
+              placeholder="วางรายการคำศัพท์ที่นี่ บรรทัดละ 1 คำ เช่น:&#10;March, เดือนมีนาคม&#10;march, เดินขบวน&#10;IT, เทคโนโลยีสารสนเทศ&#10;it, มัน&#10;accomplish, ทำสำเร็จ&#10;deadline, กำหนดส่งงาน" 
+              class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl p-3.5 text-xs sm:text-sm font-mono-code text-slate-100 placeholder:text-slate-600 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none leading-relaxed"
+            ></textarea>
+          </div>
+
+          <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
+          <span id="bulk-add-status" class="text-xs font-semibold text-emerald-400"></span>
+          <button id="btn-process-bulk" onclick="processBulkAdd()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-700 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-bold rounded-xl transition shadow-lg shadow-emerald-600/20 flex items-center gap-2">
+            <i class="fa-solid fa-plus-circle"></i> <span>บันทึกเข้าคลังศัพท์</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- TAB 2: VOCAB LIST -->
+        <div id="tab-content-list" class="space-y-3 hidden">
+          <div class="flex items-center justify-between gap-2">
+            <div class="relative flex-1">
+              <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+              <input 
+                type="text" 
+                id="search-vocab" 
+                oninput="renderVocabTable()"
+                placeholder="ค้นหาคำศัพท์ หรือ คำแปล..." 
+                class="w-full bg-[#0b0f19] border border-slate-800 rounded-xl pl-8 pr-3 py-2 text-xs text-white placeholder:text-slate-600 outline-none focus:border-sky-500"
+              >
+            </div>
+            <button onclick="resetToDefaultVocab()" class="px-3 py-2 bg-slate-800 hover:bg-rose-950 text-slate-300 hover:text-rose-300 border border-slate-700 hover:border-rose-800 text-xs rounded-xl transition flex items-center gap-1.5">
+              <i class="fa-solid fa-rotate-left"></i> รีเซ็ตค่าเริ่มต้น
+            </button>
+          </div>
+
+          <div class="border border-slate-800 rounded-xl overflow-hidden max-h-[340px] overflow-y-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead class="bg-[#0b0f19] text-slate-400 border-b border-slate-800 sticky top-0">
+                <tr>
+                  <th class="p-2.5">คำศัพท์</th>
+                  <th class="p-2.5">ชนิดคำ</th>
+                  <th class="p-2.5">คำแปล / คำอ่าน</th>
+                  <th class="p-2.5">หมวดหมู่</th>
+                  <th class="p-2.5 text-center">ลบ</th>
+                </tr>
+              </thead>
+              <tbody id="vocab-table-body" class="divide-y divide-slate-800/60 text-slate-200">
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION -->
+  <div id="toast" class="fixed bottom-5 right-5 z-50 bg-[#111726] border border-slate-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2">
+    <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
+    <span id="toast-message" class="text-xs font-medium">บันทึกข้อมูลเรียบร้อยแล้ว</span>
+  </div>
+
+  <script>
+    /* ==========================================================================
+       1. คลังคำศัพท์ TOEIC เริ่มต้น
+       ========================================================================== */
+    const DEFAULT_TOEIC_VOCAB = [
+      { word: "distribute", pos: "คำกริยา (v.)", pronunciation: "ดิส-ทริ-บิวท์", meaning: "แจกจ่าย, กระจายสินค้า", category: "Logistics", example_en: "Logistics will distribute the goods across all branches.", example_th: "ฝ่ายโลจิสติกส์จะกระจายสินค้าไปยังทุกสาขา" },
+      { word: "March", pos: "คำนาม (n.)", pronunciation: "มาร์ช", meaning: "เดือนมีนาคม", category: "General Business", example_en: "The quarterly report will be published in March.", example_th: "รายงานประจำไตรมาสจะตีพิมพ์เผยแพร่ในเดือนมีนาคม" },
+      { word: "march", pos: "คำกริยา (v.)", pronunciation: "มาร์ช", meaning: "เดินขบวน, ก้าวไปข้างหน้า", category: "General Business", example_en: "Protesters march peacefully outside the headquarters.", example_th: "ผู้ประท้วงเดินขบวนอย่างสงบด้านนอกสำนักงานใหญ่" },
+      { word: "IT", pos: "คำนาม (n.)", pronunciation: "ไอ-ที", meaning: "เทคโนโลยีสารสนเทศ", category: "Technology", example_en: "Please contact the IT department to fix the network issue.", example_th: "กรุณาติดต่อแผนกไอทีเพื่อแก้ไขปัญหาเครือข่าย" },
+      { word: "it", pos: "สรรพนาม (pron.)", pronunciation: "อิท", meaning: "มัน (สรรพนาม)", category: "General Business", example_en: "The company updated its policy, and it was approved.", example_th: "บริษัทได้อัปเดตนโยบาย และมันได้รับการอนุมัติ" },
+      { word: "delay", pos: "คำนาม / คำกริยา (n./v.)", pronunciation: "ดิ-เลย์", meaning: "ความล่าช้า / ทำให้ล่าช้า", category: "Travel", example_en: "Severe fog caused a two-hour flight delay.", example_th: "หมอกลงจัดทำให้เที่ยวบินล่าช้าไปสองชั่วโมง" },
+      { word: "implement", pos: "คำกริยา (v.)", pronunciation: "อิม-พลี-เมนท์", meaning: "นำไปปฏิบัติ, ดำเนินการ", category: "Management", example_en: "We will implement the new software system next Monday.", example_th: "เราจะนำระบบซอฟต์แวร์ใหม่ไปใช้งานในวันจันทร์หน้า" },
+      { word: "collaborate", pos: "คำกริยา (v.)", pronunciation: "เคอล-แลบ-บะ-เรท", meaning: "ร่วมมือ, ทำงานร่วมกัน", category: "Corporate", example_en: "Two departments need to collaborate on this product launch.", example_th: "สองแผนกต้องร่วมมือกันในการเปิดตัวสินค้านี้" },
+      { word: "revenue", pos: "คำนาม (n.)", pronunciation: "เรฟ-เวอ-นิว", meaning: "รายได้ของบริษัท", category: "Finance", example_en: "Annual revenue increased by fifteen percent this year.", example_th: "รายได้ประจำปีเพิ่มขึ้นสิบห้าเปอร์เซ็นต์ในปีนี้" },
+      { word: "deficit", pos: "คำนาม (n.)", pronunciation: "เดฟ-ฟิ-ซิท", meaning: "การขาดดุล, ยอดขาดทุน", category: "Finance", example_en: "The budget deficit was larger than previously estimated.", example_th: "การขาดดุลงบประมาณมีขนาดใหญ่กว่าที่ประเมินไว้ก่อนหน้า" },
+      { word: "negotiate", pos: "คำกริยา (v.)", pronunciation: "เน-โก-ชิ-เอท", meaning: "เจรจาต่อรอง", category: "Sales & Contract", example_en: "Our sales team managed to negotiate a better contract.", example_th: "ทีมขายของเราเจรจาต่อรองสัญญาที่ดีกว่าได้สำเร็จ" },
+      { word: "appraisal", pos: "คำนาม (n.)", pronunciation: "แอพ-เพร-เซิล", meaning: "การประเมินผลงาน", category: "Human Resources", example_en: "Employee performance appraisal takes place every December.", example_th: "การประเมินผลงานพนักงานมีขึ้นทุกเดือนธันวาคม" },
+      { word: "deduct", pos: "คำกริยา (v.)", pronunciation: "ดิ-ดัคท์", meaning: "หักออก, ลบออก", category: "Finance", example_en: "Taxes will be automatically deducted from your salary.", example_th: "ภาษีจะถูกหักออกจากเงินเดือนของคุณโดยอัตโนมัติ" },
+      { word: "initiative", pos: "คำนาม (n.)", pronunciation: "อิ-นิ-เชีย-ทิฟ", meaning: "ความคิดริเริ่ม, โครงการใหม่", category: "Management", example_en: "The manager praised her initiative in solving the issue.", example_th: "ผู้จัดการเอ่ยชมความคิดริเริ่มของเธอในการแก้ปัญหา" },
+      { word: "authorize", pos: "คำกริยา (v.)", pronunciation: "ออ-เธอร์-ไรซ์", meaning: "อนุมัติ, มอบอำนาจ", category: "Corporate", example_en: "Only the director can authorize expenditure over $10,000.", example_th: "มีเพียงผู้อำนวยการเท่านั้นที่สามารถอนุมัติรายจ่ายเกิน 10,000 ดอลลาร์ได้" },
+      { word: "delegate", pos: "คำกริยา (v.)", pronunciation: "เดล-ลิ-เกท", meaning: "มอบหมายงาน", category: "Management", example_en: "A good manager knows how to delegate tasks effectively.", example_th: "ผู้จัดการที่ดีรู้วิธีมอบหมายงานอย่างมีประสิทธิภาพ" },
+      { word: "supervise", pos: "คำกริยา (v.)", pronunciation: "ซู-เพอร์-ไวซ์", meaning: "ควบคุมดูแล, นิเทศงาน", category: "Management", example_en: "She was hired to supervise the construction of the factory.", example_th: "เธอถูกว่าจ้างให้ดูแลควบคุมการก่อสร้างโรงงาน" },
+      { word: "allocate", pos: "คำกริยา (v.)", pronunciation: "อัล-โล-เคท", meaning: "จัดสรร (เงินทุน/ทรัพยากร)", category: "Finance", example_en: "The board decided to allocate more funds to research.", example_th: "คณะกรรมการตัดสินใจจัดสรรเงินทุนเพิ่มเติมสำหรับการวิจัย" },
+      { word: "reimburse", pos: "คำกริยา (v.)", pronunciation: "รี-อิม-เบิร์ส", meaning: "จ่ายเงินชดเชย, คืนเงิน", category: "Finance", example_en: "The company will reimburse your travel expenses.", example_th: "บริษัทจะจ่ายเงินชดเชยค่าใช้จ่ายในการเดินทางของคุณ" },
+      { word: "audit", pos: "คำนาม / คำกริยา (n./v.)", pronunciation: "ออ-ดิท", meaning: "การตรวจสอบบัญชี", category: "Finance", example_en: "The external audit confirmed that all records were accurate.", example_th: "การตรวจสอบบัญชีจากภายนอกยืนยันว่าบันทึกทั้งหมดถูกต้อง" },
+      { word: "expenditure", pos: "คำนาม (n.)", pronunciation: "เอ็กซ์-เพน-ดิ-เชอร์", meaning: "รายจ่าย, ค่าใช้จ่าย", category: "Finance", example_en: "We need to reduce unnecessary operational expenditure.", example_th: "เราจำเป็นต้องลดรายจ่ายในการดำเนินงานที่ไม่จำเป็น" },
+      { word: "fluctuate", pos: "คำกริยา (v.)", pronunciation: "ฟลัค-ทู-เอท", meaning: "ผันผวน, ขึ้นๆ ลงๆ", category: "Finance", example_en: "Fuel prices continue to fluctuate in the global market.", example_th: "ราคาน้ำมันยังคงผันผวนในตลาดโลก" },
+      { word: "candidate", pos: "คำนาม (n.)", pronunciation: "แคน-ดิ-เดท", meaning: "ผู้สมัครงาน", category: "Human Resources", example_en: "The interview panel selected the most qualified candidate.", example_th: "คณะกรรมการสัมภาษณ์เลือกผู้สมัครที่มีคุณสมบัติเหมาะสมที่สุด" },
+      { word: "compensate", pos: "คำกริยา (v.)", pronunciation: "คอม-เพน-เสท", meaning: "ชดเชยค่าเสียหาย/ค่าตอบแทน", category: "Human Resources", example_en: "Employees will be compensated for working overtime.", example_th: "พนักงานจะได้รับการชดเชยสำหรับการทำงานล่วงเวลา" },
+      { word: "terminate", pos: "คำกริยา (v.)", pronunciation: "เทอร์-มิ-เนท", meaning: "ยุติ, สิ้นสุดสัญญา", category: "Corporate", example_en: "Either party may terminate the agreement with written notice.", example_th: "ฝ่ายใดฝ่ายหนึ่งสามารถยุติข้อตกลงได้ด้วยหนังสือแจ้ง" },
+      { word: "recruit", pos: "คำกริยา (v.)", pronunciation: "รี-ครูท", meaning: "รับสมัครงาน, สรรหาพนักงาน", category: "Human Resources", example_en: "We plan to recruit five software engineers next month.", example_th: "เรามีแผนจะรับสมัครวิศวกรซอฟต์แวร์ห้าคนในเดือนหน้า" },
+      { word: "qualifications", pos: "คำนาม (n.)", pronunciation: "ควอล-ลิ-ฟิ-เค-ชันส์", meaning: "คุณสมบัติ, วุฒิการศึกษา", category: "Human Resources", example_en: "Please send your resume listing all relevant qualifications.", example_th: "กรุณาส่งเรซูเม่ระบุคุณสมบัติที่เกี่ยวข้องทั้งหมด" },
+      { word: "orientation", pos: "คำนาม (n.)", pronunciation: "โอ-ริ-เอน-เท-ชัน", meaning: "การปฐมนิเทศ", category: "Human Resources", example_en: "New employees must attend the orientation session on Monday.", example_th: "พนักงานใหม่ต้องเข้าร่วมการปฐมนิเทศในวันจันทร์" },
+      { word: "benefit", pos: "คำนาม (n.)", pronunciation: "เบน-นิ-ฟิต", meaning: "สวัสดิการ, ผลประโยชน์", category: "Human Resources", example_en: "Health insurance is a key benefit provided by the firm.", example_th: "ประกันสุขภาพเป็นสวัสดิการหลักที่บริษัทจัดหาให้" },
+      { word: "promotional", pos: "คำคุณศัพท์ (adj.)", pronunciation: "โพร-โม-ชัน-นอล", meaning: "เกี่ยวกับการส่งเสริมการขาย", category: "Marketing", example_en: "They distributed promotional flyers outside the station.", example_th: "พวกเขาแจกใบปลิวส่งเสริมการขายที่หน้าสถานี" },
+      { word: "launch", pos: "คำกริยา (v.)", pronunciation: "ลอนช์", meaning: "ปล่อยสินค้าใหม่, เริ่มโครงการ", category: "Marketing", example_en: "The brand will launch its new smartphone line tomorrow.", example_th: "แบรนด์จะเปิดตัวสมาร์ทโฟนรุ่นใหม่ในวันพรุ่งนี้" },
+      { word: "competitor", pos: "คำนาม (n.)", pronunciation: "คอม-เพท-ติ-เทอร์", meaning: "คู่แข่งทางธุรกิจ", category: "Marketing", example_en: "Our main competitor lowered their prices recently.", example_th: "คู่แข่งหลักของเราเพิ่งลดราคาลงเมื่อเร็วๆ นี้" },
+      { word: "persuade", pos: "คำกริยา (v.)", pronunciation: "เพอร์-สเวด", meaning: "โน้มน้าวใจ", category: "Sales & Contract", example_en: "The advertisement failed to persuade customers to buy.", example_th: "โฆษณาไม่สามารถโน้มน้าวใจให้ลูกค้าซื้อได้" },
+      { word: "client", pos: "คำนาม (n.)", pronunciation: "คลาย-เอนท์", meaning: "ลูกค้า, ผู้รับบริการ", category: "General Business", example_en: "The lawyer prepared all documents for the new client.", example_th: "ทนายความเตรียมเอกสารทั้งหมดสำหรับลูกค้าคนใหม่" },
+      { word: "warranty", pos: "คำนาม (n.)", pronunciation: "วอร์-รัน-ที", meaning: "การรับประกันสินค้า", category: "Sales & Contract", example_en: "The laptop comes with a two-year limited warranty.", example_th: "แล็ปท็อปมาพร้อมกับการรับประกันแบบจำกัดสองปี" },
+      { word: "accommodate", pos: "คำกริยา (v.)", pronunciation: "อะ-คอม-โม-เดท", meaning: "รองรับ, อำนวยความสะดวก", category: "Travel", example_en: "The hotel can accommodate up to five hundred guests.", example_th: "โรงแรมสามารถรองรับแขกได้สูงสุดห้าร้อยคน" },
+      { word: "acquire", pos: "คำกริยา (v.)", pronunciation: "อะ-ไควเออร์", meaning: "ได้มา, เข้าซื้อกิจการ", category: "Corporate", example_en: "The corporation plans to acquire a smaller tech startup.", example_th: "บริษัทมีแผนจะเข้าซื้อกิจการสตาร์ทอัพเทคโนโลยีขนาดเล็ก" },
+      { word: "agenda", pos: "คำนาม (n.)", pronunciation: "อะ-เจน-ดา", meaning: "วาระการประชุม", category: "Management", example_en: "Please review the meeting agenda before two o'clock.", example_th: "กรุณาตรวจสอบวาระการประชุมก่อนบ่ายสองโมง" },
+      { word: "amendment", pos: "คำนาม (n.)", pronunciation: "อะ-เมนด์-เมนท์", meaning: "การแก้ไขข้อตกลง/กฎหมาย", category: "Legal", example_en: "Both parties agreed to the proposed contract amendment.", example_th: "ทั้งสองฝ่ายตกลงตามการแก้ไขสัญญาที่เสนอ" },
+      { word: "applicant", pos: "คำนาม (n.)", pronunciation: "แอพ-พลิ-แคนท์", meaning: "ผู้สมัคร", category: "Human Resources", example_en: "Every applicant must submit three professional references.", example_th: "ผู้สมัครทุกคนต้องยื่นบุคคลอ้างอิงทางวิชาชีพสามคน" },
+      { word: "assess", pos: "คำกริยา (v.)", pronunciation: "อะ-เซส", meaning: "ประเมิน, ตรวจสอบ", category: "Management", example_en: "We must assess the financial risks before investing.", example_th: "เราต้องประเมินความเสี่ยงทางการเงินก่อนลงทุน" },
+      { word: "budget", pos: "คำนาม (n.)", pronunciation: "บัด-เจท", meaning: "งบประมาณ", category: "Finance", example_en: "The department stayed well within its annual budget.", example_th: "แผนกอยู่ภายในงบประมาณประจำปีเป็นอย่างดี" },
+      { word: "comply", pos: "คำกริยา (v.)", pronunciation: "คอม-พลาย", meaning: "ปฏิบัติตามกฎระเบียบ", category: "Legal", example_en: "All factories must comply with safety regulations.", example_th: "โรงงานทั้งหมดต้องปฏิบัติตามกฎระเบียบความปลอดภัย" },
+      { word: "consolidate", pos: "คำกริยา (v.)", pronunciation: "คอน-โซ-ลิ-เดท", meaning: "รวมเป็นหนึ่งเดียว, รวมบัญชี", category: "Corporate", example_en: "They decided to consolidate the two regional offices.", example_th: "พวกเขาตัดสินใจรวมสำนักงานภูมิภาคสองแห่งเข้าด้วยกัน" },
+      { word: "contract", pos: "คำนาม (n.)", pronunciation: "คอน-แทรคท์", meaning: "สัญญาข้อตกลง", category: "Legal", example_en: "Please sign the employment contract on the last page.", example_th: "กรุณาเซ็นสัญญาจ้างงานที่หน้าสุดท้าย" },
+      { word: "designate", pos: "คำกริยา (v.)", pronunciation: "เดส-ซิก-เนท", meaning: "แต่งตั้ง, กำหนดตำแหน่ง", category: "Management", example_en: "She was designated as the team leader for the project.", example_th: "เธอได้รับการแต่งตั้งให้เป็นหัวหน้าทีมสำหรับโปรเจกต์นี้" },
+      { word: "evaluate", pos: "คำกริยา (v.)", pronunciation: "อิ-แว-ลู-เอท", meaning: "ประเมินคุณค่า/ผลการทำงาน", category: "Management", example_en: "Consultants will evaluate our operational efficiency.", example_th: "ที่ปรึกษาจะประเมินประสิทธิภาพการดำเนินงานของเรา" },
+      { word: "exceed", pos: "คำกริยา (v.)", pronunciation: "อิก-ซีด", meaning: "เกินกว่า, มากกว่าเป้าหมาย", category: "Sales & Contract", example_en: "Sales results are expected to exceed last quarter targets.", example_th: "ผลการขายคาดว่าจะเกินเป้าหมายไตรมาสที่แล้ว" },
+      { word: "feasible", pos: "คำคุณศัพท์ (adj.)", pronunciation: "ฟี-ซิ-เบิล", meaning: "เป็นไปได้จริง, สมเหตุสมผล", category: "Management", example_en: "The committee believes the proposed expansion is feasible.", example_th: "คณะกรรมการเชื่อว่าการขยายกิจการที่เสนอมานั้นเป็นไปได้จริง" },
+      { word: "incentive", pos: "คำนาม (n.)", pronunciation: "อิน-เซน-ทีฟ", meaning: "สิ่งจูงใจ, เงินรางวัล", category: "Human Resources", example_en: "The company offers cash incentives for high sales performance.", example_th: "บริษัทเสนอเงินรางวัลจูงใจสำหรับผลการขายที่สูง" },
+      { word: "inventory", pos: "คำนาม (n.)", pronunciation: "อิน-เวน-โท-รี", meaning: "สินค้าคงคลัง", category: "Logistics", example_en: "Staff will count the warehouse inventory this weekend.", example_th: "พนักงานจะนับสินค้าคงคลังในคลังสินค้าสุดสัปดาห์นี้" },
+      { word: "merge", pos: "คำกริยา (v.)", pronunciation: "เมิร์จ", meaning: "ควบรวมกิจการ", category: "Corporate", example_en: "The two tech giants decided to merge their operations.", example_th: "สองยักษ์ใหญ่เทคโนโลยีตัดสินใจควบรวมการดำเนินงาน" },
+      { word: "notify", pos: "คำกริยา (v.)", pronunciation: "โน-ทิ-ไฟ", meaning: "แจ้งให้ทราบ", category: "General Business", example_en: "We will notify you once your order has shipped.", example_th: "เราจะแจ้งให้คุณทราบเมื่อคำสั่งซื้อของคุณถูกจัดส่งแล้ว" },
+      { word: "obligation", pos: "คำนาม (n.)", pronunciation: "ออบ-ลิ-เก-ชัน", meaning: "ข้อผูกพัน, หน้าที่ตามกฎหมาย", category: "Legal", example_en: "We have a legal obligation to protect client data.", example_th: "เรามีข้อผูกพันตามกฎหมายในการปกป้องข้อมูลของลูกค้า" },
+      { word: "outstanding", pos: "คำคุณศัพท์ (adj.)", pronunciation: "เอาท์-สแตน-ดิ้ง", meaning: "โดดเด่น / ยอดค้างชำระ", category: "Finance", example_en: "Please settle your outstanding balance before the due date.", example_th: "กรุณาชำระยอดค้างชำระของคุณก่อนวันครบกำหนด" }
+    ];
+
+    /* ==========================================================================
+       2. STATE & INITIALIZATION
+       ========================================================================== */
+    let vocabList = [];
+    let currentIndex = 0;
+    let selectedCategory = 'ALL';
+    let isHintHidden = false;
+    let isAutoSpeak = true;
+    const speechRates = [1.0, 0.8, 1.2];
+    let speechRateIndex = 0;
+    let audioCtx = null;
+
+    function initApp() {
+      const storedVocab = localStorage.getItem('toeic_vocab_v3');
+      if (storedVocab) {
+        try {
+          const parsed = JSON.parse(storedVocab);
+          vocabList = Array.isArray(parsed) && parsed.length > 0 ? parsed : [...DEFAULT_TOEIC_VOCAB];
+        } catch (e) {
+          vocabList = [...DEFAULT_TOEIC_VOCAB];
+        }
+      } else {
+        vocabList = [...DEFAULT_TOEIC_VOCAB];
+        saveVocabToStorage();
+      }
+
+      updateCategoryDropdown();
+      updateWordCountBadge();
+      pickNextRandomWord(false);
+
+      const inputEl = document.getElementById('typing-input');
+      inputEl.addEventListener('input', handleTypingInput);
+      inputEl.addEventListener('keydown', function(e) {
+        if (e.key === 'Tab') {
+          e.preventDefault();
+          speakCurrentWord();
+        } else if (e.key === 'Escape') {
+          e.preventDefault();
+          skipWord();
+        } else if (e.key === 'Enter') {
+          e.preventDefault();
+          checkInputExact();
+        }
+      });
+    }
+
+    function saveVocabToStorage() {
+      try {
+        localStorage.setItem('toeic_vocab_v3', JSON.stringify(vocabList));
+      } catch (e) {
+        showToast('พื้นที่จัดเก็บเบราว์เซอร์เต็ม ไม่สามารถบันทึกเพิ่มได้', 'error');
+      }
+    }
+
+    function updateWordCountBadge() {
+      const count = vocabList.length;
+      const topCounter = document.getElementById('total-word-count');
+      const modalCounter = document.getElementById('modal-word-count');
+      if (topCounter) topCounter.innerText = count.toLocaleString();
+      if (modalCounter) modalCounter.innerText = count.toLocaleString();
+    }
+
+    function updateCategoryDropdown() {
+      const selectEl = document.getElementById('category-filter');
+      if (!selectEl) return;
+      const categories = [...new Set(vocabList.map(item => item.category || 'General Business'))].sort();
+      selectEl.innerHTML = `<option value="ALL">ทั้งหมด (All Categories)</option>`;
+      categories.forEach(cat => {
+        const opt = document.createElement('option');
+        opt.value = cat;
+        opt.innerText = cat;
+        if (cat === selectedCategory) opt.selected = true;
+        selectEl.appendChild(opt);
+      });
+    }
+
+    function filterByCategory(category) {
+      selectedCategory = category;
+      pickNextRandomWord(true);
+    }
+
+    /* ==========================================================================
+       3. CONTROL BAR ACTIONS (HINT MODE, AUTO-SPEAK, SPEED)
+       ========================================================================== */
+    function toggleHintMode() {
+      isHintHidden = !isHintHidden;
+      const wordEl = document.getElementById('target-word');
+      const hintIcon = document.getElementById('hint-icon');
+      const hintText = document.getElementById('hint-text');
+
+      if (isHintHidden) {
+        wordEl.classList.add('blur-md');
+        hintIcon.className = "fa-solid fa-eye-slash text-rose-400";
+        hintText.innerText = "โหมด: ทดสอบจำ (ซ่อนตัวสะกด)";
+      } else {
+        wordEl.classList.remove('blur-md');
+        hintIcon.className = "fa-solid fa-eye text-amber-400";
+        hintText.innerText = "โหมด: ปกติ (เห็นตัวสะกด)";
+      }
+      document.getElementById('typing-input').focus();
+    }
+
+    function toggleAutoSpeak() {
+      isAutoSpeak = !isAutoSpeak;
+      const icon = document.getElementById('auto-speak-icon');
+      const text = document.getElementById('auto-speak-text');
+      if (isAutoSpeak) {
+        icon.className = "fa-solid fa-volume-high text-sky-400";
+        text.innerText = "อ่านอัตโนมัติ: เปิด";
+      } else {
+        icon.className = "fa-solid fa-volume-xmark text-slate-500";
+        text.innerText = "อ่านอัตโนมัติ: ปิด";
+      }
+      document.getElementById('typing-input').focus();
+    }
+
+    function cycleSpeechRate() {
+      speechRateIndex = (speechRateIndex + 1) % speechRates.length;
+      const rate = speechRates[speechRateIndex];
+      document.getElementById('btn-speech-rate').innerText = rate.toFixed(1) + 'x';
+      speakCurrentWord();
+      document.getElementById('typing-input').focus();
+    }
+
+    /* ==========================================================================
+       4. WORD SELECTION & DISPLAY
+       ========================================================================== */
+    function pickNextRandomWord(shouldAutoSpeak = true) {
+      if (vocabList.length === 0) return;
+      let candidateIndices = [];
+      vocabList.forEach((item, idx) => {
+        if (selectedCategory === 'ALL' || (item.category || 'General Business') === selectedCategory) {
+          candidateIndices.push(idx);
+        }
+      });
+
+      if (candidateIndices.length === 0) {
+        candidateIndices = vocabList.map((_, idx) => idx);
+      }
+
+      let nextIdx = candidateIndices[0];
+      if (candidateIndices.length > 1) {
+        do {
+          nextIdx = candidateIndices[Math.floor(Math.random() * candidateIndices.length)];
+        } while (nextIdx === currentIndex);
+      }
+
+      displayWordAtIndex(nextIdx, shouldAutoSpeak);
+    }
+
+    function displayWordAtIndex(idx, shouldAutoSpeak = true) {
+      if (vocabList.length === 0) return;
+      currentIndex = idx;
+      const currentItem = vocabList[currentIndex];
+
+      document.getElementById('card-category').innerText = currentItem.category || "General Business";
+      document.getElementById('card-pos').innerText = currentItem.pos || "คำศัพท์ (vocab)";
+      
+      const targetWordEl = document.getElementById('target-word');
+      targetWordEl.innerText = currentItem.word;
+      if (isHintHidden) {
+        targetWordEl.classList.add('blur-md');
+      } else {
+        targetWordEl.classList.remove('blur-md');
+      }
+
+      // ลบสัทอักษรในวงเล็บ (เช่น (/dɑɡ/)) ออกหากมีติดอยู่ในข้อมูลเดิม
+      const cleanPron = (currentItem.pronunciation || '-').replace(/\s*\([^)]*\)/g, '').trim();
+      document.getElementById('target-pronunciation').innerHTML = `คำอ่าน: <span class="text-sky-400 font-semibold">${escapeHtml(cleanPron)}</span>`;
+      document.getElementById('target-meaning').innerText = currentItem.meaning;
+
+      const sentence = currentItem.example_en || `The ${currentItem.word} is very important.`;
+      const regex = new RegExp(`(${escapeRegExp(currentItem.word)})`, 'gi');
+      const highlightedSentence = sentence.replace(regex, `<span class="text-amber-400 font-bold underline underline-offset-4">$1</span>`);
+      
+      document.getElementById('target-example-en').innerHTML = highlightedSentence;
+      document.getElementById('target-example-th').innerText = currentItem.example_th || `ตัวอย่างการใช้คำว่า "${currentItem.word}"`;
+
+      const inputEl = document.getElementById('typing-input');
+      inputEl.value = '';
+      inputEl.className = "w-full bg-[#0b0f19] border-2 border-slate-700/80 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 rounded-xl px-4 py-3 text-lg sm:text-xl font-mono-code text-center tracking-wider text-white outline-none transition-all placeholder:text-slate-600 placeholder:font-sans placeholder:text-sm";
+      document.getElementById('input-status-icon').innerHTML = `<i class="fa-solid fa-keyboard"></i>`;
+      inputEl.focus();
+
+      if (shouldAutoSpeak && isAutoSpeak) {
+        speakCurrentWord();
+      }
+    }
+
+    function handleTypingInput(e) {
+      const inputEl = e.target;
+      const typed = inputEl.value;
+      const target = vocabList[currentIndex].word;
+      const statusIcon = document.getElementById('input-status-icon');
+      const targetWordEl = document.getElementById('target-word');
+
+      // เปลี่ยนสีตัวอักษรบนคำศัพท์เป้าหมายทีละตัว (เขียว = ถูก, แดง = ผิด)
+      let highlightedWordHtml = '';
+      for (let i = 0; i < target.length; i++) {
+        const charHtml = escapeHtml(target[i]);
+        if (i < typed.length) {
+          if (typed[i] === target[i]) {
+            highlightedWordHtml += `<span class="text-emerald-400">${charHtml}</span>`;
+          } else {
+            highlightedWordHtml += `<span class="text-rose-500 underline decoration-rose-500/70 underline-offset-8">${charHtml}</span>`;
+          }
+        } else {
+          highlightedWordHtml += `<span>${charHtml}</span>`;
+        }
+      }
+      targetWordEl.innerHTML = highlightedWordHtml;
+
+      if (typed.length === 0) {
+        inputEl.className = "w-full bg-[#0b0f19] border-2 border-slate-700/80 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-500/20 rounded-xl px-4 py-3 text-lg sm:text-xl font-mono-code text-center tracking-wider text-white outline-none transition-all placeholder:text-slate-600 placeholder:font-sans placeholder:text-sm";
+        statusIcon.innerHTML = `<i class="fa-solid fa-keyboard"></i>`;
+        return;
+      }
+
+      // ตรวจแบบ Case-Sensitive (ตัวพิมพ์เล็ก-ใหญ่ต้องตรงเป๊ะ)
+      if (typed === target) {
+        inputEl.className = "w-full bg-emerald-950/40 border-2 border-emerald-500 rounded-xl px-4 py-3 text-lg sm:text-xl font-mono-code text-center tracking-wider text-emerald-300 outline-none transition-all";
+        statusIcon.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i>`;
+        
+        const card = document.getElementById('flashcard-box');
+        card.classList.add('animate-success');
+        playChimeSound();
+
+        setTimeout(() => {
+          card.classList.remove('animate-success');
+          pickNextRandomWord(true);
+        }, 260);
+      } else if (target.startsWith(typed)) {
+        inputEl.className = "w-full bg-[#0b0f19] border-2 border-emerald-500/80 rounded-xl px-4 py-3 text-lg sm:text-xl font-mono-code text-center tracking-wider text-emerald-400 outline-none transition-all";
+        statusIcon.innerHTML = `<i class="fa-solid fa-spinner fa-spin text-emerald-400"></i>`;
+      } else {
+        inputEl.className = "w-full bg-rose-950/30 border-2 border-rose-500 rounded-xl px-4 py-3 text-lg sm:text-xl font-mono-code text-center tracking-wider text-rose-400 outline-none transition-all";
+        statusIcon.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-400"></i>`;
+      }
+    }
+
+    function checkInputExact() {
+      const inputEl = document.getElementById('typing-input');
+      const target = vocabList[currentIndex].word;
+      if (inputEl.value === target) {
+        pickNextRandomWord(true);
+      } else {
+        playPopSound();
+        showToast(`ตัวพิมพ์เล็ก-ใหญ่ต้องตรงกับ "${target}"`, 'error');
+      }
+    }
+
+    function skipWord() {
+      playPopSound();
+      pickNextRandomWord(true);
+    }
+
+    /* ==========================================================================
+       5. SPEECH (2x EN + 1x TH) & SOUND EFFECTS
+       ========================================================================== */
+    function speakCurrentWord() {
+      if (!('speechSynthesis' in window) || vocabList.length === 0) return;
+      window.speechSynthesis.cancel();
+
+      const currentItem = vocabList[currentIndex];
+      const rate = speechRates[speechRateIndex] || 1.0;
+
+      // อ่านคำศัพท์ภาษาอังกฤษรอบที่ 1
+      const utterEn1 = new SpeechSynthesisUtterance(currentItem.word);
+      utterEn1.lang = 'en-US';
+      utterEn1.rate = rate;
+
+      // อ่านคำศัพท์ภาษาอังกฤษรอบที่ 2
+      const utterEn2 = new SpeechSynthesisUtterance(currentItem.word);
+      utterEn2.lang = 'en-US';
+      utterEn2.rate = rate;
+
+      // อ่านคำแปลภาษาไทย 1 รอบ
+      const utterTh = new SpeechSynthesisUtterance(currentItem.meaning);
+      utterTh.lang = 'th-TH';
+      utterTh.rate = rate;
+
+      window.speechSynthesis.speak(utterEn1);
+      window.speechSynthesis.speak(utterEn2);
+      window.speechSynthesis.speak(utterTh);
+    }
+
+    function speakCurrentSentence() {
+      if (!('speechSynthesis' in window) || vocabList.length === 0) return;
+      window.speechSynthesis.cancel();
+
+      const currentItem = vocabList[currentIndex];
+      const sentence = currentItem.example_en || currentItem.word;
+      const utter = new SpeechSynthesisUtterance(sentence);
+      utter.lang = 'en-US';
+      utter.rate = speechRates[speechRateIndex] || 1.0;
+      window.speechSynthesis.speak(utter);
+    }
+
+    function playChimeSound() {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(587.33, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.12);
+        gain.gain.setValueAtTime(0.12, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.25);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.25);
+      } catch (e) {}
+    }
+
+    function playPopSound() {
+      try {
+        if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(300, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(150, audioCtx.currentTime + 0.1);
+        gain.gain.setValueAtTime(0.1, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.12);
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.12);
+      } catch (e) {}
+    }
+
+    /* ==========================================================================
+       6. BULK ADD & STRICT CASE-SENSITIVE DEDUPLICATION (WITH LIVE DICTIONARY API)
+       ========================================================================== */
+    function cleanWordSpacing(str) {
+      return str.replace(/[\u200B-\u200D\uFEFF]/g, '').trim().replace(/\s+/g, ' ');
+    }
+
+    function mapPosToThai(posEn) {
+      if (!posEn) return "คำนาม (n.)";
+      const p = posEn.toLowerCase();
+      if (p === 'noun') return "คำนาม (n.)";
+      if (p === 'verb') return "คำกริยา (v.)";
+      if (p === 'adjective') return "คำคุณศัพท์ (adj.)";
+      if (p === 'adverb') return "คำกริยาวิเศษณ์ (adv.)";
+      if (p === 'pronoun') return "คำสรรพนาม (pron.)";
+      if (p === 'preposition') return "คำบุพบท (prep.)";
+      if (p === 'conjunction') return "คำสันธาน (conj.)";
+      if (p === 'interjection') return "คำอุทาน (interj.)";
+      return `${posEn}`;
+    }
+
+    function estimateThaiPronunciation(word) {
+      const clean = word.toLowerCase().trim();
+      const quickDict = {
+        "dog": "ด็อก", "cat": "แคท", "book": "บุ๊ค", "pen": "เพ็น", "car": "คาร์",
+        "water": "วอ-เทอร์", "time": "ไทม์", "work": "เวิร์ค", "money": "มัน-นี่",
+        "people": "พี-เพิล", "business": "บิซ-เนส", "company": "คอม-พะ-นี",
+        "manager": "แมน-เน-เจอร์", "office": "ออฟ-ฟิศ", "meeting": "มีท-ติ้ง",
+        "project": "โพร-เจคท์", "report": "รี-พอร์ท", "customer": "คัส-โท-เมอร์",
+        "service": "เซอร์-วิส", "product": "โพร-ดัคท์", "market": "มาร์-เก็ท",
+        "price": "ไพรซ์", "sale": "เซล", "team": "ทีม", "plan": "แพลน",
+        "apple": "แอพ-เพิล", "house": "เฮาส์", "food": "ฟู้ด", "run": "รัน",
+        "eat": "อีท", "drink": "ดริงค์", "sleep": "สลีป", "study": "สตัด-ดี้"
+      };
+      if (quickDict[clean]) return quickDict[clean];
+
+      let s = clean
+        .replace(/tion$/g, 'ชัน')
+        .replace(/sion$/g, 'ชัน')
+        .replace(/ment$/g, 'เมนท์')
+        .replace(/ness$/g, 'เนส')
+        .replace(/able$/g, 'เอ-เบิล')
+        .replace(/ing$/g, 'อิง')
+        .replace(/ed$/g, 'ด์')
+        .replace(/er$/g, 'เออร์')
+        .replace(/ly$/g, 'ลี่')
+        .replace(/sh/g, 'ช')
+        .replace(/ch/g, 'ช')
+        .replace(/th/g, 'ธ')
+        .replace(/ph/g, 'ฟ')
+        .replace(/qu/g, 'คว')
+        .replace(/oo/g, 'อู')
+        .replace(/ee/g, 'อี')
+        .replace(/ea/g, 'อี')
+        .replace(/ai/g, 'เอ')
+        .replace(/ay/g, 'เอ')
+        .replace(/oa/g, 'โอ')
+        .replace(/ou/g, 'เอา')
+        .replace(/ow/g, 'เอา');
+
+      const mapChar = {
+        a: 'แ-', b: 'บ', c: 'ค', d: 'ด', e: 'เ-', f: 'ฟ', g: 'ก', h: 'ฮ',
+        i: 'อิ', j: 'จ', k: 'ค', l: 'ล', m: 'ม', n: 'น', o: 'ออ', p: 'พ',
+        q: 'ค', r: 'ร', s: 'ซ', t: 'ท', u: 'อั', v: 'ว', w: 'ว', x: 'กซ',
+        y: 'ย', z: 'ซ'
+      };
+      let res = '';
+      for (let ch of s) {
+        res += mapChar[ch] !== undefined ? mapChar[ch] : ch;
+      }
+      return res;
+    }
+
+    async function translateEnToTh(text) {
+      try {
+        const res = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|th`);
+        if (!res.ok) return null;
+        const data = await res.json();
+        if (data && data.responseData && data.responseData.translatedText) {
+          return data.responseData.translatedText;
+        }
+      } catch (e) {}
+      return null;
+    }
+
+    async function fetchWordDetailsFromAPI(word, meaning) {
+      let pos = "คำนาม (n.)";
+      let phonetic = "";
+      let exampleEn = "";
+      let exampleTh = "";
+
+      try {
+        const res = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word.toLowerCase())}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (Array.isArray(data) && data.length > 0) {
+            const entry = data[0];
+            phonetic = entry.phonetic || (entry.phonetics && entry.phonetics.find(p => p.text)?.text) || "";
+
+            if (Array.isArray(entry.meanings) && entry.meanings.length > 0) {
+              pos = mapPosToThai(entry.meanings[0].partOfSpeech);
+
+              for (const m of entry.meanings) {
+                if (Array.isArray(m.definitions)) {
+                  const defWithEx = m.definitions.find(d => d.example && d.example.trim().length > 0);
+                  if (defWithEx) {
+                    pos = mapPosToThai(m.partOfSpeech);
+                    exampleEn = defWithEx.example.trim();
+                    break;
+                  }
+                }
+              }
+            }
+          }
+        }
+      } catch (e) {}
+
+      // แสดงเฉพาะคำอ่านภาษาไทยล้วนๆ ไม่ต่อท้ายด้วยสัทอักษร IPA
+      const finalPronunciation = estimateThaiPronunciation(word);
+
+      if (!exampleEn) {
+        if (pos.includes('กริยา')) {
+          exampleEn = `We need to ${word} as soon as possible.`;
+          exampleTh = `เราจำเป็นต้อง${meaning}โดยเร็วที่สุดเท่าที่จะทำได้`;
+        } else if (pos.includes('คุณศัพท์')) {
+          exampleEn = `This is a very ${word} situation for everyone.`;
+          exampleTh = `นี่เป็นสถานการณ์ที่${meaning}มากสำหรับทุกคน`;
+        } else {
+          exampleEn = `The ${word} is very important in our daily life.`;
+          exampleTh = `${meaning}มีความสำคัญมากในชีวิตประจำวันของเรา`;
+        }
+      } else {
+        const translated = await translateEnToTh(exampleEn);
+        exampleTh = translated || `ตัวอย่างการใช้คำว่า "${word}" (${meaning}) ในประโยค`;
+      }
+
+      return {
+        pos,
+        pronunciation: finalPronunciation,
+        example_en: exampleEn,
+        example_th: exampleTh
+      };
+    }
+
+    async function processBulkAdd() {
+      const rawText = document.getElementById('bulk-input').value;
+      if (!rawText.trim()) {
+        showToast('กรุณาวางรายการคำศัพท์ก่อนกดบันทึก', 'error');
+        return;
+      }
+
+      const btn = document.getElementById('btn-process-bulk');
+      const statusEl = document.getElementById('bulk-add-status');
+      btn.disabled = true;
+      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>กำลังดึงคำอ่าน ชนิดคำ และตัวอย่างประโยค...</span>`;
+
+      const existingWordsSet = new Set(vocabList.map(item => item.word));
+      const lines = rawText.split(/\r?\n/);
+
+      let candidates = [];
+      let duplicateCount = 0;
+
+      lines.forEach(line => {
+        if (!line.trim()) return;
+        let parts = line.includes('\t') ? line.split('\t') : line.split(',');
+        const cleanWord = cleanWordSpacing(parts[0] || '');
+        const cleanMeaning = cleanWordSpacing(parts.slice(1).join(', ') || 'คำศัพท์ภาษาอังกฤษ');
+
+        if (!cleanWord) return;
+        if (existingWordsSet.has(cleanWord)) {
+          duplicateCount++;
+          return;
+        }
+        existingWordsSet.add(cleanWord);
+        candidates.push({ word: cleanWord, meaning: cleanMeaning });
+      });
+
+      let addedCount = 0;
+      const batchSize = 5;
+      for (let i = 0; i < candidates.length; i += batchSize) {
+        const batch = candidates.slice(i, i + batchSize);
+        statusEl.innerText = `กำลังวิเคราะห์คำศัพท์ ${Math.min(i + batchSize, candidates.length)} / ${candidates.length} คำ...`;
+
+        const results = await Promise.all(
+          batch.map(async (item) => {
+            const details = await fetchWordDetailsFromAPI(item.word, item.meaning);
+            return {
+              word: item.word,
+              pos: details.pos,
+              pronunciation: details.pronunciation,
+              meaning: item.meaning,
+              category: "Custom TOEIC",
+              example_en: details.example_en,
+              example_th: details.example_th
+            };
+          })
+        );
+
+        vocabList.push(...results);
+        addedCount += results.length;
+      }
+
+      saveVocabToStorage();
+      updateCategoryDropdown();
+      updateWordCountBadge();
+      renderVocabTable();
+
+      btn.disabled = false;
+      btn.innerHTML = `<i class="fa-solid fa-plus-circle"></i> <span>บันทึกเข้าคลังศัพท์</span>`;
+      statusEl.innerText = `เพิ่มสำเร็จ ${addedCount.toLocaleString()} คำ | ตัดคำซ้ำออก ${duplicateCount.toLocaleString()} คำ`;
+      document.getElementById('bulk-input').value = '';
+
+      showToast(`เพิ่มคำศัพท์ใหม่ ${addedCount.toLocaleString()} คำพร้อมคำอ่านและประโยคจริง!`, 'success');
+      if (addedCount > 0) {
+        currentIndex = vocabList.length - 1;
+        displayWordAtIndex(currentIndex, false);
+      }
+    }
+
+    /* ==========================================================================
+       7. MODAL & TABLE MANAGEMENT
+       ========================================================================== */
+    function openVocabManager() {
+      document.getElementById('vocab-modal').classList.remove('hidden');
+      renderVocabTable();
+    }
+
+    function closeVocabManager() {
+      document.getElementById('vocab-modal').classList.add('hidden');
+      document.getElementById('typing-input').focus();
+    }
+
+    function switchModalTab(tabName) {
+      const addTab = document.getElementById('tab-content-add');
+      const listTab = document.getElementById('tab-content-list');
+      const btnAdd = document.getElementById('tab-btn-add');
+      const btnList = document.getElementById('tab-btn-list');
+
+      if (tabName === 'add') {
+        addTab.classList.remove('hidden');
+        listTab.classList.add('hidden');
+        btnAdd.className = "py-3 px-4 text-sky-400 border-b-2 border-sky-400 flex items-center gap-2";
+        btnList.className = "py-3 px-4 text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2";
+      } else {
+        addTab.classList.add('hidden');
+        listTab.classList.remove('hidden');
+        btnAdd.className = "py-3 px-4 text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2";
+        btnList.className = "py-3 px-4 text-sky-400 border-b-2 border-sky-400 flex items-center gap-2";
+        renderVocabTable();
+      }
+    }
+
+    function renderVocabTable() {
+      const tbody = document.getElementById('vocab-table-body');
+      const query = document.getElementById('search-vocab').value.trim().toLowerCase();
+      tbody.innerHTML = '';
+
+      const filtered = vocabList.filter(item => {
+        return item.word.toLowerCase().includes(query) ||
+               item.meaning.toLowerCase().includes(query) ||
+               (item.category && item.category.toLowerCase().includes(query));
+      });
+
+      if (filtered.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-500">ไม่พบคำศัพท์ที่ค้นหา</td></tr>`;
+        return;
+      }
+
+      // แสดงสูงสุด 300 รายการล่าสุดในตารางเพื่อความลื่นไหลกรณีมีหลายพันคำ
+      const displaySlice = filtered.slice(0, 300);
+      displaySlice.forEach(item => {
+        const row = document.createElement('tr');
+        row.className = "hover:bg-slate-800/50 transition";
+        row.innerHTML = `
+          <td class="p-2.5 font-mono font-bold text-sky-300">${escapeHtml(item.word)}</td>
+          <td class="p-2.5 text-slate-400 text-[11px]">${escapeHtml(item.pos || '-')}</td>
+          <td class="p-2.5">
+            <span class="text-slate-200 font-medium">${escapeHtml(item.meaning)}</span>
+            <span class="text-slate-500 text-[11px] block">${escapeHtml(item.pronunciation || '')}</span>
+          </td>
+          <td class="p-2.5 text-slate-400 text-[11px]">${escapeHtml(item.category || 'General')}</td>
+          <td class="p-2.5 text-center">
+            <button onclick="deleteSingleWord('${escapeJsString(item.word)}')" class="p-1.5 hover:text-rose-400 text-slate-500 transition" title="ลบคำนี้">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      if (filtered.length > 300) {
+        const infoRow = document.createElement('tr');
+        infoRow.innerHTML = `<td colspan="5" class="p-2.5 text-center text-slate-500 text-[11px]">แสดง 300 รายการแรกจากทั้งหมด ${filtered.length.toLocaleString()} คำ (ใช้ช่องค้นหาด้านบนเพื่อกรองคำเฉพาะเจาะจง)</td>`;
+        tbody.appendChild(infoRow);
+      }
+    }
+
+    function deleteSingleWord(wordTarget) {
+      vocabList = vocabList.filter(item => item.word !== wordTarget);
+      saveVocabToStorage();
+      updateCategoryDropdown();
+      updateWordCountBadge();
+      renderVocabTable();
+      showToast(`ลบคำว่า "${wordTarget}" เรียบร้อยแล้ว`, 'info');
+    }
+
+    function resetToDefaultVocab() {
+      vocabList = [...DEFAULT_TOEIC_VOCAB];
+      saveVocabToStorage();
+      updateCategoryDropdown();
+      updateWordCountBadge();
+      renderVocabTable();
+      pickNextRandomWord(false);
+      showToast('รีเซ็ตคลังศัพท์กลับเป็นค่าเริ่มต้นเรียบร้อยแล้ว', 'success');
+    }
+
+    /* ==========================================================================
+       8. UTILITIES
+       ========================================================================== */
+    function escapeHtml(str) {
+      return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function escapeJsString(str) {
+      return String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+    }
+
+    function escapeRegExp(str) {
+      return String(str).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    }
+
+    function showToast(message, type = 'success') {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      const toastIcon = document.getElementById('toast-icon');
+
+      toastMsg.innerText = message;
+      if (type === 'success') {
+        toastIcon.className = "fa-solid fa-circle-check text-emerald-400 text-lg";
+      } else if (type === 'error') {
+        toastIcon.className = "fa-solid fa-circle-exclamation text-rose-400 text-lg";
+      } else {
+        toastIcon.className = "fa-solid fa-circle-info text-sky-400 text-lg";
+      }
+
+      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
+      }, 3000);
+    }
+
+    window.onload = function() {
+      initApp();
+    };
+  </script>
+</body>
+</html>

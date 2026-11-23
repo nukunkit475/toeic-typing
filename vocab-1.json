@@ -1,4 +1,93 @@
-[
+[{
+    "word": "campaign",
+    "meaning": "แคมเปญโฆษณา, การรณรงค์",
+    "phonetic": "แคม-เพน",
+    "pos": "คำนาม (n.)",
+    "category": "Advertising & PR",
+    "sentence": "Our digital marketing campaign boosted website traffic by fifty percent.",
+    "sentence_th": "แคมเปญการตลาดดิจิทัลของเราช่วยเพิ่มยอดผู้เข้าชมเว็บไซต์ได้ถึงห้าสิบเปอร์เซ็นต์"
+  },
+  {
+    "word": "publicity",
+    "meaning": "การประชาสัมพันธ์, การเผยแพร่ข่าวสาร",
+    "phonetic": "พับ-บลิส-ซิ-ที",
+    "pos": "คำนาม (n.)",
+    "category": "Advertising & PR",
+    "sentence": "The charity event generated positive publicity for the company.",
+    "sentence_th": "งานการกุศลสร้างการประชาสัมพันธ์เชิงบวกให้กับบริษัท"
+  },
+  {
+    "word": "demographic",
+    "meaning": "กลุ่มประชากรเป้าหมาย",
+    "phonetic": "เดม-โม-กราฟ-ฟิค",
+    "pos": "คำนาม (n.)",
+    "category": "Advertising & PR",
+    "sentence": "Young professionals are the primary demographic for this smartphone.",
+    "sentence_th": "คนทำงานรุ่นใหม่เป็นกลุ่มประชากรเป้าหมายหลักสำหรับสมาร์ทโฟนรุ่นนี้"
+  },
+  {
+    "word": "sponsor",
+    "meaning": "ผู้สนับสนุนเงินทุน, สปอนเซอร์",
+    "phonetic": "สปอน-เซอร์",
+    "pos": "คำกริยา (v.)",
+    "category": "Advertising & PR",
+    "sentence": "Several major corporations agreed to sponsor the annual marathon.",
+    "sentence_th": "บริษัทขนาดใหญ่หลายแห่งตกลงที่จะเป็นผู้สนับสนุนการแข่งขันมาราธอนประจำปี"
+  },
+  {
+    "word": "testimonial",
+    "meaning": "คำรับรองจากลูกค้า",
+    "phonetic": "เทส-ทิ-โม-เนียล",
+    "pos": "คำนาม (n.)",
+    "category": "Advertising & PR",
+    "sentence": "We featured a glowing customer testimonial on our homepage.",
+    "sentence_th": "เรานำคำรับรองที่น่าประทับใจจากลูกค้ามาแสดงบนหน้าแรกของเว็บไซต์"
+  },
+  {
+    "word": "precaution",
+    "meaning": "มาตรการป้องกันล่วงหน้า",
+    "phonetic": "พริ-คอ-ชัน",
+    "pos": "คำนาม (n.)",
+    "category": "Health & Safety",
+    "sentence": "Workers must wear protective helmets as a safety precaution.",
+    "sentence_th": "คนงานต้องสวมหมวกนิรภัยเพื่อเป็นมาตรการป้องกันความปลอดภัยล่วงหน้า"
+  },
+  {
+    "word": "hazardous",
+    "meaning": "ที่เป็นอันตราย",
+    "phonetic": "แฮซ-ซาร์-ดัส",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Health & Safety",
+    "sentence": "Hazardous chemicals must be stored in sealed containers.",
+    "sentence_th": "สารเคมีที่เป็นอันตรายต้องถูกจัดเก็บไว้ในภาชนะที่ปิดสนิท"
+  },
+  {
+    "word": "evacuate",
+    "meaning": "อพยพออกจากพื้นที่",
+    "phonetic": "อิ-แวค-คิว-เอท",
+    "pos": "คำกริยา (v.)",
+    "category": "Health & Safety",
+    "sentence": "Employees practiced how to evacuate the building during the fire drill.",
+    "sentence_th": "พนักงานฝึกซ้อมวิธีการอพยพออกจากอาคารในระหว่างการซ้อมหนีไฟ"
+  },
+  {
+    "word": "sanitation",
+    "meaning": "สุขาภิบาล, ความสะอาดถูกสุขลักษณะ",
+    "phonetic": "แซน-นิ-เท-ชัน",
+    "pos": "คำนาม (n.)",
+    "category": "Health & Safety",
+    "sentence": "Food processing plants must follow strict sanitation standards.",
+    "sentence_th": "โรงงานแปรรูปอาหารต้องปฏิบัติตามมาตรฐานสุขาภิบาลอย่างเคร่งครัด"
+  },
+  {
+    "word": "ergonomic",
+    "meaning": "ที่ออกแบบตามหลักสรีรศาสตร์",
+    "phonetic": "เออร์-โก-นอม-มิค",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Health & Safety",
+    "sentence": "The office purchased ergonomic chairs to prevent back pain.",
+    "sentence_th": "สำนักงานซื้อเก้าอี้ที่ออกแบบตามหลักสรีรศาสตร์เพื่อป้องกันอาการปวดหลัง"
+  },
   {
     "word": "assembly",
     "meaning": "การประกอบชิ้นส่วน, สายการผลิต",

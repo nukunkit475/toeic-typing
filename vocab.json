@@ -1,1 +1,92 @@
-[]
+[
+  {
+    "word": "negotiate",
+    "pos": "คำศัพท์ (vocab)",
+    "pronunciation": "เน-โก-ทิท",
+    "meaning": "เจรจาต่อรอง",
+    "category": "Sales & Contract",
+    "example_en": "The negotiate is very important in business.",
+    "example_th": "เจรจาต่อรองมีความสำคัญมากในการทำธุรกิจ"
+  },
+  {
+    "word": "reimburse",
+    "pos": "คำศัพท์ (vocab)",
+    "pronunciation": "เบิกเงินคืน",
+    "meaning": "ชดเชยเงินคืน",
+    "category": "Finance",
+    "example_en": "The reimburse is very important in business.",
+    "example_th": "ชดเชยเงินคืนมีความสำคัญมากในการทำธุรกิจ"
+  },
+  {
+    "word": "agenda",
+    "pos": "คำศัพท์ (vocab)",
+    "pronunciation": "อา-เกน-ดา",
+    "meaning": "ระเบียบวาระการประชุม",
+    "category": "Legal",
+    "example_en": "The agenda is very important in business.",
+    "example_th": "ระเบียบวาระการประชุมมีความสำคัญมากในการทำธุรกิจ"
+  },
+  {
+    "word": "itinerary",
+    "pos": "คำศัพท์ (vocab)",
+    "pronunciation": "ไอ-ทิน-เนอ-แร-รี",
+    "meaning": "กำหนดการเดินทาง",
+    "category": "Travel",
+    "example_en": "The itinerary is very important in business.",
+    "example_th": "กำหนดการเดินทางมีความสำคัญมากในการทำธุรกิจ"
+  },
+  {
+    "word": "subsidiary",
+    "pos": "คำศัพท์ (vocab)",
+    "pronunciation": "ซับ-ซิด-ดิ-เออ-รี",
+    "meaning": "บริษัทในเครือ",
+    "category": "Corporate",
+    "example_en": "The subsidiary is very important in business.",
+    "example_th": "บริษัทในเครือมีความสำคัญมากในการทำธุรกิจ"
+  },
+  {
+    "word": "headquarters",
+    "pos": "คำศัพท์ (vocab)",
+    "pronunciation": "เฮด-ควอ-เทอร์ส",
+    "meaning": "สำนักงานใหญ่",
+    "category": "Corporate",
+    "example_en": "The headquarters is very important in business.",
+    "example_th": "สำนักงานใหญ่มีความสำคัญมากในการทำธุรกิจ"
+  },
+  {
+    "word": "renovate",
+    "pos": "คำศัพท์ (vocab)",
+    "pronunciation": "เรน-โน-เวท",
+    "meaning": "ปรับปรุงซ่อมแซม",
+    "category": "General Business",
+    "example_en": "The renovate is very important in business.",
+    "example_th": "ปรับปรุงซ่อมแซมมีความสำคัญมากในการทำธุรกิจ"
+  },
+  {
+    "word": "eligible",
+    "pos": "คำศัพท์ (vocab)",
+    "pronunciation": "เอล-ลิ-จิ-เบิล",
+    "meaning": "มีสิทธิ์ตามเกณฑ์",
+    "category": "General Business",
+    "example_en": "The eligible is very important in business.",
+    "example_th": "มีสิทธิ์ตามเกณฑ์มีความสำคัญมากในการทำธุรกิจ"
+  },
+  {
+    "word": "mandatory",
+    "pos": "คำศัพท์ (vocab)",
+    "pronunciation": "จำเป็นต้องทำ",
+    "meaning": "บังคับ",
+    "category": "General Business",
+    "example_en": "The mandatory is very important in business.",
+    "example_th": "บังคับมีความสำคัญมากในการทำธุรกิจ"
+  },
+  {
+    "word": "warranty",
+    "pos": "คำศัพท์ (vocab)",
+    "pronunciation": "วัร์-รัน-ที",
+    "meaning": "การรับประกันสินค้า",
+    "category": "Sales & Contract",
+    "example_en": "The warranty is very important in business.",
+    "example_th": "การรับประกันสินค้ามีความสำคัญมากในการทำธุรกิจ"
+  }
+]

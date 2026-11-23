@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>TOEIC Typing Master</title>
+  <!-- Open Graph / Social Share Preview (ป้องกันไม่ให้แชทดึงรูป QR Code ไปเป็นรูปปกเวลาส่งลิงก์) -->
+  <meta property="og:title" content="TOEIC Typing Master - ฝึกพิมพ์คำศัพท์ TOEIC">
+  <meta property="og:description" content="ฝึกพิมพ์คำศัพท์ภาษาอังกฤษ TOEIC พร้อมเสียงอ่าน คำอ่านภาษาไทย และตัวอย่างประโยคธุรกิจ">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://placehold.co/1200x630/0b0f19/38bdf8?text=TOEIC+Typing+Master">
+  <meta name="twitter:card" content="summary_large_image">
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
@@ -327,10 +333,10 @@
         <!-- PromptPay Card (จำลองหน้าบัตร Thai QR Payment ของคุณ นาย นุกูลกิจ ศรีมุกข์) -->
         <!-- PromptPay Card -->
         <div class="bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-300 max-w-[270px] mx-auto text-slate-800">
-          <!-- แสดงรูปภาพ QR Code ที่คุณอัปโหลดชื่อ qr.jpg ไว้บน GitHub แบบเต็มใบ -->
+          <!-- ใช้ data-src เพื่อไม่ให้บอทแชท (Messenger/LINE) ดึงรูป QR Code ไปแสดงเป็นรูปปกเวลาส่งลิงก์ -->
           <img 
             id="qr-code-image" 
-            src="qr.jpg" 
+            data-src="qr.jpg" 
             onerror="this.style.display='none'; document.getElementById('qr-fallback-box').classList.remove('hidden');"
             alt="QR Code สนับสนุน นาย นุกูลกิจ ศรีมุกข์" 
             class="w-full h-auto object-contain block"
@@ -1175,6 +1181,10 @@
        7. MODAL & TABLE MANAGEMENT
        ========================================================================== */
     function openDonateModal() {
+      const qrImg = document.getElementById('qr-code-image');
+      if (qrImg && !qrImg.getAttribute('src') && qrImg.dataset.src) {
+        qrImg.src = qrImg.dataset.src;
+      }
       document.getElementById('donate-modal').classList.remove('hidden');
     }
 

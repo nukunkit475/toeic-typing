@@ -123,58 +123,56 @@
     <div id="flashcard-box" class="w-full bg-[#111726] border border-slate-800/90 rounded-2xl shadow-2xl p-5 sm:p-7 flex flex-col justify-between transition-all duration-200">
       
       <!-- Card Top Row: Category Badge & Speak Button -->
-      <div class="flex items-center justify-between">
-        <span id="card-category" class="bg-slate-800/90 text-slate-300 border border-slate-700/60 text-xs px-3 py-1 rounded-lg font-medium">
-          General
+      <div class="flex items-center justify-between gap-2 mb-3">
+        <span id="card-category" class="px-3 py-1 rounded-lg bg-slate-800/90 border border-slate-700/80 text-xs font-medium text-slate-300">
+          Empty
         </span>
-
-        <button onclick="speakCurrentWord()" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white transition text-xs flex items-center gap-2 font-medium shadow-md shadow-indigo-600/20">
+        <button onclick="speakCurrentWord()" class="px-3.5 py-1.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-white font-semibold transition text-xs flex items-center gap-2 shadow-lg shadow-indigo-600/25">
           <i class="fa-solid fa-volume-high"></i>
           <span>ฟังเสียงอ่าน (Tab)</span>
         </button>
       </div>
 
-      <!-- Center: Word, Pronunciation, POS, Meaning -->
-      <div class="text-center my-3">
-        <h2 id="target-word" class="text-4xl sm:text-5xl md:text-6xl font-bold font-mono-code tracking-wider text-white my-2 transition-all">
-          distribute
-        </h2>
-
-        <!-- Pronunciation & POS Pills -->
-        <div class="flex flex-wrap items-center justify-center gap-2 mt-3">
-          <span id="target-pronunciation" class="bg-slate-800/90 text-slate-300 border border-slate-700/60 text-xs px-3 py-1 rounded-full">
-            คำอ่าน: <span class="text-sky-400 font-semibold">ดิส-ทริ-บิวท์</span>
-          </span>
-          <span id="card-pos" class="bg-indigo-950/90 text-indigo-300 border border-indigo-800/70 text-xs px-3 py-1 rounded-full font-medium">
-            คำกริยา (v.)
-          </span>
+      <!-- Center: Target Word, Pronunciation, POS, Meaning & Example -->
+      <div class="text-center my-2 space-y-3">
+        <div>
+          <h2 id="target-word" class="text-4xl sm:text-5xl md:text-6xl font-bold font-mono-code tracking-wider text-white break-all transition-all duration-200">
+            0 คำศัพท์
+          </h2>
+          <div class="flex flex-wrap items-center justify-center gap-2 mt-3 text-xs">
+            <span id="target-pronunciation" class="px-3 py-1 rounded-full bg-slate-800/80 border border-slate-700/70 text-slate-300">
+              สถานะ: <span class="text-sky-400 font-semibold">คลังคำศัพท์ว่างเปล่า</span>
+            </span>
+            <span id="card-pos" class="px-3 py-1 rounded-full bg-indigo-950/80 border border-indigo-700/50 text-indigo-300 font-medium">
+              ยังไม่มีคำศัพท์
+            </span>
+          </div>
         </div>
 
-        <!-- Yellow Meaning Box -->
-        <div class="mt-4 bg-[#0b0f19] border border-slate-800/90 rounded-xl py-3 px-4 max-w-2xl mx-auto">
-          <p class="text-[11px] text-slate-500 mb-0.5">ความหมายภาษาไทย</p>
-          <p id="target-meaning" class="text-lg sm:text-2xl font-bold text-amber-400">
-            แจกจ่าย, กระจายสินค้า
+        <!-- Meaning Box -->
+        <div class="bg-[#0b0f19]/90 border border-slate-800/90 rounded-xl p-3.5 max-w-2xl mx-auto">
+          <span class="text-[11px] text-slate-500 block mb-0.5">ความหมายภาษาไทย</span>
+          <p id="target-meaning" class="text-xl sm:text-2xl font-bold text-amber-400">
+            ดับเบิลคลิกที่ไอคอนคีย์บอร์ดมุมซ้ายบนเพื่อเพิ่มคำศัพท์
           </p>
         </div>
 
-        <!-- EXAMPLE SENTENCE BOX (ย้ายมาไว้ใต้ความหมายภาษาไทยตามภาพ) -->
-        <div class="mt-3 bg-[#0b0f19] border border-slate-800/90 rounded-2xl p-4 text-left max-w-2xl mx-auto">
-          <div class="flex items-center justify-between mb-1.5">
-            <div class="flex items-center gap-2 text-xs text-sky-400 font-semibold">
-              <i class="fa-solid fa-quote-left text-sky-400"></i>
-              <span>ตัวอย่างประโยค TOEIC:</span>
-            </div>
+        <!-- Example Sentence Box -->
+        <div class="bg-[#0b0f19]/70 border border-slate-800/80 rounded-xl p-3.5 max-w-2xl mx-auto text-left">
+          <div class="flex items-center justify-between gap-2 mb-1.5">
+            <span class="text-xs font-semibold text-sky-400 flex items-center gap-1.5">
+              <i class="fa-solid fa-quote-left"></i> ตัวอย่างประโยค TOEIC:
+            </span>
             <button onclick="speakCurrentSentence()" class="px-2.5 py-1 rounded-lg bg-slate-800/90 hover:bg-slate-700 text-slate-300 hover:text-white border border-slate-700/70 transition text-[11px] flex items-center gap-1.5">
               <i class="fa-solid fa-volume-low text-sky-400"></i>
               <span>ฟังประโยค</span>
             </button>
           </div>
           <p id="target-example-en" class="text-slate-100 text-sm sm:text-base leading-relaxed">
-            Logistics will <span class="text-amber-400 font-bold underline underline-offset-4">distribute</span> the goods across all branches.
+            Double-click the keyboard icon at the top-left to add your vocabulary.
           </p>
           <p id="target-example-th" class="text-slate-400 text-xs sm:text-sm mt-1">
-            ฝ่ายโลจิสติกส์จะกระจายสินค้าไปยังทุกสาขา
+            คลังคำศัพท์ถูกตั้งค่าเป็น 0 คำเรียบร้อยแล้ว
           </p>
         </div>
       </div>
@@ -229,47 +227,60 @@
       <!-- Modal Tabs -->
       <div class="flex border-b border-slate-800 bg-[#0d121f] px-5 text-xs font-semibold">
         <button id="tab-btn-add" onclick="switchModalTab('add')" style="display: none;" class="py-3 px-4 text-sky-400 border-b-2 border-sky-400 flex items-center gap-2">
-          <i class="fa-solid fa-file-circle-plus"></i> เพิ่มคำศัพท์ (เฉพาะผู้ดูแลระบบ)
+          <i class="fa-solid fa-plus"></i> เพิ่มคำศัพท์ใหม่ (จำนวนมาก)
         </button>
-        <button id="tab-btn-list" onclick="switchModalTab('list')" class="py-3 px-4 text-sky-400 border-b-2 border-sky-400 flex items-center gap-2">
-          <i class="fa-solid fa-list-check"></i> คลังคำศัพท์ทั้งหมด (<span id="modal-word-count">0</span>)
+        <button id="tab-btn-list" onclick="switchModalTab('list')" class="py-3 px-4 text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2">
+          <i class="fa-solid fa-list"></i> รายการคำศัพท์ทั้งหมด (<span id="modal-word-count">0</span>)
         </button>
       </div>
 
       <!-- Modal Body -->
-      <div class="p-5 flex-1 overflow-y-auto space-y-4">
+      <div class="p-5 overflow-y-auto flex-1 space-y-4">
         
         <!-- TAB 1: BULK ADD -->
-        <div id="tab-content-add" class="space-y-4">
-          <div class="bg-sky-950/30 border border-sky-800/50 rounded-xl p-3.5 text-xs text-slate-300 leading-relaxed space-y-1">
-            <p class="font-semibold text-sky-400 flex items-center gap-1.5">
-              <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> ระบบ Gemini AI ตรวจสอบและสร้างข้อมูลอัตโนมัติ:
-            </p>
-            <ul class="list-disc list-inside space-y-1 text-slate-300">
-              <li>พิมพ์แค่ <code class="bg-slate-950 px-1.5 py-0.5 rounded font-mono text-emerald-300">คำศัพท์</code> หรือ <code class="bg-slate-950 px-1.5 py-0.5 rounded font-mono text-amber-300">คำศัพท์, คำแปล</code> บรรทัดละ 1 คำ (รองรับทีละหลายสิบคำ)</li>
-              <li><strong>Gemini AI</strong> จะช่วยตรวจคำแปล สร้างคำอ่านภาษาไทยที่ออกเสียงเป๊ะ จัดหมวดหมู่ TOEIC และแต่งประโยคธุรกิจยุคใหม่ให้ครบทุกช่อง</li>
-              <li><strong class="text-amber-400">สนตัวพิมพ์เล็ก-ใหญ่ (Case-Sensitive):</strong> <code class="bg-slate-950 px-1 rounded font-mono">March</code> กับ <code class="bg-slate-950 px-1 rounded font-mono">march</code> ถือเป็นคนละคำ ไม่ถูกตัดซ้ำ</li>
-            </ul>
-          </div>
+        <div id="tab-content-add" class="space-y-3 hidden">
+          <!-- ช่องตั้งค่า Gemini API Key และ GitHub Cloud Sync สำหรับผู้ดูแลระบบ -->
+          <div class="bg-[#0b0f19] border border-slate-800 rounded-xl p-3 space-y-2.5 text-xs">
+            <div class="flex flex-wrap items-center justify-between gap-2">
+              <div class="flex items-center gap-2 text-slate-300">
+                <i class="fa-solid fa-key text-amber-400"></i>
+                <span>Gemini API Key (AI ตรวจคำศัพท์):</span>
+              </div>
+              <div class="flex items-center gap-2 flex-1 min-w-[220px] max-w-md">
+                <input 
+                  type="password" 
+                  id="gemini-api-key-input" 
+                  onchange="saveGeminiApiKey(this.value)"
+                  placeholder="วาง API Key ฟรีจาก aistudio.google.com..." 
+                  class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-mono text-sky-300 placeholder:text-slate-600 focus:border-sky-500 outline-none"
+                >
+                <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-400 whitespace-nowrap transition">
+                  รับ Key ฟรี
+                </a>
+              </div>
+            </div>
 
-          <!-- ช่องตั้งค่า Gemini API Key สำหรับใช้งานบน GitHub Pages ของตัวเอง -->
-          <div class="bg-[#0b0f19] border border-slate-800 rounded-xl p-3 flex flex-wrap items-center justify-between gap-2 text-xs">
-            <div class="flex items-center gap-2 text-slate-300">
-              <i class="fa-solid fa-key text-amber-400"></i>
-              <span>Gemini API Key (สำหรับใช้บน GitHub):</span>
+            <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800/80">
+              <div class="flex items-center gap-2 text-slate-300">
+                <i class="fa-brands fa-github text-emerald-400"></i>
+                <span>GitHub Token (ซิงค์ข้ามทุกเครื่อง):</span>
+              </div>
+              <div class="flex items-center gap-2 flex-1 min-w-[220px] max-w-md">
+                <input 
+                  type="password" 
+                  id="github-token-input" 
+                  onchange="saveGithubToken(this.value)"
+                  placeholder="วาง GitHub Token (ghp_... หรือ github_pat_...)" 
+                  class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-mono text-emerald-300 placeholder:text-slate-600 focus:border-emerald-500 outline-none"
+                >
+                <button onclick="syncVocabToGithub(true)" class="px-2.5 py-1.5 rounded-lg bg-emerald-900/70 hover:bg-emerald-800 text-emerald-300 whitespace-nowrap transition">
+                  ซิงค์ขึ้น Cloud
+                </button>
+              </div>
             </div>
-            <div class="flex items-center gap-2 flex-1 min-w-[220px] max-w-md">
-              <input 
-                type="password" 
-                id="gemini-api-key-input" 
-                onchange="saveGeminiApiKey(this.value)"
-                placeholder="วาง API Key ฟรีจาก aistudio.google.com..." 
-                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-mono text-sky-300 placeholder:text-slate-600 focus:border-sky-500 outline-none"
-              >
-              <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-400 whitespace-nowrap transition">
-                รับ Key ฟรี
-              </a>
-            </div>
+            <p class="text-[11px] text-slate-500">
+              * เมื่อใส่ GitHub Token (สิทธิ์ <code class="text-slate-300">Contents: Read and write</code> ของ repo <code class="text-slate-300">nukunkit475/toeic-typing</code>) ทุกครั้งที่เพิ่มหรือแก้คำศัพท์ ระบบจะบันทึกลง <code class="text-sky-400">vocab.json</code> บน GitHub อัตโนมัติ ทำให้เปิดเครื่องไหนหรือล้างประวัติเว็บ คำศัพท์ก็อยู่ครบทุกเครื่องครับ
+            </p>
           </div>
 
           <div>
@@ -290,11 +301,11 @@
           </div>
         </div>
 
-        <!-- TAB 2: VOCAB LIST & SEARCH -->
-        <div id="tab-content-list" class="hidden space-y-3">
+        <!-- TAB 2: VOCABULARY LIST -->
+        <div id="tab-content-list" class="space-y-3">
           <div class="flex flex-wrap items-center justify-between gap-2">
             <div class="relative flex-1 min-w-[200px]">
-              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+              <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
               <input 
                 type="text" 
                 id="search-vocab" 
@@ -303,10 +314,16 @@
                 class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:border-sky-500 outline-none"
               >
             </div>
-            <button id="btn-reset-vocab" onclick="clearAllVocab()" style="display: none;" class="px-3 py-2 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border border-rose-800/60 text-xs transition flex items-center gap-1.5">
-              <i class="fa-solid fa-trash-can"></i>
-              <span>ล้างคำศัพท์ทั้งหมด (เหลือ 0)</span>
-            </button>
+            <div class="flex flex-wrap items-center gap-2">
+              <button id="btn-export-code" onclick="copyVocabAsCode()" style="display: none;" class="px-3 py-2 rounded-xl bg-indigo-950/70 hover:bg-indigo-900/80 text-indigo-300 border border-indigo-800/60 text-xs transition flex items-center gap-1.5">
+                <i class="fa-solid fa-code"></i>
+                <span>คัดลอกโค้ดฝังเว็บ</span>
+              </button>
+              <button id="btn-reset-vocab" onclick="clearAllVocab()" style="display: none;" class="px-3 py-2 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border border-rose-800/60 text-xs transition flex items-center gap-1.5">
+                <i class="fa-solid fa-trash-can"></i>
+                <span>ล้างคำศัพท์ทั้งหมด (เหลือ 0)</span>
+              </button>
+            </div>
           </div>
 
           <div class="border border-slate-800 rounded-xl overflow-hidden bg-[#0b0f19]">
@@ -364,9 +381,9 @@
                 <input type="text" id="edit-example-th" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg px-2.5 py-1.5 text-white outline-none focus:border-sky-500">
               </div>
             </div>
-            <div class="flex justify-end gap-2">
-              <button onclick="closeEditPanel()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs">ยกเลิก</button>
-              <button onclick="saveEditedWord()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center gap-1.5">
+            <div class="flex justify-end gap-2 pt-1">
+              <button onclick="closeEditPanel()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition">ยกเลิก</button>
+              <button onclick="saveEditedWord()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition flex items-center gap-1.5">
                 <i class="fa-solid fa-check"></i> บันทึกการแก้ไข
               </button>
             </div>
@@ -462,8 +479,12 @@
     let speechRateIndex = 0;
     let audioCtx = null;
     let isAdminMode = false;
-    const VOCAB_DATA_VERSION = "v3.6_empty";
+    const VOCAB_DATA_VERSION = "v3.7_cloud_sync";
+    const GITHUB_OWNER = "nukunkit475";
+    const GITHUB_REPO = "toeic-typing";
+    const GITHUB_VOCAB_PATH = "vocab.json";
     let customGeminiApiKey = "";
+    let customGithubToken = "";
 
     function saveGeminiApiKey(val) {
       customGeminiApiKey = (val || "").trim();
@@ -473,12 +494,116 @@
       } catch (e) {}
     }
 
-    function initApp() {
+    function saveGithubToken(val) {
+      customGithubToken = (val || "").trim();
+      try {
+        localStorage.setItem('toeic_github_token', customGithubToken);
+        showToast(customGithubToken ? 'บันทึก GitHub Token เรียบร้อยแล้ว' : 'ล้าง GitHub Token แล้ว', 'success');
+      } catch (e) {}
+    }
+
+    async function loadCloudVocabFromGithub() {
+      try {
+        // ดึงข้อมูลจากไฟล์ vocab.json บน GitHub Pages / Raw GitHub แบบไม่ติดแคช
+        const urls = [
+          `./vocab.json?t=${Date.now()}`,
+          `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${GITHUB_VOCAB_PATH}?t=${Date.now()}`
+        ];
+        for (const url of urls) {
+          const res = await fetchWithTimeout(url, 3000);
+          if (res.ok) {
+            const data = await res.json();
+            if (Array.isArray(data)) {
+              vocabList = data;
+              localStorage.setItem('toeic_vocab_v3', JSON.stringify(vocabList));
+              localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
+              updateCategoryDropdown();
+              updateWordCountBadge();
+              renderVocabTable();
+              pickNextRandomWord(false);
+              return true;
+            }
+          }
+        }
+      } catch (e) {}
+      return false;
+    }
+
+    async function syncVocabToGithub(showManualToast = false) {
+      if (!customGithubToken) {
+        if (showManualToast) {
+          showToast('กรุณาใส่ GitHub Token ก่อนกดซิงค์ขึ้น Cloud', 'error');
+        }
+        return false;
+      }
+
+      try {
+        const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_VOCAB_PATH}`;
+        const headers = {
+          "Authorization": `Bearer ${customGithubToken}`,
+          "Accept": "application/vnd.github+json",
+          "Content-Type": "application/json"
+        };
+
+        // 1. ตรวจสอบ SHA ของไฟล์ vocab.json เดิมบน GitHub (ถ้ามี)
+        let sha = null;
+        const getRes = await fetch(apiUrl, { headers });
+        if (getRes.ok) {
+          const fileInfo = await getRes.json();
+          sha = fileInfo.sha;
+        }
+
+        // 2. เข้ารหัส JSON ภาษาไทยเป็น Base64 UTF-8 อย่างถูกต้อง
+        const jsonString = JSON.stringify(vocabList, null, 2);
+        const bytes = new TextEncoder().encode(jsonString);
+        let binary = "";
+        for (let i = 0; i < bytes.byteLength; i++) {
+          binary += String.fromCharCode(bytes[i]);
+        }
+        const base64Content = btoa(binary);
+
+        const body = {
+          message: `Update vocabulary (${vocabList.length} words) via TOEIC Typing Master`,
+          content: base64Content
+        };
+        if (sha) body.sha = sha;
+
+        const putRes = await fetch(apiUrl, {
+          method: "PUT",
+          headers,
+          body: JSON.stringify(body)
+        });
+
+        if (putRes.ok) {
+          if (showManualToast) {
+            showToast(`ซิงค์คำศัพท์ ${vocabList.length} คำ ขึ้น GitHub Cloud สำเร็จ! ทุกเครื่องจะเห็นข้อมูลตรงกัน`, 'success');
+          }
+          return true;
+        } else {
+          if (showManualToast) {
+            showToast('ซิงค์ไม่สำเร็จ กรุณาตรวจสอบสิทธิ์ของ GitHub Token', 'error');
+          }
+          return false;
+        }
+      } catch (e) {
+        if (showManualToast) {
+          showToast('เกิดข้อผิดพลาดในการเชื่อมต่อ GitHub Cloud', 'error');
+        }
+        return false;
+      }
+    }
+
+    async function initApp() {
       try {
         customGeminiApiKey = localStorage.getItem('toeic_gemini_api_key') || "";
         const keyInput = document.getElementById('gemini-api-key-input');
         if (keyInput && customGeminiApiKey) keyInput.value = customGeminiApiKey;
+
+        customGithubToken = localStorage.getItem('toeic_github_token') || "";
+        const ghInput = document.getElementById('github-token-input');
+        if (ghInput && customGithubToken) ghInput.value = customGithubToken;
       } catch (e) {}
+
       const storedVersion = localStorage.getItem('toeic_vocab_version');
       const storedVocab = localStorage.getItem('toeic_vocab_v3');
       if (storedVocab && storedVersion === VOCAB_DATA_VERSION) {
@@ -486,11 +611,10 @@
           const parsed = JSON.parse(storedVocab);
           vocabList = Array.isArray(parsed) ? parsed : [];
         } catch (e) {
-          vocabList = [];
+          vocabList = [...DEFAULT_TOEIC_VOCAB];
         }
       } else {
-        // รีเซ็ตคลังคำศัพท์เริ่มต้นให้เหลือ 0 คำตามที่ตั้งค่าไว้
-        vocabList = [];
+        vocabList = [...DEFAULT_TOEIC_VOCAB];
         localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
         saveVocabToStorage();
       }
@@ -498,6 +622,9 @@
       updateCategoryDropdown();
       updateWordCountBadge();
       pickNextRandomWord(false);
+
+      // ดึงข้อมูลล่าสุดจาก GitHub Cloud อัตโนมัติ (ทำให้ล้างประวัติหรือเปิดเครื่องอื่นก็เจอคำศัพท์ทันที)
+      await loadCloudVocabFromGithub();
 
       const inputEl = document.getElementById('typing-input');
       inputEl.addEventListener('input', handleTypingInput);
@@ -520,6 +647,9 @@
         localStorage.setItem('toeic_vocab_v3', JSON.stringify(vocabList));
       } catch (e) {
         showToast('พื้นที่จัดเก็บเบราว์เซอร์เต็ม ไม่สามารถบันทึกเพิ่มได้', 'error');
+      }
+      if (customGithubToken) {
+        syncVocabToGithub(false);
       }
     }
 
@@ -1365,12 +1495,28 @@
 
       btn.disabled = false;
       btn.innerHTML = `<i class="fa-solid fa-plus-circle"></i> <span>บันทึกเข้าคลังศัพท์</span>`;
+      const cloudNote = customGithubToken ? ' และซิงค์ขึ้น GitHub Cloud แล้ว' : '';
       if (aiSuccessTotal > 0) {
-        statusEl.innerText = `Gemini AI ตรวจสอบสำเร็จ ${aiSuccessTotal}/${itemsToFetch.length} คำ (ตัดคำซ้ำ ${duplicateCount.toLocaleString()} คำ)`;
-        showToast(`Gemini AI ตรวจสอบและสร้างข้อมูลสำเร็จ ${aiSuccessTotal} คำ!`, 'success');
+        statusEl.innerText = `Gemini AI ตรวจสอบสำเร็จ ${aiSuccessTotal}/${itemsToFetch.length} คำ${cloudNote}`;
+        showToast(`Gemini AI ตรวจสอบสำเร็จ ${aiSuccessTotal} คำ${cloudNote}!`, 'success');
       } else {
-        statusEl.innerText = `เพิ่มสำเร็จ ${newItems.length.toLocaleString()} คำ (โหมดพจนานุกรมสำรอง - ใส่ API Key เพื่อเปิดใช้ AI)`;
+        statusEl.innerText = `เพิ่มสำเร็จ ${newItems.length.toLocaleString()} คำ${cloudNote}`;
       }
+    }
+
+    function copyVocabAsCode() {
+      const codeStr = `const DEFAULT_TOEIC_VOCAB = ${JSON.stringify(vocabList, null, 2)};`;
+      const tempTextarea = document.createElement('textarea');
+      tempTextarea.value = codeStr;
+      document.body.appendChild(tempTextarea);
+      tempTextarea.select();
+      try {
+        document.execCommand('copy');
+        showToast(`คัดลอกโค้ดคำศัพท์ ${vocabList.length} คำ เรียบร้อย! นำไปวางแทนที่ DEFAULT_TOEIC_VOCAB ในไฟล์ index.html ได้เลย`, 'success');
+      } catch (e) {
+        showToast('ไม่สามารถคัดลอกอัตโนมัติได้', 'error');
+      }
+      document.body.removeChild(tempTextarea);
     }
 
     /* ==========================================================================
@@ -1392,6 +1538,7 @@
     function openAdminAddModal() {
       isAdminMode = true;
       document.getElementById('tab-btn-add').style.display = 'flex';
+      document.getElementById('btn-export-code').style.display = 'flex';
       document.getElementById('btn-reset-vocab').style.display = 'flex';
       document.getElementById('th-vocab-action').style.display = 'table-cell';
       openVocabManager();
@@ -1402,6 +1549,7 @@
     function openVocabManager() {
       if (!isAdminMode) {
         document.getElementById('tab-btn-add').style.display = 'none';
+        document.getElementById('btn-export-code').style.display = 'none';
         document.getElementById('btn-reset-vocab').style.display = 'none';
         document.getElementById('th-vocab-action').style.display = 'none';
         switchModalTab('list');
@@ -1414,6 +1562,7 @@
       isAdminMode = false;
       document.getElementById('vocab-modal').classList.add('hidden');
       document.getElementById('tab-btn-add').style.display = 'none';
+      document.getElementById('btn-export-code').style.display = 'none';
       document.getElementById('btn-reset-vocab').style.display = 'none';
       document.getElementById('th-vocab-action').style.display = 'none';
       document.getElementById('typing-input').focus();

@@ -50,9 +50,9 @@
   <!-- TOP HEADER (ตรงตามแบบต้นฉบับ ไม่มีแถบสถิติ) -->
   <header class="border-b border-slate-800/80 bg-[#0d121f] px-4 sm:px-8 py-3.5 flex-none">
     <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
-      <!-- Left: Logo & Live Word Counter -->
+      <!-- Left: Logo & Live Word Counter (ดับเบิลคลิกที่ไอคอนเพื่อเปิดหน้าเพิ่มศัพท์สำหรับเจ้าของเว็บ) -->
       <div class="flex items-center gap-3.5">
-        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25">
+        <div ondblclick="openAdminAddModal()" title="ดับเบิลคลิกเพื่อจัดการเพิ่มคำศัพท์ (Admin)" class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25 cursor-pointer active:scale-95 transition">
           <i class="fa-solid fa-keyboard text-lg"></i>
         </div>
         <div>
@@ -63,11 +63,11 @@
         </div>
       </div>
 
-      <!-- Right: Action Buttons -->
+      <!-- Right: Action Buttons (ปุ่มสนับสนุน QR Code แทนปุ่มเพิ่มคำศัพท์ + ปุ่มดูคลังศัพท์) -->
       <div class="flex items-center gap-2.5">
-        <button onclick="openVocabManager(); switchModalTab('add');" class="px-3.5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-semibold transition text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-emerald-600/20">
-          <i class="fa-solid fa-circle-plus"></i>
-          <span>เพิ่มคำศัพท์เอง (ไม่จำกัด)</span>
+        <button onclick="openDonateModal()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold transition text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20">
+          <i class="fa-solid fa-mug-hot"></i>
+          <span>สนับสนุนค่ากาแฟ (QR)</span>
         </button>
 
         <button onclick="openVocabManager(); switchModalTab('list');" class="px-3.5 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 font-medium transition text-xs sm:text-sm flex items-center gap-2 border border-slate-700/80">
@@ -218,10 +218,10 @@
 
       <!-- Modal Tabs -->
       <div class="flex border-b border-slate-800 bg-[#0d121f] px-5 text-xs font-semibold">
-        <button id="tab-btn-add" onclick="switchModalTab('add')" class="py-3 px-4 text-sky-400 border-b-2 border-sky-400 flex items-center gap-2">
-          <i class="fa-solid fa-file-circle-plus"></i> เพิ่มคำศัพท์ (ทีละคำ / วางทีละหลายพันคำ)
+        <button id="tab-btn-add" onclick="switchModalTab('add')" style="display: none;" class="py-3 px-4 text-sky-400 border-b-2 border-sky-400 flex items-center gap-2">
+          <i class="fa-solid fa-file-circle-plus"></i> เพิ่มคำศัพท์ (เฉพาะผู้ดูแลระบบ)
         </button>
-        <button id="tab-btn-list" onclick="switchModalTab('list')" class="py-3 px-4 text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2">
+        <button id="tab-btn-list" onclick="switchModalTab('list')" class="py-3 px-4 text-sky-400 border-b-2 border-sky-400 flex items-center gap-2">
           <i class="fa-solid fa-list-check"></i> คลังคำศัพท์ทั้งหมด (<span id="modal-word-count">0</span>)
         </button>
       </div>
@@ -251,50 +251,116 @@
             ></textarea>
           </div>
 
-          <div class="flex flex-wrap items-center justify-between gap-2 pt-1">
-          <span id="bulk-add-status" class="text-xs font-semibold text-emerald-400"></span>
-          <button id="btn-process-bulk" onclick="processBulkAdd()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-500 disabled:bg-slate-700 disabled:cursor-not-allowed text-white text-xs sm:text-sm font-bold rounded-xl transition shadow-lg shadow-emerald-600/20 flex items-center gap-2">
-            <i class="fa-solid fa-plus-circle"></i> <span>บันทึกเข้าคลังศัพท์</span>
-          </button>
+          <div class="flex flex-wrap items-center justify-between gap-3">
+            <span id="bulk-add-status" class="text-xs text-emerald-400 font-medium"></span>
+            <button id="btn-process-bulk" onclick="processBulkAdd()" class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs sm:text-sm transition flex items-center gap-2 shadow-lg shadow-sky-600/20 ml-auto">
+              <i class="fa-solid fa-plus-circle"></i>
+              <span>บันทึกเข้าคลังศัพท์</span>
+            </button>
+          </div>
         </div>
-      </div>
 
-      <!-- TAB 2: VOCAB LIST -->
-        <div id="tab-content-list" class="space-y-3 hidden">
-          <div class="flex items-center justify-between gap-2">
-            <div class="relative flex-1">
-              <i class="fa-solid fa-magnifying-glass absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+        <!-- TAB 2: VOCAB LIST & SEARCH -->
+        <div id="tab-content-list" class="hidden space-y-3">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="relative flex-1 min-w-[200px]">
+              <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
               <input 
                 type="text" 
                 id="search-vocab" 
-                oninput="renderVocabTable()"
-                placeholder="ค้นหาคำศัพท์ หรือ คำแปล..." 
-                class="w-full bg-[#0b0f19] border border-slate-800 rounded-xl pl-8 pr-3 py-2 text-xs text-white placeholder:text-slate-600 outline-none focus:border-sky-500"
+                oninput="renderVocabTable()" 
+                placeholder="ค้นหาคำศัพท์, คำแปล, หรือหมวดหมู่..." 
+                class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:border-sky-500 outline-none"
               >
             </div>
-            <button onclick="resetToDefaultVocab()" class="px-3 py-2 bg-slate-800 hover:bg-rose-950 text-slate-300 hover:text-rose-300 border border-slate-700 hover:border-rose-800 text-xs rounded-xl transition flex items-center gap-1.5">
-              <i class="fa-solid fa-rotate-left"></i> รีเซ็ตค่าเริ่มต้น
+            <button id="btn-reset-vocab" onclick="resetToDefaultVocab()" style="display: none;" class="px-3 py-2 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border border-rose-800/60 text-xs transition flex items-center gap-1.5">
+              <i class="fa-solid fa-rotate-left"></i>
+              <span>รีเซ็ตค่าเริ่มต้น</span>
             </button>
           </div>
 
-          <div class="border border-slate-800 rounded-xl overflow-hidden max-h-[340px] overflow-y-auto">
-            <table class="w-full text-left border-collapse text-xs">
-              <thead class="bg-[#0b0f19] text-slate-400 border-b border-slate-800 sticky top-0">
-                <tr>
-                  <th class="p-2.5">คำศัพท์</th>
-                  <th class="p-2.5">ชนิดคำ</th>
-                  <th class="p-2.5">คำแปล / คำอ่าน</th>
-                  <th class="p-2.5">หมวดหมู่</th>
-                  <th class="p-2.5 text-center">ลบ</th>
-                </tr>
-              </thead>
-              <tbody id="vocab-table-body" class="divide-y divide-slate-800/60 text-slate-200">
-              </tbody>
-            </table>
+          <div class="border border-slate-800 rounded-xl overflow-hidden bg-[#0b0f19]">
+            <div class="max-h-[45vh] overflow-y-auto">
+              <table class="w-full text-left border-collapse text-xs">
+                <thead class="bg-slate-900/90 text-slate-400 sticky top-0 border-b border-slate-800">
+                  <tr>
+                    <th class="p-2.5 font-semibold">คำศัพท์</th>
+                    <th class="p-2.5 font-semibold">ชนิดคำ</th>
+                    <th class="p-2.5 font-semibold">ความหมาย / คำอ่าน</th>
+                    <th class="p-2.5 font-semibold">หมวดหมู่</th>
+                    <th id="th-vocab-action" style="display: none;" class="p-2.5 font-semibold text-center w-14">จัดการ</th>
+                  </tr>
+                </thead>
+                <tbody id="vocab-table-body" class="divide-y divide-slate-800/60">
+                  <!-- Rows populated by JS -->
+                </tbody>
+              </table>
+            </div>
           </div>
         </div>
 
       </div>
+    </div>
+  </div>
+
+  <!-- DONATE / QR CODE MODAL -->
+  <div id="donate-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
+    <div class="bg-[#111726] border border-slate-800 rounded-2xl w-full max-w-sm flex flex-col shadow-2xl overflow-hidden text-center">
+      
+      <!-- Header -->
+      <div class="px-5 py-3.5 border-b border-slate-800 flex items-center justify-between bg-[#0b0f19]">
+        <div class="flex items-center gap-2 text-amber-400 font-bold text-sm sm:text-base">
+          <i class="fa-solid fa-heart text-rose-500"></i>
+          <span>ร่วมสนับสนุนผู้พัฒนาเว็บ</span>
+        </div>
+        <button onclick="closeDonateModal()" class="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition">
+          <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+      </div>
+
+      <!-- Body -->
+      <div class="p-5 space-y-3.5">
+        <p class="text-xs text-slate-300 leading-relaxed">
+          หากเว็บไซต์นี้ช่วยให้คุณฝึกศัพท์ TOEIC ได้สนุกและเก่งขึ้น สามารถร่วมสนับสนุนค่ากาแฟให้ผู้พัฒนาได้ตามกำลังศรัทธาเลยครับ (ไม่บังคับ ขอบคุณมากๆ ครับ 🙏)
+        </p>
+
+        <!-- PromptPay Card (จำลองหน้าบัตร Thai QR Payment ของคุณ นาย นุกูลกิจ ศรีมุกข์) -->
+        <!-- PromptPay Card -->
+        <div class="bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-300 max-w-[270px] mx-auto text-slate-800">
+          <!-- แสดงรูปภาพ QR Code ที่คุณอัปโหลดชื่อ qr.jpg ไว้บน GitHub แบบเต็มใบ -->
+          <img 
+            id="qr-code-image" 
+            src="qr.jpg" 
+            onerror="this.style.display='none'; document.getElementById('qr-fallback-box').classList.remove('hidden');"
+            alt="QR Code สนับสนุน นาย นุกูลกิจ ศรีมุกข์" 
+            class="w-full h-auto object-contain block"
+          >
+          <!-- กล่องสำรองกรณีคนเปิดดูยังไม่ได้อัปโหลดไฟล์ qr.jpg ขึ้น GitHub -->
+          <div id="qr-fallback-box" class="hidden">
+            <div class="bg-[#113f67] text-white py-2 px-3 flex items-center justify-center gap-2">
+              <i class="fa-solid fa-qrcode text-lg text-emerald-400"></i>
+              <span class="font-bold text-xs tracking-wider">THAI QR PAYMENT</span>
+            </div>
+            <div class="p-3.5 flex flex-col items-center">
+              <div class="border border-slate-300 rounded px-2 py-0.5 text-[10px] font-bold text-[#113f67] mb-2">
+                PromptPay พร้อมเพย์
+              </div>
+              <img 
+                src="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data=00020101021129370016A000000677010111011300660000000005802TH53037646304"
+                alt="QR Code สำรอง" 
+                class="w-44 h-44 object-contain rounded-lg"
+              >
+              <p class="text-emerald-600 font-bold text-xs mt-2">สแกน QR เพื่อจ่าย</p>
+              <p class="text-slate-900 font-bold text-xs mt-0.5">ชื่อ: นาย นุกูลกิจ ศรีมุกข์</p>
+              <p class="text-slate-600 text-[11px]">บัญชี: xxx-x-x7278-x</p>
+            </div>
+            <div class="bg-slate-50 border-t border-slate-200 py-1.5 px-3 text-[10px] text-slate-500 flex items-center justify-center gap-1">
+              <span class="font-bold text-emerald-600">K+</span> รับเงินได้จากทุกธนาคาร
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 
@@ -377,6 +443,7 @@
     const speechRates = [1.0, 0.8, 1.2];
     let speechRateIndex = 0;
     let audioCtx = null;
+    let isAdminMode = false;
 
     function initApp() {
       const storedVocab = localStorage.getItem('toeic_vocab_v3');
@@ -920,17 +987,49 @@
     /* ==========================================================================
        7. MODAL & TABLE MANAGEMENT
        ========================================================================== */
+    function openDonateModal() {
+      document.getElementById('donate-modal').classList.remove('hidden');
+    }
+
+    function closeDonateModal() {
+      document.getElementById('donate-modal').classList.add('hidden');
+      document.getElementById('typing-input').focus();
+    }
+
+    function openAdminAddModal() {
+      isAdminMode = true;
+      document.getElementById('tab-btn-add').style.display = 'flex';
+      document.getElementById('btn-reset-vocab').style.display = 'flex';
+      document.getElementById('th-vocab-action').style.display = 'table-cell';
+      openVocabManager();
+      switchModalTab('add');
+      showToast('เปิดโหมดเพิ่มคำศัพท์สำหรับผู้ดูแลระบบแล้ว', 'info');
+    }
+
     function openVocabManager() {
+      if (!isAdminMode) {
+        document.getElementById('tab-btn-add').style.display = 'none';
+        document.getElementById('btn-reset-vocab').style.display = 'none';
+        document.getElementById('th-vocab-action').style.display = 'none';
+        switchModalTab('list');
+      }
       document.getElementById('vocab-modal').classList.remove('hidden');
       renderVocabTable();
     }
 
     function closeVocabManager() {
+      isAdminMode = false;
       document.getElementById('vocab-modal').classList.add('hidden');
+      document.getElementById('tab-btn-add').style.display = 'none';
+      document.getElementById('btn-reset-vocab').style.display = 'none';
+      document.getElementById('th-vocab-action').style.display = 'none';
       document.getElementById('typing-input').focus();
     }
 
     function switchModalTab(tabName) {
+      if (tabName === 'add' && !isAdminMode) {
+        tabName = 'list';
+      }
       const addTab = document.getElementById('tab-content-add');
       const listTab = document.getElementById('tab-content-list');
       const btnAdd = document.getElementById('tab-btn-add');
@@ -962,7 +1061,8 @@
       });
 
       if (filtered.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-500">ไม่พบคำศัพท์ที่ค้นหา</td></tr>`;
+        const colSpan = isAdminMode ? 5 : 4;
+        tbody.innerHTML = `<tr><td colspan="${colSpan}" class="p-4 text-center text-slate-500">ไม่พบคำศัพท์ที่ค้นหา</td></tr>`;
         return;
       }
 
@@ -971,6 +1071,13 @@
       displaySlice.forEach(item => {
         const row = document.createElement('tr');
         row.className = "hover:bg-slate-800/50 transition";
+        const actionCell = isAdminMode ? `
+          <td class="p-2.5 text-center">
+            <button onclick="deleteSingleWord('${escapeJsString(item.word)}')" class="p-1.5 hover:text-rose-400 text-slate-500 transition" title="ลบคำนี้">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </td>` : '';
+
         row.innerHTML = `
           <td class="p-2.5 font-mono font-bold text-sky-300">${escapeHtml(item.word)}</td>
           <td class="p-2.5 text-slate-400 text-[11px]">${escapeHtml(item.pos || '-')}</td>
@@ -979,18 +1086,15 @@
             <span class="text-slate-500 text-[11px] block">${escapeHtml(item.pronunciation || '')}</span>
           </td>
           <td class="p-2.5 text-slate-400 text-[11px]">${escapeHtml(item.category || 'General')}</td>
-          <td class="p-2.5 text-center">
-            <button onclick="deleteSingleWord('${escapeJsString(item.word)}')" class="p-1.5 hover:text-rose-400 text-slate-500 transition" title="ลบคำนี้">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>
+          ${actionCell}
         `;
         tbody.appendChild(row);
       });
 
       if (filtered.length > 300) {
+        const colSpan = isAdminMode ? 5 : 4;
         const infoRow = document.createElement('tr');
-        infoRow.innerHTML = `<td colspan="5" class="p-2.5 text-center text-slate-500 text-[11px]">แสดง 300 รายการแรกจากทั้งหมด ${filtered.length.toLocaleString()} คำ (ใช้ช่องค้นหาด้านบนเพื่อกรองคำเฉพาะเจาะจง)</td>`;
+        infoRow.innerHTML = `<td colspan="${colSpan}" class="p-2.5 text-center text-slate-500 text-[11px]">แสดง 300 รายการแรกจากทั้งหมด ${filtered.length.toLocaleString()} คำ (ใช้ช่องค้นหาด้านบนเพื่อกรองคำเฉพาะเจาะจง)</td>`;
         tbody.appendChild(infoRow);
       }
     }

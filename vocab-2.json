@@ -1,0 +1,272 @@
+[
+  {
+    "word": "negotiate",
+    "meaning": "เจรจาต่อรอง",
+    "phonetic": "นิ-โก-ชิ-เอท",
+    "pos": "คำกริยา (v.)",
+    "category": "Contracts & Law",
+    "sentence": "The two companies will negotiate the contract terms tomorrow.",
+    "sentence_th": "ทั้งสองบริษัทจะเจรจาต่อรองเงื่อนไขสัญญาในวันพรุ่งนี้"
+  },
+  {
+    "word": "compliance",
+    "meaning": "การปฏิบัติตามกฎระเบียบ",
+    "phonetic": "คอม-ไพล-แอนซ์",
+    "pos": "คำนาม (n.)",
+    "category": "Contracts & Law",
+    "sentence": "All departments must ensure strict compliance with safety regulations.",
+    "sentence_th": "ทุกแผนกต้องรับรองการปฏิบัติตามกฎระเบียบด้านความปลอดภัยอย่างเคร่งครัด"
+  },
+  {
+    "word": "amendment",
+    "meaning": "การแก้ไขเพิ่มเติมสัญญา",
+    "phonetic": "อะ-เมนด์-เมินท์",
+    "pos": "คำนาม (n.)",
+    "category": "Contracts & Law",
+    "sentence": "Both parties signed an amendment to extend the lease agreement.",
+    "sentence_th": "ทั้งสองฝ่ายได้ลงนามในการแก้ไขเพิ่มเติมสัญญาเพื่อขยายระยะเวลาการเช่า"
+  },
+  {
+    "word": "liability",
+    "meaning": "ความรับผิดชอบตามกฎหมาย",
+    "phonetic": "ไล-อะ-บิล-ลิ-ที",
+    "pos": "คำนาม (n.)",
+    "category": "Contracts & Law",
+    "sentence": "The firm denies any legal liability for the shipping delay.",
+    "sentence_th": "บริษัทปฏิเสธความรับผิดชอบตามกฎหมายใดๆ สำหรับความล่าช้าในการจัดส่ง"
+  },
+  {
+    "word": "dispute",
+    "meaning": "ข้อพิพาท, การโต้แย้ง",
+    "phonetic": "ดิส-พิวท์",
+    "pos": "คำนาม (n.)",
+    "category": "Contracts & Law",
+    "sentence": "The legal team helped resolve the billing dispute quickly.",
+    "sentence_th": "ทีมกฎหมายช่วยแก้ไขข้อพิพาทเรื่องการเรียกเก็บเงินได้อย่างรวดเร็ว"
+  },
+  {
+    "word": "reimburse",
+    "meaning": "ชดเชยเงินคืน",
+    "phonetic": "รี-อิม-เบิร์ส",
+    "pos": "คำกริยา (v.)",
+    "category": "Finance",
+    "sentence": "The company will reimburse all travel expenses if you submit the original receipts.",
+    "sentence_th": "บริษัทจะชดเชยเงินคืนสำหรับค่าใช้จ่ายในการเดินทางทั้งหมดหากคุณยื่นใบเสร็จรับเงินต้นฉบับ"
+  },
+  {
+    "word": "invoice",
+    "meaning": "ใบแจ้งหนี้",
+    "phonetic": "อิน-วอยซ์",
+    "pos": "คำนาม (n.)",
+    "category": "Finance",
+    "sentence": "Please settle the attached invoice within thirty days.",
+    "sentence_th": "กรุณาชำระเงินตามใบแจ้งหนี้ที่แนบมานี้ภายในสามสิบวัน"
+  },
+  {
+    "word": "deficit",
+    "meaning": "การขาดดุล, ยอดขาดทุน",
+    "phonetic": "เดฟ-ฟิ-ซิท",
+    "pos": "คำนาม (n.)",
+    "category": "Finance",
+    "sentence": "The new cost-cutting plan successfully reduced our annual budget deficit.",
+    "sentence_th": "แผนการลดต้นทุนใหม่ช่วยลดยอดขาดดุลงบประมาณประจำปีของเราได้สำเร็จ"
+  },
+  {
+    "word": "audit",
+    "meaning": "การตรวจสอบบัญชี",
+    "phonetic": "ออ-ดิท",
+    "pos": "คำนาม (n.)",
+    "category": "Finance",
+    "sentence": "External accountants will conduct a financial audit next week.",
+    "sentence_th": "นักบัญชีภายนอกจะดำเนินการตรวจสอบบัญชีทางการเงินในสัปดาห์หน้า"
+  },
+  {
+    "word": "revenue",
+    "meaning": "รายได้ขององค์กร",
+    "phonetic": "เรฟ-เวอ-นิว",
+    "pos": "คำนาม (n.)",
+    "category": "Finance",
+    "sentence": "Online sales generated forty percent of our total revenue this year.",
+    "sentence_th": "ยอดขายออนไลน์สร้างรายได้ถึงสี่สิบเปอร์เซ็นต์ของรายได้ทั้งหมดของเราในปีนี้"
+  },
+  {
+    "word": "eligible",
+    "meaning": "มีสิทธิ์ตามเกณฑ์",
+    "phonetic": "เอล-ลิ-จิ-เบิล",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Human Resources",
+    "sentence": "Full-time employees are eligible for health insurance.",
+    "sentence_th": "พนักงานประจำมีสิทธิ์ได้รับประกันสุขภาพตามเกณฑ์"
+  },
+  {
+    "word": "mandatory",
+    "meaning": "บังคับ, จำเป็นต้องทำ",
+    "phonetic": "แมน-ดะ-ทอ-รี",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Human Resources",
+    "sentence": "Safety training is mandatory for all factory workers.",
+    "sentence_th": "การฝึกอบรมด้านความปลอดภัยเป็นข้อบังคับสำหรับพนักงานโรงงานทุกคน"
+  },
+  {
+    "word": "recruit",
+    "meaning": "สรรหาบุคลากร, รับสมัคร",
+    "phonetic": "ริ-ครูท",
+    "pos": "คำกริยา (v.)",
+    "category": "Human Resources",
+    "sentence": "We are looking to recruit experienced software engineers.",
+    "sentence_th": "เรากำลังมองหาการสรรหาบุคลากรวิศวกรซอฟต์แวร์ที่มีประสบการณ์"
+  },
+  {
+    "word": "appraisal",
+    "meaning": "การประเมินผลงาน",
+    "phonetic": "อะ-เพร-เซิล",
+    "pos": "คำนาม (n.)",
+    "category": "Human Resources",
+    "sentence": "Annual performance appraisals take place every December.",
+    "sentence_th": "การประเมินผลงานประจำปีจะจัดขึ้นในทุกเดือนธันวาคม"
+  },
+  {
+    "word": "resign",
+    "meaning": "ลาออก",
+    "phonetic": "ริ-ไซน์",
+    "pos": "คำกริยา (v.)",
+    "category": "Human Resources",
+    "sentence": "Mr. Tanaka decided to resign from his position as sales director.",
+    "sentence_th": "คุณทานากะตัดสินใจลาออกจากตำแหน่งผู้อำนวยการฝ่ายขาย"
+  },
+  {
+    "word": "warranty",
+    "meaning": "การรับประกันสินค้า",
+    "phonetic": "วอ-แรน-ที",
+    "pos": "คำนาม (n.)",
+    "category": "Sales & Marketing",
+    "sentence": "This laptop comes with a two-year manufacturer warranty.",
+    "sentence_th": "แล็ปท็อปเครื่องนี้มาพร้อมกับการรับประกันจากผู้ผลิตสองปี"
+  },
+  {
+    "word": "merchandise",
+    "meaning": "สินค้า",
+    "phonetic": "เมอร์-แชน-ไดซ์",
+    "pos": "คำนาม (n.)",
+    "category": "Sales & Marketing",
+    "sentence": "Customers may return damaged merchandise within fourteen days.",
+    "sentence_th": "ลูกค้าสามารถคืนสินค้าที่ชำรุดได้ภายในสิบสี่วัน"
+  },
+  {
+    "word": "brochure",
+    "meaning": "แผ่นพับโฆษณา",
+    "phonetic": "โบร-ชัวร์",
+    "pos": "คำนาม (n.)",
+    "category": "Sales & Marketing",
+    "sentence": "Our latest travel brochure features discounts on European tours.",
+    "sentence_th": "แผ่นพับโฆษณาการท่องเที่ยวล่าสุดของเรามีส่วนลดสำหรับทัวร์ยุโรป"
+  },
+  {
+    "word": "competitor",
+    "meaning": "คู่แข่งทางการค้า",
+    "phonetic": "คอม-เพท-ทิ-เทอร์",
+    "pos": "คำนาม (n.)",
+    "category": "Sales & Marketing",
+    "sentence": "We lowered our prices to stay ahead of our main competitor.",
+    "sentence_th": "เราลดราคาสินค้าลงเพื่อให้อยู่เหนือคู่แข่งทางการค้าหลักของเรา"
+  },
+  {
+    "word": "endorse",
+    "meaning": "รับรอง, สนับสนุนสินค้า",
+    "phonetic": "เอน-ดอร์ส",
+    "pos": "คำกริยา (v.)",
+    "category": "Sales & Marketing",
+    "sentence": "Famous athletes were hired to endorse the new sportswear line.",
+    "sentence_th": "นักกีฬาชื่อดังถูกว่าจ้างให้รับรองสินค้าชุดกีฬารุ่นใหม่"
+  },
+  {
+    "word": "agenda",
+    "meaning": "ระเบียบวาระการประชุม",
+    "phonetic": "อะ-เจน-ดะ",
+    "pos": "คำนาม (n.)",
+    "category": "Management",
+    "sentence": "Please review the meeting agenda before we start.",
+    "sentence_th": "กรุณาตรวจสอบระเบียบวาระการประชุมก่อนที่เราจะเริ่ม"
+  },
+  {
+    "word": "delegate",
+    "meaning": "มอบหมายงาน",
+    "phonetic": "เดล-ลิ-เกท",
+    "pos": "คำกริยา (v.)",
+    "category": "Management",
+    "sentence": "A good manager knows how to delegate tasks effectively.",
+    "sentence_th": "ผู้จัดการที่ดีรู้วิธีมอบหมายงานอย่างมีประสิทธิภาพ"
+  },
+  {
+    "word": "implement",
+    "meaning": "นำไปปฏิบัติ, ดำเนินการ",
+    "phonetic": "อิม-พลิ-เมินท์",
+    "pos": "คำกริยา (v.)",
+    "category": "Management",
+    "sentence": "The company will implement the new attendance policy next month.",
+    "sentence_th": "บริษัทจะนำนโยบายการเข้างานใหม่ไปปฏิบัติในเดือนหน้า"
+  },
+  {
+    "word": "deadline",
+    "meaning": "กำหนดส่งงาน",
+    "phonetic": "เดด-ไลน์",
+    "pos": "คำนาม (n.)",
+    "category": "Management",
+    "sentence": "We worked overtime to meet the strict project deadline.",
+    "sentence_th": "เราทำงานล่วงเวลาเพื่อให้ทันกำหนดส่งงานของโครงการที่เข้มงวด"
+  },
+  {
+    "word": "supervise",
+    "meaning": "ควบคุมดูแล",
+    "phonetic": "ซู-เพอร์-ไวซ์",
+    "pos": "คำกริยา (v.)",
+    "category": "Management",
+    "sentence": "Ms. Lee was appointed to supervise the customer service team.",
+    "sentence_th": "คุณลีได้รับการแต่งตั้งให้ควบคุมดูแลทีมบริการลูกค้า"
+  },
+  {
+    "word": "itinerary",
+    "meaning": "กำหนดการเดินทาง",
+    "phonetic": "ไอ-ทิน-เนอ-แร-รี",
+    "pos": "คำนาม (n.)",
+    "category": "Travel",
+    "sentence": "I have sent your flight itinerary to your email.",
+    "sentence_th": "ฉันได้ส่งกำหนดการเดินทางโดยเครื่องบินไปที่อีเมลของคุณแล้ว"
+  },
+  {
+    "word": "accommodation",
+    "meaning": "ที่พัก",
+    "phonetic": "อะ-คอม-โม-เด-ชัน",
+    "pos": "คำนาม (n.)",
+    "category": "Travel",
+    "sentence": "Hotel accommodation is included in the conference registration fee.",
+    "sentence_th": "ที่พักโรงแรมรวมอยู่ในค่าลงทะเบียนเข้าร่วมการประชุมแล้ว"
+  },
+  {
+    "word": "departure",
+    "meaning": "การออกเดินทาง",
+    "phonetic": "ดิ-พาร์-เชอร์",
+    "pos": "คำนาม (n.)",
+    "category": "Travel",
+    "sentence": "Passengers should arrive at the airport two hours before departure.",
+    "sentence_th": "ผู้โดยสารควรมาถึงสนามบินสองชั่วโมงก่อนการออกเดินทาง"
+  },
+  {
+    "word": "luggage",
+    "meaning": "กระเป๋าเดินทาง, สัมภาระ",
+    "phonetic": "ลัก-เกจ",
+    "pos": "คำนาม (n.)",
+    "category": "Travel",
+    "sentence": "Please do not leave your luggage unattended in the terminal.",
+    "sentence_th": "กรุณาอย่าวางกระเป๋าเดินทางของคุณทิ้งไว้โดยไม่มีคนดูแลในอาคารผู้โดยสาร"
+  },
+  {
+    "word": "customs",
+    "meaning": "ด่านศุลกากร",
+    "phonetic": "คัส-ทอมส์",
+    "pos": "คำนาม (n.)",
+    "category": "Travel",
+    "sentence": "International travelers must pass through customs upon arrival.",
+    "sentence_th": "ผู้เดินทางระหว่างประเทศต้องผ่านด่านศุลกากรเมื่อเดินทางมาถึง"
+  }
+]

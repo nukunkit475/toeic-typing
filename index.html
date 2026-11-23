@@ -243,20 +243,40 @@
         <div id="tab-content-add" class="space-y-4">
           <div class="bg-sky-950/30 border border-sky-800/50 rounded-xl p-3.5 text-xs text-slate-300 leading-relaxed space-y-1">
             <p class="font-semibold text-sky-400 flex items-center gap-1.5">
-              <i class="fa-solid fa-circle-info"></i> วิธีเพิ่มคำศัพท์ (รองรับก๊อปปี้วางทีละ 5,000+ คำ):
+              <i class="fa-solid fa-wand-magic-sparkles text-amber-400"></i> ระบบ Gemini AI ตรวจสอบและสร้างข้อมูลอัตโนมัติ:
             </p>
             <ul class="list-disc list-inside space-y-1 text-slate-300">
-              <li>พิมพ์หรือวางบรรทัดละ 1 คำ รูปแบบ: <code class="bg-slate-950 px-1.5 py-0.5 rounded font-mono text-amber-300">คำศัพท์, คำแปล</code> หรือคั่นด้วย Tab จาก Excel/Sheets ได้เลย</li>
-              <li><strong class="text-amber-400">สนตัวพิมพ์เล็ก-ใหญ่ (Case-Sensitive):</strong> <code class="bg-slate-950 px-1 rounded font-mono">March</code> กับ <code class="bg-slate-950 px-1 rounded font-mono">march</code> หรือ <code class="bg-slate-950 px-1 rounded font-mono">IT</code> กับ <code class="bg-slate-950 px-1 rounded font-mono">it</code> ถือเป็นคนละคำ ไม่ถูกตัดซ้ำ</li>
-              <li>ระบบจะสร้างตัวอย่างประโยค TOEIC และคำแปลประโยคให้อัตโนมัติหากไม่ได้กรอกมา</li>
+              <li>พิมพ์แค่ <code class="bg-slate-950 px-1.5 py-0.5 rounded font-mono text-emerald-300">คำศัพท์</code> หรือ <code class="bg-slate-950 px-1.5 py-0.5 rounded font-mono text-amber-300">คำศัพท์, คำแปล</code> บรรทัดละ 1 คำ (รองรับทีละหลายสิบคำ)</li>
+              <li><strong>Gemini AI</strong> จะช่วยตรวจคำแปล สร้างคำอ่านภาษาไทยที่ออกเสียงเป๊ะ จัดหมวดหมู่ TOEIC และแต่งประโยคธุรกิจยุคใหม่ให้ครบทุกช่อง</li>
+              <li><strong class="text-amber-400">สนตัวพิมพ์เล็ก-ใหญ่ (Case-Sensitive):</strong> <code class="bg-slate-950 px-1 rounded font-mono">March</code> กับ <code class="bg-slate-950 px-1 rounded font-mono">march</code> ถือเป็นคนละคำ ไม่ถูกตัดซ้ำ</li>
             </ul>
+          </div>
+
+          <!-- ช่องตั้งค่า Gemini API Key สำหรับใช้งานบน GitHub Pages ของตัวเอง -->
+          <div class="bg-[#0b0f19] border border-slate-800 rounded-xl p-3 flex flex-wrap items-center justify-between gap-2 text-xs">
+            <div class="flex items-center gap-2 text-slate-300">
+              <i class="fa-solid fa-key text-amber-400"></i>
+              <span>Gemini API Key (สำหรับใช้บน GitHub):</span>
+            </div>
+            <div class="flex items-center gap-2 flex-1 min-w-[220px] max-w-md">
+              <input 
+                type="password" 
+                id="gemini-api-key-input" 
+                onchange="saveGeminiApiKey(this.value)"
+                placeholder="วาง API Key ฟรีจาก aistudio.google.com..." 
+                class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-mono text-sky-300 placeholder:text-slate-600 focus:border-sky-500 outline-none"
+              >
+              <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-400 whitespace-nowrap transition">
+                รับ Key ฟรี
+              </a>
+            </div>
           </div>
 
           <div>
             <textarea 
               id="bulk-input" 
-              rows="8" 
-              placeholder="วางรายการคำศัพท์ที่นี่ บรรทัดละ 1 คำ เช่น:&#10;March, เดือนมีนาคม&#10;march, เดินขบวน&#10;IT, เทคโนโลยีสารสนเทศ&#10;it, มัน&#10;accomplish, ทำสำเร็จ&#10;deadline, กำหนดส่งงาน" 
+              rows="7" 
+              placeholder="พิมพ์คำศัพท์บรรทัดละ 1 คำได้เลย เช่น:&#10;complimentary, ฟรี, อภินันทนาการ&#10;confidential, เป็นความลับ&#10;endorse&#10;expedite&#10;obsolete" 
               class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl p-3.5 text-xs sm:text-sm font-mono-code text-slate-100 placeholder:text-slate-600 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none leading-relaxed"
             ></textarea>
           </div>
@@ -283,9 +303,9 @@
                 class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:border-sky-500 outline-none"
               >
             </div>
-            <button id="btn-reset-vocab" onclick="resetToDefaultVocab()" style="display: none;" class="px-3 py-2 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border border-rose-800/60 text-xs transition flex items-center gap-1.5">
-              <i class="fa-solid fa-rotate-left"></i>
-              <span>รีเซ็ตค่าเริ่มต้น</span>
+            <button id="btn-reset-vocab" onclick="clearAllVocab()" style="display: none;" class="px-3 py-2 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border border-rose-800/60 text-xs transition flex items-center gap-1.5">
+              <i class="fa-solid fa-trash-can"></i>
+              <span>ล้างคำศัพท์ทั้งหมด (เหลือ 0)</span>
             </button>
           </div>
 
@@ -298,13 +318,57 @@
                     <th class="p-2.5 font-semibold">ชนิดคำ</th>
                     <th class="p-2.5 font-semibold">ความหมาย / คำอ่าน</th>
                     <th class="p-2.5 font-semibold">หมวดหมู่</th>
-                    <th id="th-vocab-action" style="display: none;" class="p-2.5 font-semibold text-center w-14">จัดการ</th>
+                    <th id="th-vocab-action" style="display: none;" class="p-2.5 font-semibold text-center w-24">จัดการ</th>
                   </tr>
                 </thead>
                 <tbody id="vocab-table-body" class="divide-y divide-slate-800/60">
                   <!-- Rows populated by JS -->
                 </tbody>
               </table>
+            </div>
+          </div>
+
+          <!-- INLINE EDIT BOX (โผล่ขึ้นเมื่อกดปุ่มแก้ไขคำศัพท์ในตาราง) -->
+          <div id="edit-vocab-panel" class="hidden bg-slate-900/95 border border-sky-500/50 rounded-xl p-4 space-y-3 shadow-xl">
+            <div class="flex items-center justify-between">
+              <h4 class="text-xs font-bold text-sky-400 flex items-center gap-1.5">
+                <i class="fa-solid fa-pen-to-square"></i> แก้ไขข้อมูลคำศัพท์: <span id="edit-word-label" class="font-mono text-white text-sm"></span>
+              </h4>
+              <button onclick="closeEditPanel()" class="text-slate-400 hover:text-white text-xs"><i class="fa-solid fa-xmark"></i> ปิด</button>
+            </div>
+            <input type="hidden" id="edit-original-word">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
+              <div>
+                <label class="text-slate-400 block mb-1">คำแปลภาษาไทย</label>
+                <input type="text" id="edit-meaning" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg px-2.5 py-1.5 text-white outline-none focus:border-sky-500">
+              </div>
+              <div>
+                <label class="text-slate-400 block mb-1">คำอ่านภาษาไทย</label>
+                <input type="text" id="edit-pronunciation" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg px-2.5 py-1.5 text-sky-300 outline-none focus:border-sky-500">
+              </div>
+              <div>
+                <label class="text-slate-400 block mb-1">ชนิดคำ / หมวดหมู่</label>
+                <div class="flex gap-1.5">
+                  <input type="text" id="edit-pos" placeholder="เช่น คำนาม (n.)" class="w-1/2 bg-[#0b0f19] border border-slate-700 rounded-lg px-2 py-1.5 text-white outline-none focus:border-sky-500">
+                  <input type="text" id="edit-category" placeholder="หมวดหมู่" class="w-1/2 bg-[#0b0f19] border border-slate-700 rounded-lg px-2 py-1.5 text-white outline-none focus:border-sky-500">
+                </div>
+              </div>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
+              <div>
+                <label class="text-slate-400 block mb-1">ตัวอย่างประโยค (อังกฤษ)</label>
+                <input type="text" id="edit-example-en" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg px-2.5 py-1.5 text-white outline-none focus:border-sky-500">
+              </div>
+              <div>
+                <label class="text-slate-400 block mb-1">คำแปลประโยค (ไทย)</label>
+                <input type="text" id="edit-example-th" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg px-2.5 py-1.5 text-white outline-none focus:border-sky-500">
+              </div>
+            </div>
+            <div class="flex justify-end gap-2">
+              <button onclick="closeEditPanel()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs">ยกเลิก</button>
+              <button onclick="saveEditedWord()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center gap-1.5">
+                <i class="fa-solid fa-check"></i> บันทึกการแก้ไข
+              </button>
             </div>
           </div>
         </div>
@@ -382,80 +446,9 @@
 
   <script>
     /* ==========================================================================
-       1. คลังคำศัพท์ TOEIC เริ่มต้น
+       1. คลังคำศัพท์ TOEIC เริ่มต้น (ตั้งค่าเริ่มต้นเป็น 0 คำ เพื่อให้ผู้ใช้เพิ่มเองทั้งหมด)
        ========================================================================== */
-    const DEFAULT_TOEIC_VOCAB = [
-      { word: "distribute", pos: "คำกริยา (v.)", pronunciation: "ดิส-ทริ-บิวท์", meaning: "แจกจ่าย, กระจายสินค้า", category: "Logistics", example_en: "Logistics will distribute the goods across all branches.", example_th: "ฝ่ายโลจิสติกส์จะกระจายสินค้าไปยังทุกสาขา" },
-      { word: "March", pos: "คำนาม (n.)", pronunciation: "มาร์ช", meaning: "เดือนมีนาคม", category: "General Business", example_en: "The quarterly report will be published in March.", example_th: "รายงานประจำไตรมาสจะตีพิมพ์เผยแพร่ในเดือนมีนาคม" },
-      { word: "march", pos: "คำกริยา (v.)", pronunciation: "มาร์ช", meaning: "เดินขบวน, ก้าวไปข้างหน้า", category: "General Business", example_en: "Protesters march peacefully outside the headquarters.", example_th: "ผู้ประท้วงเดินขบวนอย่างสงบด้านนอกสำนักงานใหญ่" },
-      { word: "IT", pos: "คำนาม (n.)", pronunciation: "ไอ-ที", meaning: "เทคโนโลยีสารสนเทศ", category: "Technology", example_en: "Please contact the IT department to fix the network issue.", example_th: "กรุณาติดต่อแผนกไอทีเพื่อแก้ไขปัญหาเครือข่าย" },
-      { word: "it", pos: "สรรพนาม (pron.)", pronunciation: "อิท", meaning: "มัน (สรรพนาม)", category: "General Business", example_en: "The company updated its policy, and it was approved.", example_th: "บริษัทได้อัปเดตนโยบาย และมันได้รับการอนุมัติ" },
-      { word: "delay", pos: "คำนาม / คำกริยา (n./v.)", pronunciation: "ดิ-เลย์", meaning: "ความล่าช้า / ทำให้ล่าช้า", category: "Travel", example_en: "Severe fog caused a two-hour flight delay.", example_th: "หมอกลงจัดทำให้เที่ยวบินล่าช้าไปสองชั่วโมง" },
-      { word: "implement", pos: "คำกริยา (v.)", pronunciation: "อิม-พลี-เมนท์", meaning: "นำไปปฏิบัติ, ดำเนินการ", category: "Management", example_en: "We will implement the new software system next Monday.", example_th: "เราจะนำระบบซอฟต์แวร์ใหม่ไปใช้งานในวันจันทร์หน้า" },
-      { word: "collaborate", pos: "คำกริยา (v.)", pronunciation: "เคอล-แลบ-บะ-เรท", meaning: "ร่วมมือ, ทำงานร่วมกัน", category: "Corporate", example_en: "Two departments need to collaborate on this product launch.", example_th: "สองแผนกต้องร่วมมือกันในการเปิดตัวสินค้านี้" },
-      { word: "revenue", pos: "คำนาม (n.)", pronunciation: "เรฟ-เวอ-นิว", meaning: "รายได้ของบริษัท", category: "Finance", example_en: "Annual revenue increased by fifteen percent this year.", example_th: "รายได้ประจำปีเพิ่มขึ้นสิบห้าเปอร์เซ็นต์ในปีนี้" },
-      { word: "deficit", pos: "คำนาม (n.)", pronunciation: "เดฟ-ฟิ-ซิท", meaning: "การขาดดุล, ยอดขาดทุน", category: "Finance", example_en: "The budget deficit was larger than previously estimated.", example_th: "การขาดดุลงบประมาณมีขนาดใหญ่กว่าที่ประเมินไว้ก่อนหน้า" },
-      { word: "negotiate", pos: "คำกริยา (v.)", pronunciation: "เน-โก-ชิ-เอท", meaning: "เจรจาต่อรอง", category: "Sales & Contract", example_en: "Our sales team managed to negotiate a better contract.", example_th: "ทีมขายของเราเจรจาต่อรองสัญญาที่ดีกว่าได้สำเร็จ" },
-      { word: "appraisal", pos: "คำนาม (n.)", pronunciation: "แอพ-เพร-เซิล", meaning: "การประเมินผลงาน", category: "Human Resources", example_en: "Employee performance appraisal takes place every December.", example_th: "การประเมินผลงานพนักงานมีขึ้นทุกเดือนธันวาคม" },
-      { word: "deduct", pos: "คำกริยา (v.)", pronunciation: "ดิ-ดัคท์", meaning: "หักออก, ลบออก", category: "Finance", example_en: "Taxes will be automatically deducted from your salary.", example_th: "ภาษีจะถูกหักออกจากเงินเดือนของคุณโดยอัตโนมัติ" },
-      { word: "initiative", pos: "คำนาม (n.)", pronunciation: "อิ-นิ-เชีย-ทิฟ", meaning: "ความคิดริเริ่ม, โครงการใหม่", category: "Management", example_en: "The manager praised her initiative in solving the issue.", example_th: "ผู้จัดการเอ่ยชมความคิดริเริ่มของเธอในการแก้ปัญหา" },
-      { word: "authorize", pos: "คำกริยา (v.)", pronunciation: "ออ-เธอร์-ไรซ์", meaning: "อนุมัติ, มอบอำนาจ", category: "Corporate", example_en: "Only the director can authorize expenditure over $10,000.", example_th: "มีเพียงผู้อำนวยการเท่านั้นที่สามารถอนุมัติรายจ่ายเกิน 10,000 ดอลลาร์ได้" },
-      { word: "delegate", pos: "คำกริยา (v.)", pronunciation: "เดล-ลิ-เกท", meaning: "มอบหมายงาน", category: "Management", example_en: "A good manager knows how to delegate tasks effectively.", example_th: "ผู้จัดการที่ดีรู้วิธีมอบหมายงานอย่างมีประสิทธิภาพ" },
-      { word: "supervise", pos: "คำกริยา (v.)", pronunciation: "ซู-เพอร์-ไวซ์", meaning: "ควบคุมดูแล, นิเทศงาน", category: "Management", example_en: "She was hired to supervise the construction of the factory.", example_th: "เธอถูกว่าจ้างให้ดูแลควบคุมการก่อสร้างโรงงาน" },
-      { word: "allocate", pos: "คำกริยา (v.)", pronunciation: "อัล-โล-เคท", meaning: "จัดสรร (เงินทุน/ทรัพยากร)", category: "Finance", example_en: "The board decided to allocate more funds to research.", example_th: "คณะกรรมการตัดสินใจจัดสรรเงินทุนเพิ่มเติมสำหรับการวิจัย" },
-      { word: "reimburse", pos: "คำกริยา (v.)", pronunciation: "รี-อิม-เบิร์ส", meaning: "จ่ายเงินชดเชย, คืนเงิน", category: "Finance", example_en: "The company will reimburse your travel expenses.", example_th: "บริษัทจะจ่ายเงินชดเชยค่าใช้จ่ายในการเดินทางของคุณ" },
-      { word: "audit", pos: "คำนาม / คำกริยา (n./v.)", pronunciation: "ออ-ดิท", meaning: "การตรวจสอบบัญชี", category: "Finance", example_en: "The external audit confirmed that all records were accurate.", example_th: "การตรวจสอบบัญชีจากภายนอกยืนยันว่าบันทึกทั้งหมดถูกต้อง" },
-      { word: "expenditure", pos: "คำนาม (n.)", pronunciation: "เอ็กซ์-เพน-ดิ-เชอร์", meaning: "รายจ่าย, ค่าใช้จ่าย", category: "Finance", example_en: "We need to reduce unnecessary operational expenditure.", example_th: "เราจำเป็นต้องลดรายจ่ายในการดำเนินงานที่ไม่จำเป็น" },
-      { word: "fluctuate", pos: "คำกริยา (v.)", pronunciation: "ฟลัค-ทู-เอท", meaning: "ผันผวน, ขึ้นๆ ลงๆ", category: "Finance", example_en: "Fuel prices continue to fluctuate in the global market.", example_th: "ราคาน้ำมันยังคงผันผวนในตลาดโลก" },
-      { word: "candidate", pos: "คำนาม (n.)", pronunciation: "แคน-ดิ-เดท", meaning: "ผู้สมัครงาน", category: "Human Resources", example_en: "The interview panel selected the most qualified candidate.", example_th: "คณะกรรมการสัมภาษณ์เลือกผู้สมัครที่มีคุณสมบัติเหมาะสมที่สุด" },
-      { word: "compensate", pos: "คำกริยา (v.)", pronunciation: "คอม-เพน-เสท", meaning: "ชดเชยค่าเสียหาย/ค่าตอบแทน", category: "Human Resources", example_en: "Employees will be compensated for working overtime.", example_th: "พนักงานจะได้รับการชดเชยสำหรับการทำงานล่วงเวลา" },
-      { word: "terminate", pos: "คำกริยา (v.)", pronunciation: "เทอร์-มิ-เนท", meaning: "ยุติ, สิ้นสุดสัญญา", category: "Corporate", example_en: "Either party may terminate the agreement with written notice.", example_th: "ฝ่ายใดฝ่ายหนึ่งสามารถยุติข้อตกลงได้ด้วยหนังสือแจ้ง" },
-      { word: "recruit", pos: "คำกริยา (v.)", pronunciation: "รี-ครูท", meaning: "รับสมัครงาน, สรรหาพนักงาน", category: "Human Resources", example_en: "We plan to recruit five software engineers next month.", example_th: "เรามีแผนจะรับสมัครวิศวกรซอฟต์แวร์ห้าคนในเดือนหน้า" },
-      { word: "qualifications", pos: "คำนาม (n.)", pronunciation: "ควอล-ลิ-ฟิ-เค-ชันส์", meaning: "คุณสมบัติ, วุฒิการศึกษา", category: "Human Resources", example_en: "Please send your resume listing all relevant qualifications.", example_th: "กรุณาส่งเรซูเม่ระบุคุณสมบัติที่เกี่ยวข้องทั้งหมด" },
-      { word: "orientation", pos: "คำนาม (n.)", pronunciation: "โอ-ริ-เอน-เท-ชัน", meaning: "การปฐมนิเทศ", category: "Human Resources", example_en: "New employees must attend the orientation session on Monday.", example_th: "พนักงานใหม่ต้องเข้าร่วมการปฐมนิเทศในวันจันทร์" },
-      { word: "benefit", pos: "คำนาม (n.)", pronunciation: "เบน-นิ-ฟิต", meaning: "สวัสดิการ, ผลประโยชน์", category: "Human Resources", example_en: "Health insurance is a key benefit provided by the firm.", example_th: "ประกันสุขภาพเป็นสวัสดิการหลักที่บริษัทจัดหาให้" },
-      { word: "promotional", pos: "คำคุณศัพท์ (adj.)", pronunciation: "โพร-โม-ชัน-นอล", meaning: "เกี่ยวกับการส่งเสริมการขาย", category: "Marketing", example_en: "They distributed promotional flyers outside the station.", example_th: "พวกเขาแจกใบปลิวส่งเสริมการขายที่หน้าสถานี" },
-      { word: "launch", pos: "คำกริยา (v.)", pronunciation: "ลอนช์", meaning: "ปล่อยสินค้าใหม่, เริ่มโครงการ", category: "Marketing", example_en: "The brand will launch its new smartphone line tomorrow.", example_th: "แบรนด์จะเปิดตัวสมาร์ทโฟนรุ่นใหม่ในวันพรุ่งนี้" },
-      { word: "competitor", pos: "คำนาม (n.)", pronunciation: "คอม-เพท-ติ-เทอร์", meaning: "คู่แข่งทางธุรกิจ", category: "Marketing", example_en: "Our main competitor lowered their prices recently.", example_th: "คู่แข่งหลักของเราเพิ่งลดราคาลงเมื่อเร็วๆ นี้" },
-      { word: "persuade", pos: "คำกริยา (v.)", pronunciation: "เพอร์-สเวด", meaning: "โน้มน้าวใจ", category: "Sales & Contract", example_en: "The advertisement failed to persuade customers to buy.", example_th: "โฆษณาไม่สามารถโน้มน้าวใจให้ลูกค้าซื้อได้" },
-      { word: "client", pos: "คำนาม (n.)", pronunciation: "คลาย-เอนท์", meaning: "ลูกค้า, ผู้รับบริการ", category: "General Business", example_en: "The lawyer prepared all documents for the new client.", example_th: "ทนายความเตรียมเอกสารทั้งหมดสำหรับลูกค้าคนใหม่" },
-      { word: "warranty", pos: "คำนาม (n.)", pronunciation: "วอร์-รัน-ที", meaning: "การรับประกันสินค้า", category: "Sales & Contract", example_en: "The laptop comes with a two-year limited warranty.", example_th: "แล็ปท็อปมาพร้อมกับการรับประกันแบบจำกัดสองปี" },
-      { word: "accommodate", pos: "คำกริยา (v.)", pronunciation: "อะ-คอม-โม-เดท", meaning: "รองรับ, อำนวยความสะดวก", category: "Travel", example_en: "The hotel can accommodate up to five hundred guests.", example_th: "โรงแรมสามารถรองรับแขกได้สูงสุดห้าร้อยคน" },
-      { word: "acquire", pos: "คำกริยา (v.)", pronunciation: "อะ-ไควเออร์", meaning: "ได้มา, เข้าซื้อกิจการ", category: "Corporate", example_en: "The corporation plans to acquire a smaller tech startup.", example_th: "บริษัทมีแผนจะเข้าซื้อกิจการสตาร์ทอัพเทคโนโลยีขนาดเล็ก" },
-      { word: "agenda", pos: "คำนาม (n.)", pronunciation: "อะ-เจน-ดา", meaning: "วาระการประชุม", category: "Management", example_en: "Please review the meeting agenda before two o'clock.", example_th: "กรุณาตรวจสอบวาระการประชุมก่อนบ่ายสองโมง" },
-      { word: "amendment", pos: "คำนาม (n.)", pronunciation: "อะ-เมนด์-เมนท์", meaning: "การแก้ไขข้อตกลง/กฎหมาย", category: "Legal", example_en: "Both parties agreed to the proposed contract amendment.", example_th: "ทั้งสองฝ่ายตกลงตามการแก้ไขสัญญาที่เสนอ" },
-      { word: "applicant", pos: "คำนาม (n.)", pronunciation: "แอพ-พลิ-แคนท์", meaning: "ผู้สมัคร", category: "Human Resources", example_en: "Every applicant must submit three professional references.", example_th: "ผู้สมัครทุกคนต้องยื่นบุคคลอ้างอิงทางวิชาชีพสามคน" },
-      { word: "assess", pos: "คำกริยา (v.)", pronunciation: "อะ-เซส", meaning: "ประเมิน, ตรวจสอบ", category: "Management", example_en: "We must assess the financial risks before investing.", example_th: "เราต้องประเมินความเสี่ยงทางการเงินก่อนลงทุน" },
-      { word: "budget", pos: "คำนาม (n.)", pronunciation: "บัด-เจท", meaning: "งบประมาณ", category: "Finance", example_en: "The department stayed well within its annual budget.", example_th: "แผนกอยู่ภายในงบประมาณประจำปีเป็นอย่างดี" },
-      { word: "comply", pos: "คำกริยา (v.)", pronunciation: "คอม-พลาย", meaning: "ปฏิบัติตามกฎระเบียบ", category: "Legal", example_en: "All factories must comply with safety regulations.", example_th: "โรงงานทั้งหมดต้องปฏิบัติตามกฎระเบียบความปลอดภัย" },
-      { word: "consolidate", pos: "คำกริยา (v.)", pronunciation: "คอน-โซ-ลิ-เดท", meaning: "รวมเป็นหนึ่งเดียว, รวมบัญชี", category: "Corporate", example_en: "They decided to consolidate the two regional offices.", example_th: "พวกเขาตัดสินใจรวมสำนักงานภูมิภาคสองแห่งเข้าด้วยกัน" },
-      { word: "contract", pos: "คำนาม (n.)", pronunciation: "คอน-แทรคท์", meaning: "สัญญาข้อตกลง", category: "Legal", example_en: "Please sign the employment contract on the last page.", example_th: "กรุณาเซ็นสัญญาจ้างงานที่หน้าสุดท้าย" },
-      { word: "designate", pos: "คำกริยา (v.)", pronunciation: "เดส-ซิก-เนท", meaning: "แต่งตั้ง, กำหนดตำแหน่ง", category: "Management", example_en: "She was designated as the team leader for the project.", example_th: "เธอได้รับการแต่งตั้งให้เป็นหัวหน้าทีมสำหรับโปรเจกต์นี้" },
-      { word: "evaluate", pos: "คำกริยา (v.)", pronunciation: "อิ-แว-ลู-เอท", meaning: "ประเมินคุณค่า/ผลการทำงาน", category: "Management", example_en: "Consultants will evaluate our operational efficiency.", example_th: "ที่ปรึกษาจะประเมินประสิทธิภาพการดำเนินงานของเรา" },
-      { word: "exceed", pos: "คำกริยา (v.)", pronunciation: "อิก-ซีด", meaning: "เกินกว่า, มากกว่าเป้าหมาย", category: "Sales & Contract", example_en: "Sales results are expected to exceed last quarter targets.", example_th: "ผลการขายคาดว่าจะเกินเป้าหมายไตรมาสที่แล้ว" },
-      { word: "feasible", pos: "คำคุณศัพท์ (adj.)", pronunciation: "ฟี-ซิ-เบิล", meaning: "เป็นไปได้จริง, สมเหตุสมผล", category: "Management", example_en: "The committee believes the proposed expansion is feasible.", example_th: "คณะกรรมการเชื่อว่าการขยายกิจการที่เสนอมานั้นเป็นไปได้จริง" },
-      { word: "incentive", pos: "คำนาม (n.)", pronunciation: "อิน-เซน-ทีฟ", meaning: "สิ่งจูงใจ, เงินรางวัล", category: "Human Resources", example_en: "The company offers cash incentives for high sales performance.", example_th: "บริษัทเสนอเงินรางวัลจูงใจสำหรับผลการขายที่สูง" },
-      { word: "inventory", pos: "คำนาม (n.)", pronunciation: "อิน-เวน-โท-รี", meaning: "สินค้าคงคลัง", category: "Logistics", example_en: "Staff will count the warehouse inventory this weekend.", example_th: "พนักงานจะนับสินค้าคงคลังในคลังสินค้าสุดสัปดาห์นี้" },
-      { word: "merge", pos: "คำกริยา (v.)", pronunciation: "เมิร์จ", meaning: "ควบรวมกิจการ", category: "Corporate", example_en: "The two tech giants decided to merge their operations.", example_th: "สองยักษ์ใหญ่เทคโนโลยีตัดสินใจควบรวมการดำเนินงาน" },
-      { word: "notify", pos: "คำกริยา (v.)", pronunciation: "โน-ทิ-ไฟ", meaning: "แจ้งให้ทราบ", category: "General Business", example_en: "We will notify you once your order has shipped.", example_th: "เราจะแจ้งให้คุณทราบเมื่อคำสั่งซื้อของคุณถูกจัดส่งแล้ว" },
-      { word: "obligation", pos: "คำนาม (n.)", pronunciation: "ออบ-ลิ-เก-ชัน", meaning: "ข้อผูกพัน, หน้าที่ตามกฎหมาย", category: "Legal", example_en: "We have a legal obligation to protect client data.", example_th: "เรามีข้อผูกพันตามกฎหมายในการปกป้องข้อมูลของลูกค้า" },
-      { word: "outstanding", pos: "คำคุณศัพท์ (adj.)", pronunciation: "เอาท์-สแตน-ดิ้ง", meaning: "โดดเด่น / ยอดค้างชำระ", category: "Finance", example_en: "Please settle your outstanding balance before the due date.", example_th: "กรุณาชำระยอดค้างชำระของคุณก่อนวันครบกำหนด" },
-      { word: "invoice", pos: "คำนาม (n.)", pronunciation: "อิน-วอยซ์", meaning: "ใบแจ้งหนี้", category: "Finance", example_en: "Please pay the attached invoice within thirty days.", example_th: "กรุณาชำระเงินตามใบแจ้งหนี้ที่แนบมานี้ภายในสามสิบวัน" },
-      { word: "receipt", pos: "คำนาม (n.)", pronunciation: "ริ-ซีท", meaning: "ใบเสร็จรับเงิน", category: "Finance", example_en: "Keep your original receipt in case you need a refund.", example_th: "เก็บใบเสร็จรับเงินตัวจริงไว้เผื่อกรณีที่ต้องการขอคืนเงิน" },
-      { word: "shipment", pos: "คำนาม (n.)", pronunciation: "ชิพ-เมนท์", meaning: "การจัดส่งสินค้า", category: "Logistics", example_en: "The shipment of new computers will arrive tomorrow morning.", example_th: "การจัดส่งคอมพิวเตอร์เครื่องใหม่จะมาถึงในเช้าวันพรุ่งนี้" },
-      { word: "merchandise", pos: "คำนาม (n.)", pronunciation: "เมอร์-แชน-ไดซ์", meaning: "สินค้า", category: "Sales & Contract", example_en: "All damaged merchandise can be exchanged free of charge.", example_th: "สินค้าที่ชำรุดทั้งหมดสามารถเปลี่ยนได้โดยไม่มีค่าใช้จ่าย" },
-      { word: "subsidiary", pos: "คำนาม (n.)", pronunciation: "ซับ-ซิด-ดิ-เออ-รี", meaning: "บริษัทในเครือ", category: "Corporate", example_en: "The corporation opened a new subsidiary in Singapore.", example_th: "บริษัทได้เปิดบริษัทในเครือแห่งใหม่ในประเทศสิงคโปร์" },
-      { word: "headquarters", pos: "คำนาม (n.)", pronunciation: "เฮด-ควอ-เทอร์ส", meaning: "สำนักงานใหญ่", category: "Corporate", example_en: "Our global headquarters is located in downtown Tokyo.", example_th: "สำนักงานใหญ่ระดับโลกของเราตั้งอยู่ในใจกลางกรุงโตเกียว" },
-      { word: "itinerary", pos: "คำนาม (n.)", pronunciation: "ไอ-ทิน-เนอ-แร-รี", meaning: "กำหนดการเดินทาง", category: "Travel", example_en: "The travel agent emailed the updated flight itinerary.", example_th: "ตัวแทนท่องเที่ยวได้ส่งกำหนดการเดินทางที่อัปเดตทางอีเมลแล้ว" },
-      { word: "renovate", pos: "คำกริยา (v.)", pronunciation: "เรน-โน-เวท", meaning: "ปรับปรุงซ่อมแซม", category: "Management", example_en: "The hotel will close next month to renovate the lobby.", example_th: "โรงแรมจะปิดทำการในเดือนหน้าเพื่อปรับปรุงซ่อมแซมล็อบบี้" },
-      { word: "eligible", pos: "คำคุณศัพท์ (adj.)", pronunciation: "เอล-ลิ-จิ-เบิล", meaning: "มีสิทธิ์ตามเกณฑ์", category: "Human Resources", example_en: "Only full-time employees are eligible for health insurance.", example_th: "เฉพาะพนักงานประจำเท่านั้นที่มีสิทธิ์ได้รับประกันสุขภาพ" },
-      { word: "mandatory", pos: "คำคุณศัพท์ (adj.)", pronunciation: "แมน-ดา-ทอ-รี", meaning: "บังคับ, จำเป็นต้องทำ", category: "Legal", example_en: "Attendance at the safety training session is mandatory.", example_th: "การเข้าร่วมการอบรมด้านความปลอดภัยเป็นข้อบังคับที่จำเป็นต้องทำ" },
-      { word: "refund", pos: "คำนาม / คำกริยา (n./v.)", pronunciation: "รี-ฟันด์", meaning: "การคืนเงิน", category: "Finance", example_en: "Customers can request a full refund within fourteen days.", example_th: "ลูกค้าสามารถขอคืนเงินเต็มจำนวนได้ภายในสิบสี่วัน" },
-      { word: "colleague", pos: "คำนาม (n.)", pronunciation: "คอล-ลีก", meaning: "เพื่อนร่วมงาน", category: "Human Resources", example_en: "She discussed the new marketing proposal with her colleague.", example_th: "เธอปรึกษาข้อเสนอทางการตลาดใหม่กับเพื่อนร่วมงานของเธอ" },
-      { word: "punctual", pos: "คำคุณศัพท์ (adj.)", pronunciation: "พังค์-ชวล", meaning: "ตรงต่อเวลา", category: "Human Resources", example_en: "All staff members are expected to be punctual for meetings.", example_th: "พนักงานทุกคนควรตรงต่อเวลาสำหรับการเข้าร่วมประชุม" },
-      { word: "deadline", pos: "คำนาม (n.)", pronunciation: "เดด-ไลน์", meaning: "กำหนดส่งงาน", category: "Management", example_en: "We must submit the final report before Friday's deadline.", example_th: "เราต้องส่งรายงานฉบับสมบูรณ์ก่อนกำหนดส่งงานในวันศุกร์" },
-      { word: "brochure", pos: "คำนาม (n.)", pronunciation: "โบร-ชัวร์", meaning: "แผ่นพับโฆษณา", category: "Marketing", example_en: "Pick up a free travel brochure at the hotel reception desk.", example_th: "หยิบแผ่นพับโฆษณาท่องเที่ยวฟรีได้ที่เคาน์เตอร์ต้อนรับของโรงแรม" }
-    ];
+    const DEFAULT_TOEIC_VOCAB = [];
 
     /* ==========================================================================
        2. STATE & INITIALIZATION
@@ -469,42 +462,35 @@
     let speechRateIndex = 0;
     let audioCtx = null;
     let isAdminMode = false;
-    const VOCAB_DATA_VERSION = "v3.4_70words";
+    const VOCAB_DATA_VERSION = "v3.6_empty";
+    let customGeminiApiKey = "";
+
+    function saveGeminiApiKey(val) {
+      customGeminiApiKey = (val || "").trim();
+      try {
+        localStorage.setItem('toeic_gemini_api_key', customGeminiApiKey);
+        showToast(customGeminiApiKey ? 'บันทึก Gemini API Key เรียบร้อยแล้ว' : 'ล้าง Gemini API Key แล้ว', 'success');
+      } catch (e) {}
+    }
 
     function initApp() {
+      try {
+        customGeminiApiKey = localStorage.getItem('toeic_gemini_api_key') || "";
+        const keyInput = document.getElementById('gemini-api-key-input');
+        if (keyInput && customGeminiApiKey) keyInput.value = customGeminiApiKey;
+      } catch (e) {}
       const storedVersion = localStorage.getItem('toeic_vocab_version');
       const storedVocab = localStorage.getItem('toeic_vocab_v3');
-      if (storedVocab) {
+      if (storedVocab && storedVersion === VOCAB_DATA_VERSION) {
         try {
           const parsed = JSON.parse(storedVocab);
-          if (Array.isArray(parsed) && parsed.length > 0) {
-            // อัปเกรดข้อมูลเก่าอัตโนมัติ + เติมคำศัพท์ใหม่จากคลังหลักที่ยังไม่มีในเครื่องให้ครบทุกคำ
-            const defaultMap = new Map(DEFAULT_TOEIC_VOCAB.map(item => [item.word, item]));
-            const mergedList = parsed.map(item => {
-              const defItem = defaultMap.get(item.word);
-              return defItem ? { ...defItem } : item;
-            });
-
-            const existingWords = new Set(mergedList.map(item => item.word));
-            DEFAULT_TOEIC_VOCAB.forEach(defItem => {
-              if (!existingWords.has(defItem.word)) {
-                mergedList.push({ ...defItem });
-              }
-            });
-
-            vocabList = mergedList;
-            localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
-            saveVocabToStorage();
-          } else {
-            vocabList = [...DEFAULT_TOEIC_VOCAB];
-            localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
-          }
+          vocabList = Array.isArray(parsed) ? parsed : [];
         } catch (e) {
-          vocabList = [...DEFAULT_TOEIC_VOCAB];
-          localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
+          vocabList = [];
         }
       } else {
-        vocabList = [...DEFAULT_TOEIC_VOCAB];
+        // รีเซ็ตคลังคำศัพท์เริ่มต้นให้เหลือ 0 คำตามที่ตั้งค่าไว้
+        vocabList = [];
         localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
         saveVocabToStorage();
       }
@@ -616,8 +602,32 @@
     /* ==========================================================================
        4. WORD SELECTION & DISPLAY
        ========================================================================== */
+    function renderEmptyState() {
+      document.getElementById('card-category').innerText = "Empty";
+      document.getElementById('card-pos').innerText = "ยังไม่มีคำศัพท์";
+      const targetWordEl = document.getElementById('target-word');
+      targetWordEl.innerText = "0 คำศัพท์";
+      targetWordEl.classList.remove('blur-md');
+      document.getElementById('target-pronunciation').innerHTML = `สถานะ: <span class="text-sky-400 font-semibold">คลังคำศัพท์ว่างเปล่า</span>`;
+      document.getElementById('target-meaning').innerText = "ดับเบิลคลิกที่ไอคอนคีย์บอร์ดมุมซ้ายบนเพื่อเพิ่มคำศัพท์";
+      document.getElementById('target-example-en').innerHTML = `Double-click the keyboard icon at the top-left to add your vocabulary.`;
+      document.getElementById('target-example-th').innerHTML = `คลังคำศัพท์ถูกตั้งค่าเป็น 0 คำเรียบร้อยแล้ว`;
+      const inputEl = document.getElementById('typing-input');
+      inputEl.value = '';
+      inputEl.disabled = true;
+      inputEl.placeholder = "กรุณาเพิ่มคำศัพท์ก่อนเริ่มฝึกพิมพ์ . . .";
+    }
+
     function pickNextRandomWord(shouldAutoSpeak = true) {
-      if (vocabList.length === 0) return;
+      if (vocabList.length === 0) {
+        renderEmptyState();
+        return;
+      }
+      const inputEl = document.getElementById('typing-input');
+      if (inputEl) {
+        inputEl.disabled = false;
+        inputEl.placeholder = "พิมพ์คำศัพท์ภาษาอังกฤษที่นี่ . . .";
+      }
       let candidateIndices = [];
       vocabList.forEach((item, idx) => {
         if (selectedCategory === 'ALL' || (item.category || 'General Business') === selectedCategory) {
@@ -640,7 +650,15 @@
     }
 
     function displayWordAtIndex(idx, shouldAutoSpeak = true) {
-      if (vocabList.length === 0) return;
+      if (vocabList.length === 0) {
+        renderEmptyState();
+        return;
+      }
+      const inputElEnable = document.getElementById('typing-input');
+      if (inputElEnable) {
+        inputElEnable.disabled = false;
+        inputElEnable.placeholder = "พิมพ์คำศัพท์ภาษาอังกฤษที่นี่ . . .";
+      }
       currentIndex = idx;
       const currentItem = vocabList[currentIndex];
 
@@ -721,6 +739,7 @@
     }
 
     function handleTypingInput(e) {
+      if (vocabList.length === 0) return;
       const inputEl = e.target;
       const typed = inputEl.value;
       const target = vocabList[currentIndex].word;
@@ -963,16 +982,24 @@
         headquarters: "เฮด-ควอ-เทอร์ส", itinerary: "ไอ-ทิน-เนอ-แร-รี",
         renovate: "เรน-โน-เวท", eligible: "เอล-ลิ-จิ-เบิล", mandatory: "แมน-ดา-ทอ-รี",
         refund: "รี-ฟันด์", colleague: "คอล-ลีก", punctual: "พังค์-ชวล",
-        deadline: "เดด-ไลน์", brochure: "โบร-ชัวร์"
+        deadline: "เดด-ไลน์", brochure: "โบร-ชัวร์",
+        complimentary: "คอม-พลิ-เมน-ทอ-รี", confidential: "คอน-ฟิ-เดน-เชียล",
+        contingency: "คอน-ทิน-เจน-ซี", endorse: "เอน-ดอร์ส",
+        expedite: "เอ็กซ์-พี-ไดท์", flaw: "ฟลอว์",
+        lucrative: "ลู-ครา-ทีฟ", obsolete: "ออบ-โซ-ลีท",
+        reconcile: "เรค-คอน-ไซล์", premise: "เพรม-มิส"
       };
       if (customDict[clean]) return customDict[clean];
 
-      // จัดการรูปลงท้ายพิเศษภาษาอังกฤษก่อนแยกพยางค์
+      // จัดการรูปลงท้ายพิเศษภาษาอังกฤษและ Silent -e ท้ายคำก่อนแยกพยางค์
       const normalized = clean
         .replace(/gue$/, 'g')
         .replace(/que$/, 'k')
         .replace(/tion$/, 'shun')
-        .replace(/sion$/, 'shun');
+        .replace(/sion$/, 'shun')
+        .replace(/tial$/, 'shul')
+        .replace(/cial$/, 'shul')
+        .replace(/([bcdfghjklmnpqrstvwxyz])e$/, '$1');
 
       const syllables = normalized.match(/[^aeiouy]*[aeiouy]+(?:[^aeiouy](?![aeiouy]))*/g) || [normalized];
       const onsetMap = {
@@ -1039,6 +1066,87 @@
           return data.responseData.translatedText;
         }
       } catch (e) {}
+      return null;
+    }
+
+    async function fetchBatchWithGeminiAI(itemsBatch) {
+      const apiKey = customGeminiApiKey || "";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
+
+      const wordListPrompt = itemsBatch
+        .map((item, idx) => `${idx + 1}. word: "${item.word}"${item.hasUserMeaning ? ` (user hint meaning: "${item.meaning}")` : ""}`)
+        .join("\n");
+
+      const systemPrompt = `You are an expert English-Thai TOEIC lexicographer. For each English word provided, return accurate Thai learners' dictionary metadata in strict JSON format:
+- word: exact original English word (preserve capitalization).
+- meaning: concise, natural Thai meaning suitable for TOEIC business context (if user provided a hint meaning, refine or keep it accurate).
+- pronunciation: accurate Thai phonetic transliteration separated by hyphens (e.g., "obsolete" -> "ออบ-โซ-ลีท", "colleague" -> "คอล-ลีก", "subsidiary" -> "ซับ-ซิด-ดิ-เออ-รี"). Do NOT include IPA symbols or parentheses.
+- pos: Thai part of speech with English abbreviation, strictly one of: "คำนาม (n.)", "คำกริยา (v.)", "คำคุณศัพท์ (adj.)", "คำกริยาวิเศษณ์ (adv.)", "คำสรรพนาม (pron.)", "คำบุพบท (prep.)", "คำสันธาน (conj.)", or "คำนาม / คำกริยา (n./v.)".
+- category: strictly one of: "Finance", "Human Resources", "Logistics", "Travel", "Technology", "Legal", "Marketing", "Sales & Contract", "Management", "Corporate", or "General Business".
+- example_en: a clear, modern, natural TOEIC business English sentence (8 to 16 words) using the exact word naturally. Never use archaic quotes, poetry, or fragments.
+- example_th: natural Thai translation of example_en, making sure the Thai translation of the target word is clearly present so it can be highlighted.`;
+
+      const payload = {
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: `Generate TOEIC vocabulary data for these ${itemsBatch.length} words:\n${wordListPrompt}` }]
+          }
+        ],
+        systemInstruction: {
+          parts: [{ text: systemPrompt }]
+        },
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: "ARRAY",
+            items: {
+              type: "OBJECT",
+              properties: {
+                word: { type: "STRING" },
+                meaning: { type: "STRING" },
+                pronunciation: { type: "STRING" },
+                pos: { type: "STRING" },
+                category: { type: "STRING" },
+                example_en: { type: "STRING" },
+                example_th: { type: "STRING" }
+              },
+              required: ["word", "meaning", "pronunciation", "pos", "category", "example_en", "example_th"]
+            }
+          }
+        }
+      };
+
+      const delays = [1000, 2000, 4000];
+      for (let attempt = 0; attempt <= delays.length; attempt++) {
+        try {
+          const response = await fetch(apiUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            if ((response.status === 429 || response.status >= 500) && attempt < delays.length) {
+              await new Promise(r => setTimeout(r, delays[attempt]));
+              continue;
+            }
+            return null;
+          }
+
+          const result = await response.json();
+          const jsonText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (!jsonText) return null;
+          const parsed = JSON.parse(jsonText);
+          return Array.isArray(parsed) ? parsed : null;
+        } catch (err) {
+          if (attempt < delays.length) {
+            await new Promise(r => setTimeout(r, delays[attempt]));
+          } else {
+            return null;
+          }
+        }
+      }
       return null;
     }
 
@@ -1125,9 +1233,23 @@
 
       lines.forEach(line => {
         if (!line.trim()) return;
-        let parts = line.includes('\t') ? line.split('\t') : line.split(',');
+        let parts = [];
+        if (line.includes('|')) {
+          parts = line.split('|');
+        } else if (line.includes('\t')) {
+          parts = line.split('\t');
+        } else {
+          parts = line.split(',');
+        }
+
         const cleanWord = cleanWordSpacing(parts[0] || '');
-        const cleanMeaning = cleanWordSpacing(parts.slice(1).join(', ') || 'คำศัพท์ภาษาอังกฤษ');
+        const rawMeaning = cleanWordSpacing(parts[1] || '');
+        const cleanMeaning = rawMeaning || 'กำลังแปลความหมาย...';
+        const customPron = cleanWordSpacing(parts[2] || '');
+        const customPos = cleanWordSpacing(parts[3] || '');
+        const customCat = cleanWordSpacing(parts[4] || '');
+        const customExEn = cleanWordSpacing(parts[5] || '');
+        const customExTh = cleanWordSpacing(parts[6] || '');
 
         if (!cleanWord) return;
         if (existingWordsSet.has(cleanWord)) {
@@ -1135,7 +1257,16 @@
           return;
         }
         existingWordsSet.add(cleanWord);
-        candidates.push({ word: cleanWord, meaning: cleanMeaning });
+        candidates.push({
+          word: cleanWord,
+          meaning: cleanMeaning,
+          hasUserMeaning: Boolean(rawMeaning),
+          customPron,
+          customPos,
+          customCat,
+          customExEn,
+          customExTh
+        });
       });
 
       if (candidates.length === 0) {
@@ -1144,18 +1275,23 @@
         return;
       }
 
-      // 1. บันทึกเข้าคลังศัพท์ทันทีภายใน 0.1 วินาที (ไม่ให้ผู้ใช้รอนาน)
-      const newItems = candidates.map(item => ({
-        word: item.word,
-        pos: "คำศัพท์ (vocab)",
-        pronunciation: estimateThaiPronunciation(item.word),
-        meaning: item.meaning,
-        category: autoDetectCategory(item.word, item.meaning),
-        example_en: `The ${item.word} is very important in business.`,
-        example_th: `${item.meaning}มีความสำคัญมากในการทำธุรกิจ`
-      }));
+      // 1. บันทึกเข้าคลังศัพท์ทันทีภายใน 0.1 วินาที (ถ้ามีข้อมูลครบชุดจะใช้ทันทีโดยไม่เดา)
+      const newItems = candidates.map(item => {
+        const isComplete = Boolean(item.customPron && item.customExEn);
+        return {
+          word: item.word,
+          pos: item.customPos || "คำศัพท์ (vocab)",
+          pronunciation: item.customPron || estimateThaiPronunciation(item.word),
+          meaning: item.meaning,
+          hasUserMeaning: item.hasUserMeaning,
+          category: item.customCat || autoDetectCategory(item.word, item.meaning),
+          example_en: item.customExEn || `The ${item.word} is very important in business.`,
+          example_th: item.customExTh || `${item.meaning}มีความสำคัญมากในการทำธุรกิจ`,
+          _skipApi: isComplete
+        };
+      });
 
-      vocabList.push(...newItems);
+      vocabList.push(...newItems.map(({ _skipApi, hasUserMeaning, ...rest }) => rest));
       saveVocabToStorage();
       updateCategoryDropdown();
       updateWordCountBadge();
@@ -1164,39 +1300,77 @@
       document.getElementById('bulk-input').value = '';
       currentIndex = vocabList.length - 1;
       displayWordAtIndex(currentIndex, false);
-      showToast(`บันทึกทันที ${newItems.length.toLocaleString()} คำ! กำลังอัปเดตประโยคจริงเบื้องหลัง...`, 'success');
 
-      // 2. อัปเดตชนิดคำและตัวอย่างประโยคจริงจากพจนานุกรมเบื้องหลังแบบขนาน (ไม่บล็อกหน้าจอ)
+      const itemsToFetch = newItems.filter(item => !item._skipApi);
+      if (itemsToFetch.length === 0) {
+        statusEl.innerText = `เพิ่มสำเร็จครบ ${newItems.length.toLocaleString()} คำ (ข้อมูลครบชุดแม่นยำ 100%)`;
+        showToast(`เพิ่มคำศัพท์ครบชุด ${newItems.length.toLocaleString()} คำ เรียบร้อยแล้ว!`, 'success');
+        return;
+      }
+
+      showToast(`บันทึกทันที ${newItems.length.toLocaleString()} คำ! กำลังให้ Gemini AI ตรวจสอบ...`, 'success');
+
+      // 2. ใช้ Gemini AI ตรวจสอบและสร้างข้อมูลครบชุด (คำแปล, คำอ่าน, ชนิดคำ, หมวดหมู่, ประโยคตัวอย่าง)
       btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> <span>กำลังอัปเดตประโยคเบื้องหลัง...</span>`;
+      btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles fa-spin"></i> <span>Gemini AI กำลังตรวจสอบคำศัพท์...</span>`;
 
-      const batchSize = 10;
-      for (let i = 0; i < newItems.length; i += batchSize) {
-        const batch = newItems.slice(i, i + batchSize);
-        statusEl.innerText = `บันทึกแล้ว ${newItems.length.toLocaleString()} คำ | อัปเดตประโยคจริง ${Math.min(i + batchSize, newItems.length)}/${newItems.length}...`;
+      const batchSize = 15;
+      let aiSuccessTotal = 0;
 
-        await Promise.all(
-          batch.map(async (targetObj) => {
-            const details = await fetchWordDetailsFromAPI(targetObj.word, targetObj.meaning);
-            targetObj.pos = details.pos;
-            targetObj.pronunciation = details.pronunciation;
-            targetObj.category = details.category;
-            targetObj.example_en = details.example_en;
-            targetObj.example_th = details.example_th;
-          })
-        );
+      for (let i = 0; i < itemsToFetch.length; i += batchSize) {
+        const batch = itemsToFetch.slice(i, i + batchSize);
+        statusEl.innerText = `บันทึกแล้ว ${newItems.length.toLocaleString()} คำ | Gemini AI กำลังตรวจสอบ ${Math.min(i + batchSize, itemsToFetch.length)}/${itemsToFetch.length}...`;
+
+        const aiResults = await fetchBatchWithGeminiAI(batch);
+
+        if (aiResults && aiResults.length > 0) {
+          const aiMap = new Map(aiResults.map(r => [cleanWordSpacing(r.word || ''), r]));
+          batch.forEach(tempObj => {
+            const targetObj = vocabList.find(v => v.word === tempObj.word);
+            const aiData = aiMap.get(tempObj.word) || aiResults.find(r => (r.word || '').toLowerCase() === tempObj.word.toLowerCase());
+            if (targetObj && aiData) {
+              aiSuccessTotal++;
+              if (!tempObj.hasUserMeaning && aiData.meaning) targetObj.meaning = cleanWordSpacing(aiData.meaning);
+              if (!tempObj.customPos && aiData.pos) targetObj.pos = cleanWordSpacing(aiData.pos);
+              if (!tempObj.customPron && aiData.pronunciation) targetObj.pronunciation = cleanWordSpacing(aiData.pronunciation);
+              if (!tempObj.customCat && aiData.category) targetObj.category = cleanWordSpacing(aiData.category);
+              if (!tempObj.customExEn && aiData.example_en) targetObj.example_en = cleanWordSpacing(aiData.example_en);
+              if (!tempObj.customExTh && aiData.example_th) targetObj.example_th = cleanWordSpacing(aiData.example_th);
+            }
+          });
+        } else {
+          // Fallback กรณีไม่ได้ใส่ API Key บน GitHub หรือ API ไม่ตอบสนอง
+          await Promise.all(
+            batch.map(async (tempObj) => {
+              const targetObj = vocabList.find(v => v.word === tempObj.word);
+              if (!targetObj) return;
+              const details = await fetchWordDetailsFromAPI(targetObj.word, targetObj.meaning);
+              if (!tempObj.hasUserMeaning) targetObj.meaning = tempObj.word;
+              if (!tempObj.customPos) targetObj.pos = details.pos;
+              if (!tempObj.customPron) targetObj.pronunciation = details.pronunciation;
+              if (!tempObj.customCat) targetObj.category = details.category;
+              if (!tempObj.customExEn) targetObj.example_en = details.example_en;
+              if (!tempObj.customExTh) targetObj.example_th = details.example_th;
+            })
+          );
+        }
 
         saveVocabToStorage();
         updateCategoryDropdown();
         renderVocabTable();
-        if (vocabList[currentIndex] && batch.includes(vocabList[currentIndex])) {
+        if (vocabList[currentIndex] && batch.some(b => b.word === vocabList[currentIndex].word)) {
           displayWordAtIndex(currentIndex, false);
         }
       }
 
       btn.disabled = false;
       btn.innerHTML = `<i class="fa-solid fa-plus-circle"></i> <span>บันทึกเข้าคลังศัพท์</span>`;
-      statusEl.innerText = `เพิ่มสำเร็จครบ ${newItems.length.toLocaleString()} คำ (ตัดคำซ้ำ ${duplicateCount.toLocaleString()} คำ)`;
+      if (aiSuccessTotal > 0) {
+        statusEl.innerText = `Gemini AI ตรวจสอบสำเร็จ ${aiSuccessTotal}/${itemsToFetch.length} คำ (ตัดคำซ้ำ ${duplicateCount.toLocaleString()} คำ)`;
+        showToast(`Gemini AI ตรวจสอบและสร้างข้อมูลสำเร็จ ${aiSuccessTotal} คำ!`, 'success');
+      } else {
+        statusEl.innerText = `เพิ่มสำเร็จ ${newItems.length.toLocaleString()} คำ (โหมดพจนานุกรมสำรอง - ใส่ API Key เพื่อเปิดใช้ AI)`;
+      }
     }
 
     /* ==========================================================================
@@ -1291,7 +1465,10 @@
         const row = document.createElement('tr');
         row.className = "hover:bg-slate-800/50 transition";
         const actionCell = isAdminMode ? `
-          <td class="p-2.5 text-center">
+          <td class="p-2.5 text-center whitespace-nowrap">
+            <button onclick="openEditPanel('${escapeJsString(item.word)}')" class="p-1.5 hover:text-sky-400 text-slate-400 transition" title="แก้ไขคำนี้">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </button>
             <button onclick="deleteSingleWord('${escapeJsString(item.word)}')" class="p-1.5 hover:text-rose-400 text-slate-500 transition" title="ลบคำนี้">
               <i class="fa-solid fa-trash-can"></i>
             </button>
@@ -1324,17 +1501,62 @@
       updateCategoryDropdown();
       updateWordCountBadge();
       renderVocabTable();
+      if (vocabList.length === 0) {
+        renderEmptyState();
+      } else if (currentIndex >= vocabList.length) {
+        pickNextRandomWord(false);
+      }
       showToast(`ลบคำว่า "${wordTarget}" เรียบร้อยแล้ว`, 'info');
     }
 
-    function resetToDefaultVocab() {
-      vocabList = [...DEFAULT_TOEIC_VOCAB];
+    function clearAllVocab() {
+      vocabList = [];
       saveVocabToStorage();
       updateCategoryDropdown();
       updateWordCountBadge();
       renderVocabTable();
-      pickNextRandomWord(false);
-      showToast('รีเซ็ตคลังศัพท์กลับเป็นค่าเริ่มต้นเรียบร้อยแล้ว', 'success');
+      renderEmptyState();
+      showToast('ล้างคลังคำศัพท์ทั้งหมดเหลือ 0 คำเรียบร้อยแล้ว', 'info');
+    }
+
+    function openEditPanel(wordTarget) {
+      const item = vocabList.find(v => v.word === wordTarget);
+      if (!item) return;
+      document.getElementById('edit-original-word').value = item.word;
+      document.getElementById('edit-word-label').innerText = item.word;
+      document.getElementById('edit-meaning').value = item.meaning || '';
+      document.getElementById('edit-pronunciation').value = item.pronunciation || '';
+      document.getElementById('edit-pos').value = item.pos || '';
+      document.getElementById('edit-category').value = item.category || '';
+      document.getElementById('edit-example-en').value = item.example_en || '';
+      document.getElementById('edit-example-th').value = item.example_th || '';
+      document.getElementById('edit-vocab-panel').classList.remove('hidden');
+    }
+
+    function closeEditPanel() {
+      document.getElementById('edit-vocab-panel').classList.add('hidden');
+    }
+
+    function saveEditedWord() {
+      const origWord = document.getElementById('edit-original-word').value;
+      const item = vocabList.find(v => v.word === origWord);
+      if (!item) return;
+
+      item.meaning = cleanWordSpacing(document.getElementById('edit-meaning').value) || item.meaning;
+      item.pronunciation = cleanWordSpacing(document.getElementById('edit-pronunciation').value) || item.pronunciation;
+      item.pos = cleanWordSpacing(document.getElementById('edit-pos').value) || item.pos;
+      item.category = cleanWordSpacing(document.getElementById('edit-category').value) || item.category;
+      item.example_en = cleanWordSpacing(document.getElementById('edit-example-en').value) || item.example_en;
+      item.example_th = cleanWordSpacing(document.getElementById('edit-example-th').value) || item.example_th;
+
+      saveVocabToStorage();
+      updateCategoryDropdown();
+      renderVocabTable();
+      if (vocabList[currentIndex] && vocabList[currentIndex].word === origWord) {
+        displayWordAtIndex(currentIndex, false);
+      }
+      closeEditPanel();
+      showToast(`บันทึกการแก้ไขคำว่า "${origWord}" เรียบร้อยแล้ว`, 'success');
     }
 
     /* ==========================================================================

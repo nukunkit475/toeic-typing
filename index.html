@@ -71,6 +71,10 @@
 
       <!-- Right: Action Buttons (ปุ่มสนับสนุน QR Code แทนปุ่มเพิ่มคำศัพท์ + ปุ่มดูคลังศัพท์) -->
       <div class="flex items-center gap-2.5">
+        <button onclick="forceRefreshApp()" title="อัปเดตข้อมูลและคำศัพท์ล่าสุด" class="p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-sky-400 transition border border-slate-700/80 flex items-center justify-center">
+          <i class="fa-solid fa-arrows-rotate"></i>
+        </button>
+
         <button onclick="openDonateModal()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold transition text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20">
           <i class="fa-solid fa-mug-hot"></i>
           <span>สนับสนุนค่ากาแฟ (QR)</span>
@@ -465,31 +469,43 @@
     let speechRateIndex = 0;
     let audioCtx = null;
     let isAdminMode = false;
+    const VOCAB_DATA_VERSION = "v3.4_70words";
 
     function initApp() {
+      const storedVersion = localStorage.getItem('toeic_vocab_version');
       const storedVocab = localStorage.getItem('toeic_vocab_v3');
       if (storedVocab) {
         try {
           const parsed = JSON.parse(storedVocab);
           if (Array.isArray(parsed) && parsed.length > 0) {
-            // อัปเกรดข้อมูลเก่าอัตโนมัติ: แทนที่คำที่มีในคลังหลักให้เป็นเวอร์ชันล่าสุดที่สมบูรณ์เสมอ
+            // อัปเกรดข้อมูลเก่าอัตโนมัติ + เติมคำศัพท์ใหม่จากคลังหลักที่ยังไม่มีในเครื่องให้ครบทุกคำ
             const defaultMap = new Map(DEFAULT_TOEIC_VOCAB.map(item => [item.word, item]));
-            vocabList = parsed.map(item => {
+            const mergedList = parsed.map(item => {
               const defItem = defaultMap.get(item.word);
-              if (defItem) {
-                return { ...defItem };
-              }
-              return item;
+              return defItem ? { ...defItem } : item;
             });
+
+            const existingWords = new Set(mergedList.map(item => item.word));
+            DEFAULT_TOEIC_VOCAB.forEach(defItem => {
+              if (!existingWords.has(defItem.word)) {
+                mergedList.push({ ...defItem });
+              }
+            });
+
+            vocabList = mergedList;
+            localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
             saveVocabToStorage();
           } else {
             vocabList = [...DEFAULT_TOEIC_VOCAB];
+            localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
           }
         } catch (e) {
           vocabList = [...DEFAULT_TOEIC_VOCAB];
+          localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
         }
       } else {
         vocabList = [...DEFAULT_TOEIC_VOCAB];
+        localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
         saveVocabToStorage();
       }
 
@@ -546,6 +562,12 @@
     function filterByCategory(category) {
       selectedCategory = category;
       pickNextRandomWord(true);
+    }
+
+    function forceRefreshApp() {
+      const url = new URL(window.location.href);
+      url.searchParams.set('v', Date.now());
+      window.location.replace(url.toString());
     }
 
     /* ==========================================================================

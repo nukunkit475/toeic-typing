@@ -1,0 +1,272 @@
+[
+  {
+    "word": "shipment",
+    "meaning": "การจัดส่งสินค้า",
+    "phonetic": "ชิพ-เมินท์",
+    "pos": "คำนาม (n.)",
+    "category": "Logistics",
+    "sentence": "The afternoon shipment arrived at the warehouse ahead of schedule.",
+    "sentence_th": "การจัดส่งสินค้าช่วงบ่ายมาถึงคลังสินค้าก่อนกำหนดเวลา"
+  },
+  {
+    "word": "inventory",
+    "meaning": "สินค้าคงคลัง",
+    "phonetic": "อิน-เวน-ทอ-รี",
+    "pos": "คำนาม (n.)",
+    "category": "Logistics",
+    "sentence": "We conduct a complete inventory check at the end of every month.",
+    "sentence_th": "เราดำเนินการตรวจสอบสินค้าคงคลังทั้งหมดในช่วงสิ้นเดือนของทุกเดือน"
+  },
+  {
+    "word": "expedite",
+    "meaning": "เร่งรัด, ทำให้เร็วขึ้น",
+    "phonetic": "เอ็กซ์-พี-ไดท์",
+    "pos": "คำกริยา (v.)",
+    "category": "Logistics",
+    "sentence": "We paid an extra fee to expedite the delivery of urgent parts.",
+    "sentence_th": "เราจ่ายค่าธรรมเนียมเพิ่มเติมเพื่อเร่งรัดการจัดส่งอะไหล่เร่งด่วน"
+  },
+  {
+    "word": "warehouse",
+    "meaning": "คลังสินค้า, โกดัง",
+    "phonetic": "แวร์-เฮาส์",
+    "pos": "คำนาม (n.)",
+    "category": "Logistics",
+    "sentence": "All imported electronics are stored in our main warehouse.",
+    "sentence_th": "อุปกรณ์อิเล็กทรอนิกส์นำเข้าทั้งหมดถูกจัดเก็บไว้ในคลังสินค้าหลักของเรา"
+  },
+  {
+    "word": "freight",
+    "meaning": "การขนส่งสินค้า",
+    "phonetic": "เฟรท",
+    "pos": "คำนาม (n.)",
+    "category": "Logistics",
+    "sentence": "Ocean freight is much cheaper than air transport for heavy machinery.",
+    "sentence_th": "การขนส่งสินค้าทางเรือมีราคาถูกกว่าการขนส่งทางอากาศมากสำหรับเครื่องจักรหนัก"
+  },
+  {
+    "word": "automate",
+    "meaning": "ทำให้ทำงานอัตโนมัติ",
+    "phonetic": "ออ-โท-เมท",
+    "pos": "คำกริยา (v.)",
+    "category": "Technology",
+    "sentence": "The new software will automate our monthly payroll calculations.",
+    "sentence_th": "ซอฟต์แวร์ใหม่จะทำให้การคำนวณเงินเดือนประจำเดือนของเราทำงานอัตโนมัติ"
+  },
+  {
+    "word": "database",
+    "meaning": "ฐานข้อมูล",
+    "phonetic": "ดา-ต้า-เบส",
+    "pos": "คำนาม (n.)",
+    "category": "Technology",
+    "sentence": "Our IT team backed up the entire customer database last night.",
+    "sentence_th": "ทีมไอทีของเราสำรองฐานข้อมูลลูกค้าทั้งหมดเมื่อคืนนี้"
+  },
+  {
+    "word": "compatible",
+    "meaning": "เข้ากันได้, ใช้งานร่วมกันได้",
+    "phonetic": "คอม-แพท-ทิ-เบิล",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Technology",
+    "sentence": "This wireless printer is compatible with both Windows and Mac computers.",
+    "sentence_th": "เครื่องพิมพ์ไร้สายรุ่นนี้ใช้งานร่วมกันได้กับทั้งคอมพิวเตอร์ Windows และ Mac"
+  },
+  {
+    "word": "malfunction",
+    "meaning": "การทำงานผิดปกติ, ขัดข้อง",
+    "phonetic": "แมล-ฟังก์-ชัน",
+    "pos": "คำนาม (n.)",
+    "category": "Technology",
+    "sentence": "A minor server malfunction temporarily delayed our email service.",
+    "sentence_th": "การทำงานผิดปกติเล็กน้อยของเซิร์ฟเวอร์ทำให้บริการอีเมลของเราล่าช้าชั่วคราว"
+  },
+  {
+    "word": "obsolete",
+    "meaning": "ล้าสมัย, เลิกใช้แล้ว",
+    "phonetic": "ออบ-โซ-ลีท",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Technology",
+    "sentence": "The company replaced its obsolete computers with modern laptops.",
+    "sentence_th": "บริษัทเปลี่ยนคอมพิวเตอร์ที่ล้าสมัยเป็นแล็ปท็อปที่ทันสมัย"
+  },
+  {
+    "word": "subsidiary",
+    "meaning": "บริษัทในเครือ",
+    "phonetic": "ซับ-ซิด-อิ-แอ-รี",
+    "pos": "คำนาม (n.)",
+    "category": "Corporate",
+    "sentence": "This firm is a wholly owned subsidiary of a global bank.",
+    "sentence_th": "บริษัทนี้เป็นบริษัทในเครือที่ธนาคารระดับโลกถือหุ้นทั้งหมด"
+  },
+  {
+    "word": "headquarters",
+    "meaning": "สำนักงานใหญ่",
+    "phonetic": "เฮด-ควอ-เทอร์ส",
+    "pos": "คำนาม (n.)",
+    "category": "Corporate",
+    "sentence": "Our corporate headquarters are located in central Bangkok.",
+    "sentence_th": "สำนักงานใหญ่ของบริษัทเราตั้งอยู่ใจกลางกรุงเทพฯ"
+  },
+  {
+    "word": "merger",
+    "meaning": "การควบรวมกิจการ",
+    "phonetic": "เมอร์-เจอร์",
+    "pos": "คำนาม (n.)",
+    "category": "Corporate",
+    "sentence": "The merger between the two airlines created the largest carrier in Asia.",
+    "sentence_th": "การควบรวมกิจการระหว่างสองสายการบินทำให้เกิดผู้ให้บริการรายใหญ่ที่สุดในเอเชีย"
+  },
+  {
+    "word": "shareholder",
+    "meaning": "ผู้ถือหุ้น",
+    "phonetic": "แชร์-โฮล-เดอร์",
+    "pos": "คำนาม (n.)",
+    "category": "Corporate",
+    "sentence": "Every shareholder is invited to attend the annual general meeting.",
+    "sentence_th": "ผู้ถือหุ้นทุกคนได้รับเชิญให้เข้าร่วมการประชุมสามัญประจำปี"
+  },
+  {
+    "word": "collaborate",
+    "meaning": "ร่วมมือกันทำงาน",
+    "phonetic": "คอล-แลบ-โบ-เรท",
+    "pos": "คำกริยา (v.)",
+    "category": "Corporate",
+    "sentence": "Our design team will collaborate with external engineers on this project.",
+    "sentence_th": "ทีมออกแบบของเราจะร่วมมือกันทำงานกับวิศวกรภายนอกในโครงการนี้"
+  },
+  {
+    "word": "renovate",
+    "meaning": "ปรับปรุงซ่อมแซม",
+    "phonetic": "เรน-โน-เวท",
+    "pos": "คำกริยา (v.)",
+    "category": "Property",
+    "sentence": "They plan to renovate the office lobby next month.",
+    "sentence_th": "พวกเขาวางแผนที่จะปรับปรุงซ่อมแซมล็อบบี้สำนักงานในเดือนหน้า"
+  },
+  {
+    "word": "premises",
+    "meaning": "สถานที่, อาคารและบริเวณ",
+    "phonetic": "เพรม-มิส-เซส",
+    "pos": "คำนาม (n.)",
+    "category": "Property",
+    "sentence": "Smoking is strictly prohibited anywhere on company premises.",
+    "sentence_th": "ห้ามสูบบุหรี่โดยเด็ดขาดในทุกพื้นที่ของอาคารและบริเวณบริษัท"
+  },
+  {
+    "word": "lease",
+    "meaning": "สัญญาเช่า",
+    "phonetic": "ลีส",
+    "pos": "คำนาม (n.)",
+    "category": "Property",
+    "sentence": "We signed a five-year commercial lease for the new retail store.",
+    "sentence_th": "เราลงนามในสัญญาเช่าเชิงพาณิชย์ระยะเวลาห้าปีสำหรับร้านค้าปลีกแห่งใหม่"
+  },
+  {
+    "word": "tenant",
+    "meaning": "ผู้เช่า",
+    "phonetic": "เทน-แนนท์",
+    "pos": "คำนาม (n.)",
+    "category": "Property",
+    "sentence": "Each commercial tenant is responsible for paying their own utility bills.",
+    "sentence_th": "ผู้เช่าเชิงพาณิชย์แต่ละรายมีหน้าที่รับผิดชอบในการชำระค่าน้ำค่าไฟของตนเอง"
+  },
+  {
+    "word": "facility",
+    "meaning": "สิ่งอำนวยความสะดวก, โรงงาน",
+    "phonetic": "ฟะ-ซิล-ลิ-ที",
+    "pos": "คำนาม (n.)",
+    "category": "Property",
+    "sentence": "The new manufacturing facility can produce ten thousand units per day.",
+    "sentence_th": "โรงงานผลิตแห่งใหม่สามารถผลิตสินค้าได้หนึ่งหมื่นชิ้นต่อวัน"
+  },
+  {
+    "word": "stationery",
+    "meaning": "เครื่องเขียนและอุปกรณ์สำนักงาน",
+    "phonetic": "สเต-ชัน-เนอ-รี",
+    "pos": "คำนาม (n.)",
+    "category": "Office Operations",
+    "sentence": "Please order more printer paper and office stationery before Friday.",
+    "sentence_th": "กรุณาสั่งซื้อกระดาษพิมพ์และเครื่องเขียนสำนักงานเพิ่มเติมก่อนวันศุกร์"
+  },
+  {
+    "word": "confidential",
+    "meaning": "เป็นความลับ",
+    "phonetic": "คอน-ฟิ-เดน-เชียล",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Office Operations",
+    "sentence": "All salary records must be kept strictly confidential.",
+    "sentence_th": "บันทึกข้อมูลเงินเดือนทั้งหมดต้องถูกเก็บเป็นความลับอย่างเคร่งครัด"
+  },
+  {
+    "word": "postpone",
+    "meaning": "เลื่อนออกไป",
+    "phonetic": "โพสท์-โพน",
+    "pos": "คำกริยา (v.)",
+    "category": "Office Operations",
+    "sentence": "We had to postpone the staff workshop due to bad weather.",
+    "sentence_th": "เราจำเป็นต้องเลื่อนการอบรมพนักงานออกไปเนื่องจากสภาพอากาศเลวร้าย"
+  },
+  {
+    "word": "punctual",
+    "meaning": "ตรงต่อเวลา",
+    "phonetic": "พังค์-ชวล",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Office Operations",
+    "sentence": "Being punctual for client meetings shows respect and professionalism.",
+    "sentence_th": "การตรงต่อเวลาสำหรับการประชุมกับลูกค้าแสดงถึงความเคารพและความเป็นมืออาชีพ"
+  },
+  {
+    "word": "archive",
+    "meaning": "คลังเก็บเอกสาร, จัดเก็บถาวร",
+    "phonetic": "อาร์-ไคฟ์",
+    "pos": "คำกริยา (v.)",
+    "category": "Office Operations",
+    "sentence": "The secretary will archive all signed contracts from last year.",
+    "sentence_th": "เลขานุการจะจัดเก็บสัญญาที่ลงนามแล้วทั้งหมดจากปีที่แล้วเข้าคลังเอกสาร"
+  },
+  {
+    "word": "inquiry",
+    "meaning": "การสอบถามข้อมูล",
+    "phonetic": "อิน-ไคว-รี",
+    "pos": "คำนาม (n.)",
+    "category": "Customer Service",
+    "sentence": "Our support team responds to every customer inquiry within twenty-four hours.",
+    "sentence_th": "ทีมสนับสนุนของเราตอบกลับการสอบถามข้อมูลของลูกค้าทุกรายภายในยี่สิบสี่ชั่วโมง"
+  },
+  {
+    "word": "complimentary",
+    "meaning": "ฟรี, อภินันทนาการ",
+    "phonetic": "คอม-พลิ-เมน-ทอ-รี",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Customer Service",
+    "sentence": "All seminar participants will receive a complimentary lunch.",
+    "sentence_th": "ผู้เข้าร่วมสัมมนาทุกคนจะได้รับอาหารกลางวันฟรี"
+  },
+  {
+    "word": "refund",
+    "meaning": "การคืนเงิน",
+    "phonetic": "รี-ฟันด์",
+    "pos": "คำนาม (n.)",
+    "category": "Customer Service",
+    "sentence": "You can request a full refund if the item arrives broken.",
+    "sentence_th": "คุณสามารถขอคืนเงินเต็มจำนวนได้หากสินค้ามาถึงในสภาพชำรุด"
+  },
+  {
+    "word": "courteous",
+    "meaning": "สุภาพอ่อนโยน, มีมารยาท",
+    "phonetic": "เคอร์-เทียส",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Customer Service",
+    "sentence": "Hotel receptionists should always be helpful and courteous to guests.",
+    "sentence_th": "พนักงานต้อนรับของโรงแรมควรช่วยเหลือและสุภาพอ่อนโยนต่อแขกผู้เข้าพักเสมอ"
+  },
+  {
+    "word": "satisfaction",
+    "meaning": "ความพึงพอใจ",
+    "phonetic": "แซท-ทิส-แฟค-ชัน",
+    "pos": "คำนาม (n.)",
+    "category": "Customer Service",
+    "sentence": "Customer satisfaction is our highest priority at this company.",
+    "sentence_th": "ความพึงพอใจของลูกค้าคือสิ่งสำคัญสูงสุดของเราที่บริษัทนี้"
+  }
+]

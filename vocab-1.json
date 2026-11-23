@@ -1,5 +1,275 @@
 [
   {
+    "word": "assembly",
+    "meaning": "การประกอบชิ้นส่วน, สายการผลิต",
+    "phonetic": "อะ-เซม-บลี",
+    "pos": "คำนาม (n.)",
+    "category": "Manufacturing",
+    "sentence": "The new robotic arm sped up the car assembly line significantly.",
+    "sentence_th": "แขนกลหุ่นยนต์ตัวใหม่ช่วยเร่งความเร็วสายการประกอบรถยนต์ได้อย่างมาก"
+  },
+  {
+    "word": "component",
+    "meaning": "ส่วนประกอบ, ชิ้นส่วน",
+    "phonetic": "คอม-โพ-เนินท์",
+    "pos": "คำนาม (n.)",
+    "category": "Manufacturing",
+    "sentence": "Every electronic component is tested before final packaging.",
+    "sentence_th": "ชิ้นส่วนอิเล็กทรอนิกส์ทุกชิ้นจะถูกทดสอบก่อนการบรรจุหีบห่อขั้นสุดท้าย"
+  },
+  {
+    "word": "prototype",
+    "meaning": "ต้นแบบสินค้า",
+    "phonetic": "โพร-โท-ไทพ์",
+    "pos": "คำนาม (n.)",
+    "category": "Manufacturing",
+    "sentence": "Engineers built a working prototype of the electric scooter.",
+    "sentence_th": "วิศวกรได้สร้างต้นแบบที่ใช้งานได้จริงของสกู๊ตเตอร์ไฟฟ้า"
+  },
+  {
+    "word": "malfunctioning",
+    "meaning": "ที่ทำงานผิดปกติ, ที่ชำรุด",
+    "phonetic": "แมล-ฟังก์-ชัน-นิง",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Manufacturing",
+    "sentence": "Technicians quickly repaired the malfunctioning packaging machine.",
+    "sentence_th": "ช่างเทคนิคซ่อมแซมเครื่องบรรจุภัณฑ์ที่ทำงานผิดปกติได้อย่างรวดเร็ว"
+  },
+  {
+    "word": "capacity",
+    "meaning": "กำลังการผลิต, ความจุ",
+    "phonetic": "คะ-แพส-ซิ-ที",
+    "pos": "คำนาม (n.)",
+    "category": "Manufacturing",
+    "sentence": "The factory is currently operating at full production capacity.",
+    "sentence_th": "ขณะนี้โรงงานกำลังดำเนินงานเต็มกำลังการผลิต"
+  },
+  {
+    "word": "dividend",
+    "meaning": "เงินปันผล",
+    "phonetic": "ดิฟ-วิ-เดนด์",
+    "pos": "คำนาม (n.)",
+    "category": "Banking & Investment",
+    "sentence": "The board approved a higher quarterly dividend for stockholders.",
+    "sentence_th": "คณะกรรมการอนุมัติเงินปันผลรายไตรมาสที่สูงขึ้นสำหรับผู้ถือหุ้น"
+  },
+  {
+    "word": "collateral",
+    "meaning": "หลักทรัพย์ค้ำประกัน",
+    "phonetic": "คอล-แลท-เทอ-รัล",
+    "pos": "คำนาม (n.)",
+    "category": "Banking & Investment",
+    "sentence": "The business used its commercial property as collateral for the loan.",
+    "sentence_th": "ธุรกิจใช้อสังหาริมทรัพย์เชิงพาณิชย์เป็นหลักทรัพย์ค้ำประกันเงินกู้"
+  },
+  {
+    "word": "transaction",
+    "meaning": "ธุรกรรมทางการเงิน",
+    "phonetic": "แทรน-แซค-ชัน",
+    "pos": "คำนาม (n.)",
+    "category": "Banking & Investment",
+    "sentence": "Every online banking transaction requires two-factor authentication.",
+    "sentence_th": "ธุรกรรมธนาคารออนไลน์ทุกครั้งต้องมีการยืนยันตัวตนแบบสองขั้นตอน"
+  },
+  {
+    "word": "fluctuate",
+    "meaning": "ผันผวน, ขึ้นๆ ลงๆ",
+    "phonetic": "ฟลัค-ชู-เอท",
+    "pos": "คำกริยา (v.)",
+    "category": "Banking & Investment",
+    "sentence": "Foreign exchange rates tend to fluctuate throughout the trading day.",
+    "sentence_th": "อัตราแลกเปลี่ยนเงินตราต่างประเทศมีแนวโน้มผันผวนตลอดทั้งวันซื้อขาย"
+  },
+  {
+    "word": "portfolio",
+    "meaning": "พอร์ตการลงทุน, แฟ้มผลงาน",
+    "phonetic": "พอร์ท-โฟ-ลิ-โอ",
+    "pos": "คำนาม (n.)",
+    "category": "Banking & Investment",
+    "sentence": "Financial advisors recommend diversifying your investment portfolio.",
+    "sentence_th": "ที่ปรึกษาทางการเงินแนะนำให้กระจายความเสี่ยงในพอร์ตการลงทุนของคุณ"
+  },
+  {
+    "word": "consensus",
+    "meaning": "ฉันทามติ, ความเห็นพ้องต้องกัน",
+    "phonetic": "คอน-เซน-ซัส",
+    "pos": "คำนาม (n.)",
+    "category": "Meetings & Presentations",
+    "sentence": "After two hours of discussion, the committee reached a consensus.",
+    "sentence_th": "หลังจากหารือกันสองชั่วโมง คณะกรรมการก็บรรลุฉันทามติร่วมกัน"
+  },
+  {
+    "word": "adjourn",
+    "meaning": "ปิดการประชุม, เลื่อนการประชุม",
+    "phonetic": "อะ-เจิร์น",
+    "pos": "คำกริยา (v.)",
+    "category": "Meetings & Presentations",
+    "sentence": "The chairperson decided to adjourn the meeting until Monday morning.",
+    "sentence_th": "ประธานในที่ประชุมตัดสินใจปิดการประชุมไปจนถึงเช้าวันจันทร์"
+  },
+  {
+    "word": "handout",
+    "meaning": "เอกสารประกอบการบรรยาย",
+    "phonetic": "แฮนด์-เอาท์",
+    "pos": "คำนาม (n.)",
+    "category": "Meetings & Presentations",
+    "sentence": "Please take a copy of the presentation handout at the entrance.",
+    "sentence_th": "กรุณารับสำเนาเอกสารประกอบการบรรยายที่บริเวณทางเข้า"
+  },
+  {
+    "word": "elaborate",
+    "meaning": "อธิบายขยายความเพิ่มเติม",
+    "phonetic": "อิ-แลบ-โบ-เรท",
+    "pos": "คำกริยา (v.)",
+    "category": "Meetings & Presentations",
+    "sentence": "Could you please elaborate on your proposal for reducing shipping costs?",
+    "sentence_th": "คุณช่วยอธิบายขยายความเพิ่มเติมเกี่ยวกับข้อเสนอในการลดค่าขนส่งได้ไหม"
+  },
+  {
+    "word": "unanimous",
+    "meaning": "เป็นเอกฉันท์",
+    "phonetic": "ยู-แนน-นิ-มัส",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Meetings & Presentations",
+    "sentence": "The board voted with unanimous approval to expand into Europe.",
+    "sentence_th": "คณะกรรมการลงมติเห็นชอบอย่างเป็นเอกฉันท์ให้ขยายธุรกิจสู่ยุโรป"
+  },
+  {
+    "word": "procurement",
+    "meaning": "การจัดซื้อจัดจ้าง",
+    "phonetic": "โพร-เคียว-เมินท์",
+    "pos": "คำนาม (n.)",
+    "category": "Purchasing & Supply",
+    "sentence": "The procurement department negotiates bulk discounts with suppliers.",
+    "sentence_th": "ฝ่ายจัดซื้อจัดจ้างเจรจาต่อรองส่วนลดการสั่งซื้อจำนวนมากกับซัพพลายเออร์"
+  },
+  {
+    "word": "vendor",
+    "meaning": "ผู้ขาย, ซัพพลายเออร์",
+    "phonetic": "เวน-เดอร์",
+    "pos": "คำนาม (n.)",
+    "category": "Purchasing & Supply",
+    "sentence": "We selected a local vendor to supply fresh ingredients for the cafeteria.",
+    "sentence_th": "เราเลือกผู้ขายในท้องถิ่นเพื่อจัดหาวัตถุดิบสดใหม่สำหรับโรงอาหาร"
+  },
+  {
+    "word": "quotation",
+    "meaning": "ใบเสนอราคา",
+    "phonetic": "โคว-เท-ชัน",
+    "pos": "คำนาม (n.)",
+    "category": "Purchasing & Supply",
+    "sentence": "Please request a formal price quotation from three different contractors.",
+    "sentence_th": "กรุณาขอใบเสนอราคาอย่างเป็นทางการจากผู้รับเหมาสามรายที่แตกต่างกัน"
+  },
+  {
+    "word": "requisition",
+    "meaning": "ใบขอเบิก, ใบขอสั่งซื้อ",
+    "phonetic": "เรค-ควิ-ซิ-ชัน",
+    "pos": "คำนาม (n.)",
+    "category": "Purchasing & Supply",
+    "sentence": "Department heads must sign every equipment requisition form.",
+    "sentence_th": "หัวหน้าแผนกต้องลงนามในแบบฟอร์มใบขอสั่งซื้ออุปกรณ์ทุกฉบับ"
+  },
+  {
+    "word": "shortage",
+    "meaning": "การขาดแคลน",
+    "phonetic": "ชอร์-เทจ",
+    "pos": "คำนาม (n.)",
+    "category": "Purchasing & Supply",
+    "sentence": "A global microchip shortage delayed the launch of the new smartphone.",
+    "sentence_th": "การขาดแคลนไมโครชิปทั่วโลกทำให้การเปิดตัวสมาร์ทโฟนรุ่นใหม่ล่าช้า"
+  },
+  {
+    "word": "defect",
+    "meaning": "ข้อบกพร่อง, ตำหนิ",
+    "phonetic": "ดี-เฟคท์",
+    "pos": "คำนาม (n.)",
+    "category": "Quality Control",
+    "sentence": "Any item found with a manufacturing defect is immediately removed.",
+    "sentence_th": "สินค้าชิ้นใดที่พบข้อบกพร่องจากการผลิตจะถูกคัดออกทันที"
+  },
+  {
+    "word": "inspection",
+    "meaning": "การตรวจสอบคุณภาพ",
+    "phonetic": "อิน-สเปค-ชัน",
+    "pos": "คำนาม (n.)",
+    "category": "Quality Control",
+    "sentence": "The new bridge passed its final safety inspection yesterday.",
+    "sentence_th": "สะพานแห่งใหม่ผ่านการตรวจสอบความปลอดภัยขั้นสุดท้ายเมื่อวานนี้"
+  },
+  {
+    "word": "flawless",
+    "meaning": "ไร้ที่ติ, สมบูรณ์แบบ",
+    "phonetic": "ฟลอ-เลส",
+    "pos": "คำคุณศัพท์ (adj.)",
+    "category": "Quality Control",
+    "sentence": "Our quality assurance team ensures every luxury watch has a flawless finish.",
+    "sentence_th": "ทีมประกันคุณภาพของเรารับรองว่านาฬิกาหรูทุกเรือนมีงานประกอบที่ไร้ที่ติ"
+  },
+  {
+    "word": "durability",
+    "meaning": "ความทนทาน",
+    "phonetic": "ดู-ระ-บิล-ลิ-ที",
+    "pos": "คำนาม (n.)",
+    "category": "Quality Control",
+    "sentence": "Outdoor gear is tested under extreme conditions to verify its durability.",
+    "sentence_th": "อุปกรณ์กลางแจ้งถูกทดสอบภายใต้สภาวะสุดขั้วเพื่อยืนยันความทนทาน"
+  },
+  {
+    "word": "calibrate",
+    "meaning": "ปรับเทียบมาตรฐาน",
+    "phonetic": "แคล-ลิ-เบรท",
+    "pos": "คำกริยา (v.)",
+    "category": "Quality Control",
+    "sentence": "Engineers calibrate the laboratory instruments once every six months.",
+    "sentence_th": "วิศวกรปรับเทียบมาตรฐานเครื่องมือในห้องปฏิบัติการทุกๆ หกเดือน"
+  },
+  {
+    "word": "keynote",
+    "meaning": "ปาฐกถาหลัก, ประเด็นสำคัญ",
+    "phonetic": "คี-โนท",
+    "pos": "คำนาม (n.)",
+    "category": "Events & Conferences",
+    "sentence": "The CEO will deliver the keynote speech at the annual tech summit.",
+    "sentence_th": "ซีอีโอจะกล่าวปาฐกถาหลักในงานประชุมสุดยอดด้านเทคโนโลยีประจำปี"
+  },
+  {
+    "word": "venue",
+    "meaning": "สถานที่จัดงาน",
+    "phonetic": "เวน-ยู",
+    "pos": "คำนาม (n.)",
+    "category": "Events & Conferences",
+    "sentence": "The convention center is an ideal venue for international trade shows.",
+    "sentence_th": "ศูนย์การประชุมเป็นสถานที่จัดงานที่เหมาะอย่างยิ่งสำหรับงานแสดงสินค้านานาชาติ"
+  },
+  {
+    "word": "attendee",
+    "meaning": "ผู้เข้าร่วมงาน",
+    "phonetic": "อะ-เทน-ดี",
+    "pos": "คำนาม (n.)",
+    "category": "Events & Conferences",
+    "sentence": "Each conference attendee will receive a personalized name badge.",
+    "sentence_th": "ผู้เข้าร่วมงานประชุมแต่ละคนจะได้รับป้ายชื่อเฉพาะบุคคล"
+  },
+  {
+    "word": "banquet",
+    "meaning": "งานเลี้ยงรับรอง",
+    "phonetic": "แบง-เควท",
+    "pos": "คำนาม (n.)",
+    "category": "Events & Conferences",
+    "sentence": "The company hosted a formal banquet to celebrate its fiftieth anniversary.",
+    "sentence_th": "บริษัทจัดงานเลี้ยงรับรองอย่างเป็นทางการเพื่อฉลองครบรอบห้าสิบปี"
+  },
+  {
+    "word": "exhibitor",
+    "meaning": "ผู้ร่วมออกบูธแสดงสินค้า",
+    "phonetic": "เอ็ก-ซิบ-บิ-เทอร์",
+    "pos": "คำนาม (n.)",
+    "category": "Events & Conferences",
+    "sentence": "Over two hundred exhibitors showcased their products at the expo.",
+    "sentence_th": "ผู้ร่วมออกบูธแสดงสินค้ากว่าสองร้อยรายได้จัดแสดงผลิตภัณฑ์ของตนในงานเอ็กซ์โป"
+  },
+  {
     "word": "shipment",
     "meaning": "การจัดส่งสินค้า",
     "phonetic": "ชิพ-เมินท์",
@@ -268,7 +538,7 @@
     "category": "Customer Service",
     "sentence": "Customer satisfaction is our highest priority at this company.",
     "sentence_th": "ความพึงพอใจของลูกค้าคือสิ่งสำคัญสูงสุดของเราที่บริษัทนี้"
-  }
+  },
   {
     "word": "negotiate",
     "meaning": "เจรจาต่อรอง",
@@ -538,7 +808,7 @@
     "category": "Travel",
     "sentence": "International travelers must pass through customs upon arrival.",
     "sentence_th": "ผู้เดินทางระหว่างประเทศต้องผ่านด่านศุลกากรเมื่อเดินทางมาถึง"
-  }
+  },
   {
     "word": "negotiate",
     "meaning": "เจรจาต่อรอง",

@@ -53,12 +53,12 @@
 </head>
 <body class="text-slate-100 min-h-screen flex flex-col justify-between select-none">
 
-  <!-- TOP HEADER (ตรงตามแบบต้นฉบับ ไม่มีแถบสถิติ) -->
+  <!-- TOP HEADER (ตรงตามแบบต้นฉบับของนาย 100%) -->
   <header class="border-b border-slate-800/80 bg-[#0d121f] px-4 sm:px-8 py-3.5 flex-none">
     <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3">
-      <!-- Left: Logo & Live Word Counter (ดับเบิลคลิกที่ไอคอนเพื่อเปิดหน้าเพิ่มศัพท์สำหรับเจ้าของเว็บ) -->
+      <!-- Left: Logo & Live Word Counter -->
       <div class="flex items-center gap-3.5">
-        <div ondblclick="openAdminAddModal()" title="ดับเบิลคลิกเพื่อจัดการเพิ่มคำศัพท์ (Admin)" class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25 cursor-pointer active:scale-95 transition">
+        <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/25">
           <i class="fa-solid fa-keyboard text-lg"></i>
         </div>
         <div>
@@ -69,18 +69,14 @@
         </div>
       </div>
 
-      <!-- Right: Action Buttons (ปุ่มสนับสนุน QR Code แทนปุ่มเพิ่มคำศัพท์ + ปุ่มดูคลังศัพท์) -->
+      <!-- Right: Action Buttons (เอาปุ่มรีเฟรชออก เหลือ 2 ปุ่มตามต้นฉบับ) -->
       <div class="flex items-center gap-2.5">
-        <button onclick="forceRefreshApp()" title="อัปเดตข้อมูลและคำศัพท์ล่าสุด" class="p-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-sky-400 transition border border-slate-700/80 flex items-center justify-center">
-          <i class="fa-solid fa-arrows-rotate"></i>
-        </button>
-
         <button onclick="openDonateModal()" class="px-3.5 py-2 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 text-slate-950 font-bold transition text-xs sm:text-sm flex items-center gap-2 shadow-lg shadow-amber-500/20">
           <i class="fa-solid fa-mug-hot"></i>
           <span>สนับสนุนค่ากาแฟ (QR)</span>
         </button>
 
-        <button onclick="openVocabManager(); switchModalTab('list');" class="px-3.5 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 font-medium transition text-xs sm:text-sm flex items-center gap-2 border border-slate-700/80">
+        <button onclick="openVocabManager()" class="px-3.5 py-2 rounded-xl bg-slate-800/90 hover:bg-slate-700 text-slate-200 font-medium transition text-xs sm:text-sm flex items-center gap-2 border border-slate-700/80">
           <i class="fa-solid fa-layer-group text-amber-400"></i>
           <span>ดูคลังศัพท์</span>
         </button>
@@ -88,16 +84,15 @@
     </div>
   </header>
 
-  <!-- MAIN CONTENT AREA -->
+  <!-- MAIN CONTENT AREA (ขนาด max-w-4xl ตามต้นฉบับเดิมของนายเป๊ะ) -->
   <main class="flex-1 flex flex-col items-center justify-center px-4 py-4 max-w-4xl mx-auto w-full">
     
-    <!-- CONTROL BAR (กล่องแยกด้านบนตามภาพต้นฉบับ) -->
+    <!-- CONTROL BAR -->
     <div class="w-full bg-[#111726] border border-slate-800/90 rounded-2xl px-4 py-2.5 mb-4 flex flex-wrap items-center justify-between gap-3 shadow-md">
-      <!-- Category Selector -->
+      <!-- Category Selector (แสดงจำนวนคำในแต่ละหมวดหมู่) -->
       <div class="flex items-center gap-2.5 flex-1 min-w-[220px]">
-        <span class="text-xs text-slate-400 whitespace-nowrap">หมวดหมู่:</span>
-        <select id="category-filter" onchange="filterByCategory(this.value)" class="w-full max-w-[260px] bg-[#0b0f19] border border-slate-700/80 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-200 outline-none focus:border-indigo-500 cursor-pointer">
-          <option value="ALL">ทั้งหมด (All Categories)</option>
+        <select id="category-filter" onchange="filterByCategory(this.value)" class="w-full max-w-[280px] bg-[#0b0f19] border border-slate-700/80 rounded-xl px-3 py-1.5 text-xs sm:text-sm text-slate-200 outline-none focus:border-indigo-500 cursor-pointer">
+          <option value="ALL">หมวดหมู่: ทั้งหมด (0 คำ)</option>
         </select>
       </div>
 
@@ -119,7 +114,7 @@
       </div>
     </div>
 
-    <!-- MAIN PRACTICE CARD (ไม่มีกล่องสถิติคั่นกลาง) -->
+    <!-- MAIN PRACTICE CARD -->
     <div id="flashcard-box" class="w-full bg-[#111726] border border-slate-800/90 rounded-2xl shadow-2xl p-5 sm:p-7 flex flex-col justify-between transition-all duration-200">
       
       <!-- Card Top Row: Category Badge & Speak Button -->
@@ -153,7 +148,7 @@
         <div class="bg-[#0b0f19]/90 border border-slate-800/90 rounded-xl p-3.5 max-w-2xl mx-auto">
           <span class="text-[11px] text-slate-500 block mb-0.5">ความหมายภาษาไทย</span>
           <p id="target-meaning" class="text-xl sm:text-2xl font-bold text-amber-400">
-            ดับเบิลคลิกที่ไอคอนคีย์บอร์ดมุมซ้ายบนเพื่อเพิ่มคำศัพท์
+            ยังไม่มีไฟล์คำศัพท์ในคลัง
           </p>
         </div>
 
@@ -169,10 +164,10 @@
             </button>
           </div>
           <p id="target-example-en" class="text-slate-100 text-sm sm:text-base leading-relaxed">
-            Double-click the keyboard icon at the top-left to add your vocabulary.
+            Upload your vocabulary JSON files (e.g., vocab-1.json) to start practicing.
           </p>
           <p id="target-example-th" class="text-slate-400 text-xs sm:text-sm mt-1">
-            คลังคำศัพท์ถูกตั้งค่าเป็น 0 คำเรียบร้อยแล้ว
+            อัปโหลดไฟล์คำศัพท์ (.json) ขึ้น GitHub เพื่อเริ่มฝึกพิมพ์
           </p>
         </div>
       </div>
@@ -206,7 +201,7 @@
     </div>
   </main>
 
-  <!-- VOCABULARY MANAGER MODAL -->
+  <!-- VOCABULARY VIEWER MODAL (ดูคลังศัพท์อย่างเดียว) -->
   <div id="vocab-modal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-3 sm:p-4 hidden">
     <div class="bg-[#111726] border border-slate-800 rounded-2xl w-full max-w-3xl max-h-[90vh] flex flex-col shadow-2xl overflow-hidden">
       
@@ -215,8 +210,8 @@
         <div class="flex items-center gap-2.5">
           <i class="fa-solid fa-database text-sky-400 text-lg"></i>
           <div>
-            <h3 class="font-bold text-base text-white">จัดการคลังคำศัพท์ (ไม่จำกัดจำนวน)</h3>
-            <p class="text-xs text-slate-400">ตรวจคำซ้ำแบบสนตัวพิมพ์เล็ก-ใหญ่ (Case-Sensitive) และตัดช่องว่างเกินอัตโนมัติ</p>
+            <h3 class="font-bold text-base text-white">รายการคำศัพท์ทั้งหมด (<span id="modal-word-count">0</span> คำ)</h3>
+            <p class="text-xs text-slate-400">รวบรวมจากไฟล์คำศัพท์และคัดคำที่ซ้ำกันออกอัตโนมัติ</p>
           </div>
         </div>
         <button onclick="closeVocabManager()" class="text-slate-400 hover:text-white p-1.5 rounded-lg hover:bg-slate-800 transition">
@@ -224,177 +219,41 @@
         </button>
       </div>
 
-      <!-- Modal Tabs -->
-      <div class="flex border-b border-slate-800 bg-[#0d121f] px-5 text-xs font-semibold">
-        <button id="tab-btn-add" onclick="switchModalTab('add')" style="display: none;" class="py-3 px-4 text-sky-400 border-b-2 border-sky-400 flex items-center gap-2">
-          <i class="fa-solid fa-plus"></i> เพิ่มคำศัพท์ใหม่ (จำนวนมาก)
-        </button>
-        <button id="tab-btn-list" onclick="switchModalTab('list')" class="py-3 px-4 text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2">
-          <i class="fa-solid fa-list"></i> รายการคำศัพท์ทั้งหมด (<span id="modal-word-count">0</span>)
-        </button>
-      </div>
-
       <!-- Modal Body -->
-      <div class="p-5 overflow-y-auto flex-1 space-y-4">
-        
-        <!-- TAB 1: BULK ADD -->
-        <div id="tab-content-add" class="space-y-3 hidden">
-          <!-- ช่องตั้งค่า Gemini API Key และ GitHub Cloud Sync สำหรับผู้ดูแลระบบ -->
-          <div class="bg-[#0b0f19] border border-slate-800 rounded-xl p-3 space-y-2.5 text-xs">
-            <div class="flex flex-wrap items-center justify-between gap-2">
-              <div class="flex items-center gap-2 text-slate-300">
-                <i class="fa-solid fa-key text-amber-400"></i>
-                <span>Gemini API Key (AI ตรวจคำศัพท์):</span>
-              </div>
-              <div class="flex items-center gap-2 flex-1 min-w-[220px] max-w-md">
-                <input 
-                  type="password" 
-                  id="gemini-api-key-input" 
-                  onchange="saveGeminiApiKey(this.value)"
-                  placeholder="วาง API Key ฟรีจาก aistudio.google.com..." 
-                  class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-mono text-sky-300 placeholder:text-slate-600 focus:border-sky-500 outline-none"
-                >
-                <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener" class="px-2.5 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-sky-400 whitespace-nowrap transition">
-                  รับ Key ฟรี
-                </a>
-              </div>
-            </div>
-
-            <div class="flex flex-wrap items-center justify-between gap-2 pt-2 border-t border-slate-800/80">
-              <div class="flex items-center gap-2 text-slate-300">
-                <i class="fa-brands fa-github text-emerald-400"></i>
-                <span>GitHub Token (ซิงค์ข้ามทุกเครื่อง):</span>
-              </div>
-              <div class="flex items-center gap-2 flex-1 min-w-[220px] max-w-md">
-                <input 
-                  type="password" 
-                  id="github-token-input" 
-                  onchange="saveGithubToken(this.value)"
-                  placeholder="วาง GitHub Token (ghp_... หรือ github_pat_...)" 
-                  class="w-full bg-slate-900 border border-slate-700 rounded-lg px-2.5 py-1.5 text-xs font-mono text-emerald-300 placeholder:text-slate-600 focus:border-emerald-500 outline-none"
-                >
-                <button onclick="syncVocabToGithub(true)" class="px-2.5 py-1.5 rounded-lg bg-emerald-900/70 hover:bg-emerald-800 text-emerald-300 whitespace-nowrap transition">
-                  ซิงค์ขึ้น Cloud
-                </button>
-              </div>
-            </div>
-            <p class="text-[11px] text-slate-500">
-              * เมื่อใส่ GitHub Token (สิทธิ์ <code class="text-slate-300">Contents: Read and write</code> ของ repo <code class="text-slate-300">nukunkit475/toeic-typing</code>) ทุกครั้งที่เพิ่มหรือแก้คำศัพท์ ระบบจะบันทึกลง <code class="text-sky-400">vocab.json</code> บน GitHub อัตโนมัติ ทำให้เปิดเครื่องไหนหรือล้างประวัติเว็บ คำศัพท์ก็อยู่ครบทุกเครื่องครับ
-            </p>
-          </div>
-
-          <div>
-            <textarea 
-              id="bulk-input" 
-              rows="7" 
-              placeholder="พิมพ์คำศัพท์บรรทัดละ 1 คำได้เลย เช่น:&#10;complimentary, ฟรี, อภินันทนาการ&#10;confidential, เป็นความลับ&#10;endorse&#10;expedite&#10;obsolete" 
-              class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl p-3.5 text-xs sm:text-sm font-mono-code text-slate-100 placeholder:text-slate-600 focus:border-sky-500 focus:ring-2 focus:ring-sky-500/20 outline-none leading-relaxed"
-            ></textarea>
-          </div>
-
-          <div class="flex flex-wrap items-center justify-between gap-3">
-            <span id="bulk-add-status" class="text-xs text-emerald-400 font-medium"></span>
-            <button id="btn-process-bulk" onclick="processBulkAdd()" class="px-4 py-2.5 rounded-xl bg-sky-600 hover:bg-sky-500 text-white font-semibold text-xs sm:text-sm transition flex items-center gap-2 shadow-lg shadow-sky-600/20 ml-auto">
-              <i class="fa-solid fa-plus-circle"></i>
-              <span>บันทึกเข้าคลังศัพท์</span>
-            </button>
-          </div>
+      <div class="p-5 overflow-y-auto flex-1 space-y-3">
+        <div class="relative">
+          <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
+          <input 
+            type="text" 
+            id="search-vocab" 
+            oninput="renderVocabTable()" 
+            placeholder="ค้นหาคำศัพท์, คำแปล, หรือหมวดหมู่..." 
+            class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:border-sky-500 outline-none"
+          >
         </div>
 
-        <!-- TAB 2: VOCABULARY LIST -->
-        <div id="tab-content-list" class="space-y-3">
-          <div class="flex flex-wrap items-center justify-between gap-2">
-            <div class="relative flex-1 min-w-[200px]">
-              <i class="fa-solid fa-search absolute left-3 top-1/2 -translate-y-1/2 text-slate-500 text-xs"></i>
-              <input 
-                type="text" 
-                id="search-vocab" 
-                oninput="renderVocabTable()" 
-                placeholder="ค้นหาคำศัพท์, คำแปล, หรือหมวดหมู่..." 
-                class="w-full bg-[#0b0f19] border border-slate-700 rounded-xl pl-9 pr-3 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:border-sky-500 outline-none"
-              >
-            </div>
-            <div class="flex flex-wrap items-center gap-2">
-              <button id="btn-export-code" onclick="copyVocabAsCode()" style="display: none;" class="px-3 py-2 rounded-xl bg-indigo-950/70 hover:bg-indigo-900/80 text-indigo-300 border border-indigo-800/60 text-xs transition flex items-center gap-1.5">
-                <i class="fa-solid fa-code"></i>
-                <span>คัดลอกโค้ดฝังเว็บ</span>
-              </button>
-              <button id="btn-reset-vocab" onclick="clearAllVocab()" style="display: none;" class="px-3 py-2 rounded-xl bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border border-rose-800/60 text-xs transition flex items-center gap-1.5">
-                <i class="fa-solid fa-trash-can"></i>
-                <span>ล้างคำศัพท์ทั้งหมด (เหลือ 0)</span>
-              </button>
-            </div>
-          </div>
-
-          <div class="border border-slate-800 rounded-xl overflow-hidden bg-[#0b0f19]">
-            <div class="max-h-[45vh] overflow-y-auto">
-              <table class="w-full text-left border-collapse text-xs">
-                <thead class="bg-slate-900/90 text-slate-400 sticky top-0 border-b border-slate-800">
-                  <tr>
-                    <th class="p-2.5 font-semibold">คำศัพท์</th>
-                    <th class="p-2.5 font-semibold">ชนิดคำ</th>
-                    <th class="p-2.5 font-semibold">ความหมาย / คำอ่าน</th>
-                    <th class="p-2.5 font-semibold">หมวดหมู่</th>
-                    <th id="th-vocab-action" style="display: none;" class="p-2.5 font-semibold text-center w-24">จัดการ</th>
-                  </tr>
-                </thead>
-                <tbody id="vocab-table-body" class="divide-y divide-slate-800/60">
-                  <!-- Rows populated by JS -->
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- INLINE EDIT BOX (โผล่ขึ้นเมื่อกดปุ่มแก้ไขคำศัพท์ในตาราง) -->
-          <div id="edit-vocab-panel" class="hidden bg-slate-900/95 border border-sky-500/50 rounded-xl p-4 space-y-3 shadow-xl">
-            <div class="flex items-center justify-between">
-              <h4 class="text-xs font-bold text-sky-400 flex items-center gap-1.5">
-                <i class="fa-solid fa-pen-to-square"></i> แก้ไขข้อมูลคำศัพท์: <span id="edit-word-label" class="font-mono text-white text-sm"></span>
-              </h4>
-              <button onclick="closeEditPanel()" class="text-slate-400 hover:text-white text-xs"><i class="fa-solid fa-xmark"></i> ปิด</button>
-            </div>
-            <input type="hidden" id="edit-original-word">
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 text-xs">
-              <div>
-                <label class="text-slate-400 block mb-1">คำแปลภาษาไทย</label>
-                <input type="text" id="edit-meaning" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg px-2.5 py-1.5 text-white outline-none focus:border-sky-500">
-              </div>
-              <div>
-                <label class="text-slate-400 block mb-1">คำอ่านภาษาไทย</label>
-                <input type="text" id="edit-pronunciation" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg px-2.5 py-1.5 text-sky-300 outline-none focus:border-sky-500">
-              </div>
-              <div>
-                <label class="text-slate-400 block mb-1">ชนิดคำ / หมวดหมู่</label>
-                <div class="flex gap-1.5">
-                  <input type="text" id="edit-pos" placeholder="เช่น คำนาม (n.)" class="w-1/2 bg-[#0b0f19] border border-slate-700 rounded-lg px-2 py-1.5 text-white outline-none focus:border-sky-500">
-                  <input type="text" id="edit-category" placeholder="หมวดหมู่" class="w-1/2 bg-[#0b0f19] border border-slate-700 rounded-lg px-2 py-1.5 text-white outline-none focus:border-sky-500">
-                </div>
-              </div>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 text-xs">
-              <div>
-                <label class="text-slate-400 block mb-1">ตัวอย่างประโยค (อังกฤษ)</label>
-                <input type="text" id="edit-example-en" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg px-2.5 py-1.5 text-white outline-none focus:border-sky-500">
-              </div>
-              <div>
-                <label class="text-slate-400 block mb-1">คำแปลประโยค (ไทย)</label>
-                <input type="text" id="edit-example-th" class="w-full bg-[#0b0f19] border border-slate-700 rounded-lg px-2.5 py-1.5 text-white outline-none focus:border-sky-500">
-              </div>
-            </div>
-            <div class="flex justify-end gap-2 pt-1">
-              <button onclick="closeEditPanel()" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs transition">ยกเลิก</button>
-              <button onclick="saveEditedWord()" class="px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs transition flex items-center gap-1.5">
-                <i class="fa-solid fa-check"></i> บันทึกการแก้ไข
-              </button>
-            </div>
+        <div class="border border-slate-800 rounded-xl overflow-hidden bg-[#0b0f19]">
+          <div class="max-h-[55vh] overflow-y-auto">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead class="bg-slate-900/90 text-slate-400 sticky top-0 border-b border-slate-800">
+                <tr>
+                  <th class="p-2.5 font-semibold">คำศัพท์</th>
+                  <th class="p-2.5 font-semibold">ชนิดคำ</th>
+                  <th class="p-2.5 font-semibold">ความหมาย / คำอ่าน</th>
+                  <th class="p-2.5 font-semibold">หมวดหมู่</th>
+                </tr>
+              </thead>
+              <tbody id="vocab-table-body" class="divide-y divide-slate-800/60">
+                <!-- Rows populated by JS -->
+              </tbody>
+            </table>
           </div>
         </div>
-
       </div>
     </div>
   </div>
 
-  <!-- DONATE / QR CODE MODAL -->
+  <!-- DONATE / QR CODE MODAL (ตรงตามแบบต้นฉบับของนาย 100%) -->
   <div id="donate-modal" class="fixed inset-0 bg-slate-950/85 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
     <div class="bg-[#111726] border border-slate-800 rounded-2xl w-full max-w-sm flex flex-col shadow-2xl overflow-hidden text-center">
       
@@ -415,10 +274,8 @@
           หากเว็บไซต์นี้ช่วยให้คุณฝึกศัพท์ TOEIC ได้สนุกและเก่งขึ้น สามารถร่วมสนับสนุนค่ากาแฟให้ผู้พัฒนาได้ตามกำลังศรัทธาเลยครับ (ไม่บังคับ ขอบคุณมากๆ ครับ 🙏)
         </p>
 
-        <!-- PromptPay Card (จำลองหน้าบัตร Thai QR Payment ของคุณ นาย นุกูลกิจ ศรีมุกข์) -->
         <!-- PromptPay Card -->
         <div class="bg-white rounded-2xl overflow-hidden shadow-xl border border-slate-300 max-w-[270px] mx-auto text-slate-800">
-          <!-- ใช้ data-src เพื่อไม่ให้บอทแชท (Messenger/LINE) ดึงรูป QR Code ไปแสดงเป็นรูปปกเวลาส่งลิงก์ -->
           <img 
             id="qr-code-image" 
             data-src="qr.jpg" 
@@ -426,7 +283,6 @@
             alt="QR Code สนับสนุน นาย นุกูลกิจ ศรีมุกข์" 
             class="w-full h-auto object-contain block"
           >
-          <!-- กล่องสำรองกรณีคนเปิดดูยังไม่ได้อัปโหลดไฟล์ qr.jpg ขึ้น GitHub -->
           <div id="qr-fallback-box" class="hidden">
             <div class="bg-[#113f67] text-white py-2 px-3 flex items-center justify-center gap-2">
               <i class="fa-solid fa-qrcode text-lg text-emerald-400"></i>
@@ -458,13 +314,18 @@
   <!-- TOAST NOTIFICATION -->
   <div id="toast" class="fixed bottom-5 right-5 z-50 bg-[#111726] border border-slate-700 text-white px-4 py-3 rounded-xl shadow-2xl flex items-center gap-3 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2">
     <i id="toast-icon" class="fa-solid fa-circle-check text-emerald-400 text-lg"></i>
-    <span id="toast-message" class="text-xs font-medium">บันทึกข้อมูลเรียบร้อยแล้ว</span>
+    <span id="toast-message" class="text-xs font-medium">แจ้งเตือน</span>
   </div>
 
   <script>
     /* ==========================================================================
-       1. คลังคำศัพท์ TOEIC เริ่มต้น (ตั้งค่าเริ่มต้นเป็น 0 คำ เพื่อให้ผู้ใช้เพิ่มเองทั้งหมด)
+       1. รายชื่อไฟล์คำศัพท์บน GitHub (เพิ่มไฟล์ใหม่ต่อท้ายได้เลย เช่น 'vocab-2.json')
        ========================================================================== */
+    const VOCAB_FILES = [
+      'vocab-1.json'
+    ];
+
+    // เอาคำศัพท์ในโค้ดออกทั้งหมด (0 คำ) เพื่อให้ดึงจากไฟล์ .json บน GitHub เท่านั้น
     const DEFAULT_TOEIC_VOCAB = [];
 
     /* ==========================================================================
@@ -478,153 +339,57 @@
     const speechRates = [1.0, 0.8, 1.2];
     let speechRateIndex = 0;
     let audioCtx = null;
-    let isAdminMode = false;
-    const VOCAB_DATA_VERSION = "v3.7_cloud_sync";
-    const GITHUB_OWNER = "nukunkit475";
-    const GITHUB_REPO = "toeic-typing";
-    const GITHUB_VOCAB_PATH = "vocab.json";
-    let customGeminiApiKey = "";
-    let customGithubToken = "";
 
-    function saveGeminiApiKey(val) {
-      customGeminiApiKey = (val || "").trim();
-      try {
-        localStorage.setItem('toeic_gemini_api_key', customGeminiApiKey);
-        showToast(customGeminiApiKey ? 'บันทึก Gemini API Key เรียบร้อยแล้ว' : 'ล้าง Gemini API Key แล้ว', 'success');
-      } catch (e) {}
-    }
+    /* ==========================================================================
+       3. โหลดคำศัพท์จากหลายไฟล์ (.json) บน GitHub และคัดคำซ้ำออกอัตโนมัติ
+          (ทำงานเฉพาะตอนรวมไฟล์เข้าคลังกลาง ไม่เกี่ยวกับการสุ่มคำพิมพ์)
+       ========================================================================== */
+    async function loadAllVocabFiles() {
+      const mergedMap = new Map();
+      const cacheBuster = `?t=${Date.now()}`;
 
-    function saveGithubToken(val) {
-      customGithubToken = (val || "").trim();
-      try {
-        localStorage.setItem('toeic_github_token', customGithubToken);
-        showToast(customGithubToken ? 'บันทึก GitHub Token เรียบร้อยแล้ว' : 'ล้าง GitHub Token แล้ว', 'success');
-      } catch (e) {}
-    }
+      const fetchPromises = VOCAB_FILES.map(async (fileName) => {
+        try {
+          const res = await fetch(`${fileName}${cacheBuster}`, { cache: 'no-store' });
+          if (!res.ok) return null;
+          const data = await res.json();
+          return Array.isArray(data) ? data : null;
+        } catch (e) {
+          return null;
+        }
+      });
 
-    async function loadCloudVocabFromGithub() {
-      try {
-        // ดึงข้อมูลจากไฟล์ vocab.json บน GitHub Pages / Raw GitHub แบบไม่ติดแคช
-        const urls = [
-          `./vocab.json?t=${Date.now()}`,
-          `https://raw.githubusercontent.com/${GITHUB_OWNER}/${GITHUB_REPO}/main/${GITHUB_VOCAB_PATH}?t=${Date.now()}`
-        ];
-        for (const url of urls) {
-          const res = await fetchWithTimeout(url, 3000);
-          if (res.ok) {
-            const data = await res.json();
-            if (Array.isArray(data)) {
-              vocabList = data;
-              localStorage.setItem('toeic_vocab_v3', JSON.stringify(vocabList));
-              localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
-              updateCategoryDropdown();
-              updateWordCountBadge();
-              renderVocabTable();
-              pickNextRandomWord(false);
-              return true;
-            }
+      const results = await Promise.all(fetchPromises);
+
+      results.forEach((items) => {
+        if (!items) return;
+        items.forEach((item) => {
+          if (!item || !item.word) return;
+          const cleanWord = String(item.word).trim();
+          // ตรวจคำซ้ำตอนรวมไฟล์เข้าคลัง (ถ้ามีคำซ้ำข้ามไฟล์จะเก็บไว้แค่ 1 คำ)
+          if (!mergedMap.has(cleanWord)) {
+            mergedMap.set(cleanWord, {
+              word: cleanWord,
+              pos: String(item.pos || 'คำศัพท์ (vocab)').trim(),
+              pronunciation: String(item.pronunciation || item.phonetic || '-').trim(),
+              meaning: String(item.meaning || '').trim(),
+              category: String(item.category || 'General Business').trim(),
+              example_en: String(item.example_en || item.sentence || '').trim(),
+              example_th: String(item.example_th || item.sentence_th || '').trim()
+            });
           }
-        }
-      } catch (e) {}
-      return false;
-    }
-
-    async function syncVocabToGithub(showManualToast = false) {
-      if (!customGithubToken) {
-        if (showManualToast) {
-          showToast('กรุณาใส่ GitHub Token ก่อนกดซิงค์ขึ้น Cloud', 'error');
-        }
-        return false;
-      }
-
-      try {
-        const apiUrl = `https://api.github.com/repos/${GITHUB_OWNER}/${GITHUB_REPO}/contents/${GITHUB_VOCAB_PATH}`;
-        const headers = {
-          "Authorization": `Bearer ${customGithubToken}`,
-          "Accept": "application/vnd.github+json",
-          "Content-Type": "application/json"
-        };
-
-        // 1. ตรวจสอบ SHA ของไฟล์ vocab.json เดิมบน GitHub (ถ้ามี)
-        let sha = null;
-        const getRes = await fetch(apiUrl, { headers });
-        if (getRes.ok) {
-          const fileInfo = await getRes.json();
-          sha = fileInfo.sha;
-        }
-
-        // 2. เข้ารหัส JSON ภาษาไทยเป็น Base64 UTF-8 อย่างถูกต้อง
-        const jsonString = JSON.stringify(vocabList, null, 2);
-        const bytes = new TextEncoder().encode(jsonString);
-        let binary = "";
-        for (let i = 0; i < bytes.byteLength; i++) {
-          binary += String.fromCharCode(bytes[i]);
-        }
-        const base64Content = btoa(binary);
-
-        const body = {
-          message: `Update vocabulary (${vocabList.length} words) via TOEIC Typing Master`,
-          content: base64Content
-        };
-        if (sha) body.sha = sha;
-
-        const putRes = await fetch(apiUrl, {
-          method: "PUT",
-          headers,
-          body: JSON.stringify(body)
         });
+      });
 
-        if (putRes.ok) {
-          if (showManualToast) {
-            showToast(`ซิงค์คำศัพท์ ${vocabList.length} คำ ขึ้น GitHub Cloud สำเร็จ! ทุกเครื่องจะเห็นข้อมูลตรงกัน`, 'success');
-          }
-          return true;
-        } else {
-          if (showManualToast) {
-            showToast('ซิงค์ไม่สำเร็จ กรุณาตรวจสอบสิทธิ์ของ GitHub Token', 'error');
-          }
-          return false;
-        }
-      } catch (e) {
-        if (showManualToast) {
-          showToast('เกิดข้อผิดพลาดในการเชื่อมต่อ GitHub Cloud', 'error');
-        }
-        return false;
-      }
+      vocabList = mergedMap.size > 0 ? Array.from(mergedMap.values()) : [...DEFAULT_TOEIC_VOCAB];
     }
 
     async function initApp() {
-      try {
-        customGeminiApiKey = localStorage.getItem('toeic_gemini_api_key') || "";
-        const keyInput = document.getElementById('gemini-api-key-input');
-        if (keyInput && customGeminiApiKey) keyInput.value = customGeminiApiKey;
-
-        customGithubToken = localStorage.getItem('toeic_github_token') || "";
-        const ghInput = document.getElementById('github-token-input');
-        if (ghInput && customGithubToken) ghInput.value = customGithubToken;
-      } catch (e) {}
-
-      const storedVersion = localStorage.getItem('toeic_vocab_version');
-      const storedVocab = localStorage.getItem('toeic_vocab_v3');
-      if (storedVocab && storedVersion === VOCAB_DATA_VERSION) {
-        try {
-          const parsed = JSON.parse(storedVocab);
-          vocabList = Array.isArray(parsed) ? parsed : [];
-        } catch (e) {
-          vocabList = [...DEFAULT_TOEIC_VOCAB];
-        }
-      } else {
-        vocabList = [...DEFAULT_TOEIC_VOCAB];
-        localStorage.setItem('toeic_vocab_version', VOCAB_DATA_VERSION);
-        saveVocabToStorage();
-      }
+      await loadAllVocabFiles();
 
       updateCategoryDropdown();
       updateWordCountBadge();
       pickNextRandomWord(false);
-
-      // ดึงข้อมูลล่าสุดจาก GitHub Cloud อัตโนมัติ (ทำให้ล้างประวัติหรือเปิดเครื่องอื่นก็เจอคำศัพท์ทันที)
-      await loadCloudVocabFromGithub();
 
       const inputEl = document.getElementById('typing-input');
       inputEl.addEventListener('input', handleTypingInput);
@@ -642,17 +407,6 @@
       });
     }
 
-    function saveVocabToStorage() {
-      try {
-        localStorage.setItem('toeic_vocab_v3', JSON.stringify(vocabList));
-      } catch (e) {
-        showToast('พื้นที่จัดเก็บเบราว์เซอร์เต็ม ไม่สามารถบันทึกเพิ่มได้', 'error');
-      }
-      if (customGithubToken) {
-        syncVocabToGithub(false);
-      }
-    }
-
     function updateWordCountBadge() {
       const count = vocabList.length;
       const topCounter = document.getElementById('total-word-count');
@@ -664,12 +418,18 @@
     function updateCategoryDropdown() {
       const selectEl = document.getElementById('category-filter');
       if (!selectEl) return;
-      const categories = [...new Set(vocabList.map(item => item.category || 'General Business'))].sort();
-      selectEl.innerHTML = `<option value="ALL">ทั้งหมด (All Categories)</option>`;
-      categories.forEach(cat => {
+
+      const categoryCounts = {};
+      vocabList.forEach(item => {
+        const cat = item.category || 'General Business';
+        categoryCounts[cat] = (categoryCounts[cat] || 0) + 1;
+      });
+
+      selectEl.innerHTML = `<option value="ALL">หมวดหมู่: ทั้งหมด (${vocabList.length.toLocaleString()} คำ)</option>`;
+      Object.keys(categoryCounts).sort().forEach(cat => {
         const opt = document.createElement('option');
         opt.value = cat;
-        opt.innerText = cat;
+        opt.innerText = `${cat} (${categoryCounts[cat]})`;
         if (cat === selectedCategory) opt.selected = true;
         selectEl.appendChild(opt);
       });
@@ -680,14 +440,8 @@
       pickNextRandomWord(true);
     }
 
-    function forceRefreshApp() {
-      const url = new URL(window.location.href);
-      url.searchParams.set('v', Date.now());
-      window.location.replace(url.toString());
-    }
-
     /* ==========================================================================
-       3. CONTROL BAR ACTIONS (HINT MODE, AUTO-SPEAK, SPEED)
+       4. CONTROL BAR ACTIONS (HINT MODE, AUTO-SPEAK, SPEED)
        ========================================================================== */
     function toggleHintMode() {
       isHintHidden = !isHintHidden;
@@ -730,7 +484,7 @@
     }
 
     /* ==========================================================================
-       4. WORD SELECTION & DISPLAY
+       5. WORD SELECTION & DISPLAY
        ========================================================================== */
     function renderEmptyState() {
       document.getElementById('card-category').innerText = "Empty";
@@ -739,13 +493,13 @@
       targetWordEl.innerText = "0 คำศัพท์";
       targetWordEl.classList.remove('blur-md');
       document.getElementById('target-pronunciation').innerHTML = `สถานะ: <span class="text-sky-400 font-semibold">คลังคำศัพท์ว่างเปล่า</span>`;
-      document.getElementById('target-meaning').innerText = "ดับเบิลคลิกที่ไอคอนคีย์บอร์ดมุมซ้ายบนเพื่อเพิ่มคำศัพท์";
-      document.getElementById('target-example-en').innerHTML = `Double-click the keyboard icon at the top-left to add your vocabulary.`;
-      document.getElementById('target-example-th').innerHTML = `คลังคำศัพท์ถูกตั้งค่าเป็น 0 คำเรียบร้อยแล้ว`;
+      document.getElementById('target-meaning').innerText = "ยังไม่มีไฟล์คำศัพท์ในคลัง";
+      document.getElementById('target-example-en').innerHTML = `Upload your vocabulary JSON files (e.g., vocab-1.json) to start practicing.`;
+      document.getElementById('target-example-th').innerHTML = `อัปโหลดไฟล์คำศัพท์ (.json) ขึ้น GitHub เพื่อเริ่มฝึกพิมพ์`;
       const inputEl = document.getElementById('typing-input');
       inputEl.value = '';
       inputEl.disabled = true;
-      inputEl.placeholder = "กรุณาเพิ่มคำศัพท์ก่อนเริ่มฝึกพิมพ์ . . .";
+      inputEl.placeholder = "รอโหลดไฟล์คำศัพท์ . . .";
     }
 
     function pickNextRandomWord(shouldAutoSpeak = true) {
@@ -803,7 +557,6 @@
         targetWordEl.classList.remove('blur-md');
       }
 
-      // ลบสัทอักษรในวงเล็บ (เช่น (/dɑɡ/)) ออกหากมีติดอยู่ในข้อมูลเดิม
       const cleanPron = (currentItem.pronunciation || '-').replace(/\s*\([^)]*\)/g, '').trim();
       document.getElementById('target-pronunciation').innerHTML = `คำอ่าน: <span class="text-sky-400 font-semibold">${escapeHtml(cleanPron)}</span>`;
       document.getElementById('target-meaning').innerText = currentItem.meaning;
@@ -814,14 +567,12 @@
       
       document.getElementById('target-example-en').innerHTML = highlightedSentence;
 
-      // ไฮไลต์คำแปลภาษาไทยในประโยคให้เป็นสีเหลืองตรงกับคำศัพท์
       let sentenceTh = currentItem.example_th || `ตัวอย่างการใช้คำว่า "${currentItem.word}"`;
       const rawParts = (currentItem.meaning || '')
         .split(/[,/()]/)
         .map(s => s.trim())
         .filter(s => s.length >= 2);
 
-      // ใช้ตัวตัดคำภาษาไทย (Intl.Segmenter) แยกคำผสมอย่าง "สัญญาข้อตกลง" -> "สัญญา", "ข้อตกลง"
       const meaningCandidates = new Set();
       const thaiSegmenter = (typeof Intl !== 'undefined' && Intl.Segmenter)
         ? new Intl.Segmenter('th', { granularity: 'word' })
@@ -898,7 +649,6 @@
         return;
       }
 
-      // ตรวจแบบ Case-Sensitive (ตัวพิมพ์เล็ก-ใหญ่ต้องตรงเป๊ะ)
       if (typed === target) {
         inputEl.className = "w-full bg-emerald-950/40 border-2 border-emerald-500 rounded-xl px-4 py-3 text-lg sm:text-xl font-mono-code text-center tracking-wider text-emerald-300 outline-none transition-all";
         statusIcon.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400"></i>`;
@@ -921,6 +671,7 @@
     }
 
     function checkInputExact() {
+      if (vocabList.length === 0) return;
       const inputEl = document.getElementById('typing-input');
       const target = vocabList[currentIndex].word;
       if (inputEl.value === target) {
@@ -937,7 +688,7 @@
     }
 
     /* ==========================================================================
-       5. SPEECH (2x EN + 1x TH) & SOUND EFFECTS
+       6. SPEECH (2x EN + 1x TH) & SOUND EFFECTS
        ========================================================================== */
     function speakCurrentWord() {
       if (!('speechSynthesis' in window) || vocabList.length === 0) return;
@@ -946,17 +697,14 @@
       const currentItem = vocabList[currentIndex];
       const rate = speechRates[speechRateIndex] || 1.0;
 
-      // อ่านคำศัพท์ภาษาอังกฤษรอบที่ 1
       const utterEn1 = new SpeechSynthesisUtterance(currentItem.word);
       utterEn1.lang = 'en-US';
       utterEn1.rate = rate;
 
-      // อ่านคำศัพท์ภาษาอังกฤษรอบที่ 2
       const utterEn2 = new SpeechSynthesisUtterance(currentItem.word);
       utterEn2.lang = 'en-US';
       utterEn2.rate = rate;
 
-      // อ่านคำแปลภาษาไทย 1 รอบ
       const utterTh = new SpeechSynthesisUtterance(currentItem.meaning);
       utterTh.lang = 'th-TH';
       utterTh.rate = rate;
@@ -1013,513 +761,6 @@
     }
 
     /* ==========================================================================
-       6. BULK ADD & STRICT CASE-SENSITIVE DEDUPLICATION (WITH LIVE DICTIONARY API)
-       ========================================================================== */
-    function cleanWordSpacing(str) {
-      return str.replace(/[\u200B-\u200D\uFEFF]/g, '').trim().replace(/\s+/g, ' ');
-    }
-
-    function mapPosToThai(posEn) {
-      if (!posEn) return "คำนาม (n.)";
-      const p = posEn.toLowerCase();
-      if (p === 'noun') return "คำนาม (n.)";
-      if (p === 'verb') return "คำกริยา (v.)";
-      if (p === 'adjective') return "คำคุณศัพท์ (adj.)";
-      if (p === 'adverb') return "คำกริยาวิเศษณ์ (adv.)";
-      if (p === 'pronoun') return "คำสรรพนาม (pron.)";
-      if (p === 'preposition') return "คำบุพบท (prep.)";
-      if (p === 'conjunction') return "คำสันธาน (conj.)";
-      if (p === 'interjection') return "คำอุทาน (interj.)";
-      return `${posEn}`;
-    }
-
-    function autoDetectCategory(word, meaning, definitionText = "") {
-      const combined = `${word} ${meaning} ${definitionText}`.toLowerCase();
-
-      const categoryRules = [
-        {
-          category: "Finance",
-          keywords: ["money", "bank", "tax", "budget", "cost", "price", "fee", "fund", "pay", "payment", "invoice", "receipt", "account", "audit", "revenue", "profit", "loss", "deficit", "debt", "loan", "invest", "currency", "financial", "เงิน", "บัญชี", "ภาษี", "งบ", "ราคา", "ค่าใช้จ่าย", "จ่าย", "ชำระ", "ใบแจ้งหนี้", "ใบเสร็จ", "รายได้", "กำไร", "ขาดทุน", "ธนาคาร", "ลงทุน", "การเงิน", "ทุน", "หนี้", "คืนเงิน", "ชดเชย"]
-        },
-        {
-          category: "Human Resources",
-          keywords: ["employ", "staff", "worker", "hire", "recruit", "candidate", "applicant", "resume", "interview", "salary", "wage", "benefit", "bonus", "pension", "retire", "resign", "train", "orientation", "appraisal", "personnel", "hr", "พนักงาน", "สมัครงาน", "ผู้สมัคร", "สัมภาษณ์", "เงินเดือน", "สวัสดิการ", "โบนัส", "เกษียณ", "ลาออก", "อบรม", "ปฐมนิเทศ", "ประเมินผล", "บุคลากร", "ว่าจ้าง", "สรรหา"]
-        },
-        {
-          category: "Logistics",
-          keywords: ["ship", "shipping", "shipment", "cargo", "freight", "deliver", "delivery", "warehouse", "inventory", "stock", "supply", "transport", "logistics", "customs", "export", "import", "parcel", "package", "จัดส่ง", "ขนส่ง", "คลังสินค้า", "สินค้าคงคลัง", "พัสดุ", "นำเข้า", "ส่งออก", "ศุลกากร", "กระจายสินค้า", "โลจิสติกส์"]
-        },
-        {
-          category: "Travel",
-          keywords: ["travel", "flight", "airline", "airport", "hotel", "accommodat", "book", "reservation", "itinerary", "passenger", "luggage", "baggage", "ticket", "tour", "trip", "journey", "departure", "arrival", "เดินทาง", "เที่ยวบิน", "สายการบิน", "สนามบิน", "โรงแรม", "ที่พัก", "จอง", "ตั๋ว", "กระเป๋าเดินทาง", "ผู้โดยสาร", "ท่องเที่ยว", "กำหนดการเดินทาง"]
-        },
-        {
-          category: "Technology",
-          keywords: ["tech", "software", "hardware", "computer", "network", "system", "data", "digital", "online", "internet", "server", "device", "app", "program", "database", "cyber", "electronic", "automate", "คอมพิวเตอร์", "ซอฟต์แวร์", "ระบบ", "ข้อมูล", "เครือข่าย", "ดิจิทัล", "ออนไลน์", "อินเทอร์เน็ต", "อุปกรณ์", "เทคโนโลยี", "อิเล็กทรอนิกส์"]
-        },
-        {
-          category: "Legal",
-          keywords: ["law", "legal", "court", "attorney", "lawyer", "regul", "comply", "compliance", "policy", "rule", "statute", "amend", "clause", "liability", "obligation", "patent", "copyright", "trademark", "กฎหมาย", "ทนาย", "ศาล", "ระเบียบ", "ข้อบังคับ", "นโยบาย", "ปฏิบัติตาม", "ข้อผูกพัน", "ลิขสิทธิ์", "สิทธิบัตร", "แก้ไขข้อตกลง"]
-        },
-        {
-          category: "Marketing",
-          keywords: ["market", "advertis", "promote", "promotion", "brand", "campaign", "survey", "consumer", "competitor", "launch", "publicity", "media", "brochure", "flyer", "ตลาด", "การตลาด", "โฆษณา", "ส่งเสริมการขาย", "แบรนด์", "แคมเปญ", "สำรวจ", "ผู้บริโภค", "คู่แข่ง", "เปิดตัว", "ใบปลิว", "ประชาสัมพันธ์"]
-        },
-        {
-          category: "Sales & Contract",
-          keywords: ["sale", "sell", "buy", "purchase", "order", "client", "customer", "contract", "agree", "negotiate", "deal", "discount", "warranty", "guarantee", "merchandise", "retail", "wholesale", "ขาย", "ซื้อ", "สั่งซื้อ", "ลูกค้า", "สัญญา", "ข้อตกลง", "เจรจา", "ต่อรอง", "ส่วนลด", "รับประกัน", "สินค้า"]
-        },
-        {
-          category: "Management",
-          keywords: ["manage", "supervis", "lead", "director", "execut", "plan", "strateg", "project", "schedule", "deadline", "agenda", "evaluate", "assess", "delegate", "implement", "organize", "objective", "goal", "จัดการ", "ผู้จัดการ", "หัวหน้า", "บริหาร", "วางแผน", "กลยุทธ์", "โครงการ", "โปรเจกต์", "ตารางเวลา", "กำหนดส่ง", "วาระการประชุม", "ประเมิน", "มอบหมาย", "ดำเนินการ", "เป้าหมาย"]
-        },
-        {
-          category: "Corporate",
-          keywords: ["corporat", "company", "firm", "enterprise", "headquarters", "branch", "subsidiary", "merge", "acquir", "board", "shareholder", "partner", "collaborat", "authorize", "บริษัท", "องค์กร", "สำนักงานใหญ่", "สาขา", "บริษัทในเครือ", "ควบรวม", "กิจการ", "คณะกรรมการ", "ผู้ถือหุ้น", "หุ้นส่วน", "ร่วมมือ", "อนุมัติ"]
-        }
-      ];
-
-      for (const rule of categoryRules) {
-        if (rule.keywords.some(kw => combined.includes(kw))) {
-          return rule.category;
-        }
-      }
-
-      return "General Business";
-    }
-
-    function estimateThaiPronunciation(word) {
-      const clean = word.toLowerCase().trim();
-      const customDict = {
-        dog: "ด็อก", cat: "แคท", book: "บุ๊ค", time: "ไทม์", work: "เวิร์ค",
-        company: "คอม-พะ-นี", business: "บิส-ซิ-เนส", meeting: "มีท-ติ้ง",
-        manager: "แมน-เน-เจอร์", office: "ออฟ-ฟิศ", project: "โพร-เจคท์",
-        report: "ริ-พอร์ท", schedule: "สเกด-จูล", customer: "คัส-โท-เมอร์",
-        product: "โพร-ดัคท์", service: "เซอร์-วิส", market: "มาร์-เก็ท",
-        price: "ไพรซ์", order: "ออ-เดอร์", payment: "เพย์-เมนท์",
-        account: "แอค-เคาท์", bank: "แบงก์", tax: "แท็กซ์",
-        staff: "สตาฟฟ์", salary: "แซล-ลา-รี", interview: "อิน-เทอร์-วิว",
-        resume: "เร-ซู-เม", apply: "แอพ-พลาย", hire: "ไฮเออร์",
-        train: "เทรน", policy: "พอล-ลิ-ซี", rule: "รูล",
-        law: "ลอว์", legal: "ลี-เกิล", agreement: "อะ-กรี-เมนท์",
-        delivery: "ดิ-ลิฟ-เวอ-รี", warehouse: "แวร์-เฮาส์", stock: "สต็อก",
-        travel: "แทร-เวิล", flight: "ไฟลท์", hotel: "โฮ-เทล",
-        airport: "แอร์-พอร์ท", ticket: "ทิค-เก็ท", luggage: "ลัก-เกจ",
-        system: "ซิส-เต็ม", software: "ซอฟท์-แวร์", network: "เน็ท-เวิร์ค",
-        data: "ดา-ต้า", online: "ออน-ไลน์", email: "อี-เมล",
-        invoice: "อิน-วอยซ์", receipt: "ริ-ซีท", shipment: "ชิพ-เมนท์",
-        merchandise: "เมอร์-แชน-ไดซ์", subsidiary: "ซับ-ซิด-ดิ-เออ-รี",
-        headquarters: "เฮด-ควอ-เทอร์ส", itinerary: "ไอ-ทิน-เนอ-แร-รี",
-        renovate: "เรน-โน-เวท", eligible: "เอล-ลิ-จิ-เบิล", mandatory: "แมน-ดา-ทอ-รี",
-        refund: "รี-ฟันด์", colleague: "คอล-ลีก", punctual: "พังค์-ชวล",
-        deadline: "เดด-ไลน์", brochure: "โบร-ชัวร์",
-        complimentary: "คอม-พลิ-เมน-ทอ-รี", confidential: "คอน-ฟิ-เดน-เชียล",
-        contingency: "คอน-ทิน-เจน-ซี", endorse: "เอน-ดอร์ส",
-        expedite: "เอ็กซ์-พี-ไดท์", flaw: "ฟลอว์",
-        lucrative: "ลู-ครา-ทีฟ", obsolete: "ออบ-โซ-ลีท",
-        reconcile: "เรค-คอน-ไซล์", premise: "เพรม-มิส"
-      };
-      if (customDict[clean]) return customDict[clean];
-
-      // จัดการรูปลงท้ายพิเศษภาษาอังกฤษและ Silent -e ท้ายคำก่อนแยกพยางค์
-      const normalized = clean
-        .replace(/gue$/, 'g')
-        .replace(/que$/, 'k')
-        .replace(/tion$/, 'shun')
-        .replace(/sion$/, 'shun')
-        .replace(/tial$/, 'shul')
-        .replace(/cial$/, 'shul')
-        .replace(/([bcdfghjklmnpqrstvwxyz])e$/, '$1');
-
-      const syllables = normalized.match(/[^aeiouy]*[aeiouy]+(?:[^aeiouy](?![aeiouy]))*/g) || [normalized];
-      const onsetMap = {
-        sh: 'ช', ch: 'ช', th: 'ธ', ph: 'ฟ', wh: 'ว', qu: 'คว',
-        str: 'สตร', spr: 'สปร', scr: 'สคร',
-        bl: 'บล', br: 'บร', cl: 'คล', cr: 'คร', dr: 'ดร', fl: 'ฟล', fr: 'ฟร',
-        gl: 'กล', gr: 'กร', pl: 'พล', pr: 'พร', sl: 'สล', sm: 'สม', sn: 'สน',
-        sp: 'สป', st: 'สต', sw: 'สว', tr: 'ทร', tw: 'ทว',
-        b: 'บ', c: 'ค', d: 'ด', f: 'ฟ', g: 'ก', h: 'ฮ', j: 'จ', k: 'ค',
-        l: 'ล', m: 'ม', n: 'น', p: 'พ', r: 'ร', s: 'ซ', t: 'ท', v: 'ว', w: 'ว', y: 'ย', z: 'ซ'
-      };
-      const codaMap = {
-        shun: 'ชัน', ment: 'เมนท์', ness: 'เนส', less: 'เลส',
-        ful: 'ฟูล', able: 'เบิล', ible: 'เบิล', ing: 'อิง',
-        ck: 'ค', ng: 'ง', nd: 'นด์', nt: 'นท์', st: 'สท์', sh: 'ช', ch: 'ช', th: 'ธ',
-        b: 'บ', c: 'ค', d: 'ด', f: 'ฟ', g: 'ก', k: 'ค', l: 'ล', m: 'ม',
-        n: 'น', p: 'พ', r: 'ร์', s: 'ส', t: 'ท', v: 'ฟ', w: 'ว', x: 'กซ์', z: 'ซ'
-      };
-
-      const converted = syllables.map((syl, idx) => {
-        if (idx === syllables.length - 1 && syl === 'e' && syllables.length > 1) return '';
-        const match = syl.match(/^([^aeiouy]*)([aeiouy]+)(.*)$/);
-        if (!match) return syl;
-
-        const [, onsetRaw, vowelRaw, codaRaw] = match;
-        const onset = onsetMap[onsetRaw] || (onsetRaw ? (onsetMap[onsetRaw[0]] || 'อ') : 'อ');
-        const coda = codaRaw ? (codaMap[codaRaw] || codaMap[codaRaw.slice(-1)] || '') : '';
-
-        if (vowelRaw === 'ea' || vowelRaw === 'ee') return `${onset}ี${coda}`;
-        if (vowelRaw.startsWith('e')) return `เ${onset}${coda}`;
-        if (vowelRaw.startsWith('a')) {
-          if (vowelRaw === 'ai' || vowelRaw === 'ay') return `เ${onset}ย${coda}`;
-          if (vowelRaw === 'au' || vowelRaw === 'aw') return `${onset}อ${coda}`;
-          return coda ? `${onset}ั${coda}` : `${onset}า`;
-        }
-        if (vowelRaw.startsWith('i') || vowelRaw.startsWith('y')) {
-          return coda ? `${onset}ิ${coda}` : `${onset}ี`;
-        }
-        if (vowelRaw.startsWith('o')) {
-          if (vowelRaw === 'oo' || vowelRaw === 'ou') return `${onset}ู${coda}`;
-          return `โ${onset}${coda}`;
-        }
-        if (vowelRaw.startsWith('u')) {
-          return coda ? `${onset}ั${coda}` : `${onset}ู`;
-        }
-        return `${onset}${coda}`;
-      }).filter(Boolean);
-
-      return converted.join('-') || clean;
-    }
-
-    function fetchWithTimeout(url, timeoutMs = 2500) {
-      const controller = new AbortController();
-      const id = setTimeout(() => controller.abort(), timeoutMs);
-      return fetch(url, { signal: controller.signal }).finally(() => clearTimeout(id));
-    }
-
-    async function translateEnToTh(text) {
-      try {
-        const res = await fetchWithTimeout(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(text)}&langpair=en|th`, 2500);
-        if (!res.ok) return null;
-        const data = await res.json();
-        if (data && data.responseData && data.responseData.translatedText) {
-          return data.responseData.translatedText;
-        }
-      } catch (e) {}
-      return null;
-    }
-
-    async function fetchBatchWithGeminiAI(itemsBatch) {
-      const apiKey = customGeminiApiKey || "";
-      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-3-flash-preview:generateContent?key=${apiKey}`;
-
-      const wordListPrompt = itemsBatch
-        .map((item, idx) => `${idx + 1}. word: "${item.word}"${item.hasUserMeaning ? ` (user hint meaning: "${item.meaning}")` : ""}`)
-        .join("\n");
-
-      const systemPrompt = `You are an expert English-Thai TOEIC lexicographer. For each English word provided, return accurate Thai learners' dictionary metadata in strict JSON format:
-- word: exact original English word (preserve capitalization).
-- meaning: concise, natural Thai meaning suitable for TOEIC business context (if user provided a hint meaning, refine or keep it accurate).
-- pronunciation: accurate Thai phonetic transliteration separated by hyphens (e.g., "obsolete" -> "ออบ-โซ-ลีท", "colleague" -> "คอล-ลีก", "subsidiary" -> "ซับ-ซิด-ดิ-เออ-รี"). Do NOT include IPA symbols or parentheses.
-- pos: Thai part of speech with English abbreviation, strictly one of: "คำนาม (n.)", "คำกริยา (v.)", "คำคุณศัพท์ (adj.)", "คำกริยาวิเศษณ์ (adv.)", "คำสรรพนาม (pron.)", "คำบุพบท (prep.)", "คำสันธาน (conj.)", or "คำนาม / คำกริยา (n./v.)".
-- category: strictly one of: "Finance", "Human Resources", "Logistics", "Travel", "Technology", "Legal", "Marketing", "Sales & Contract", "Management", "Corporate", or "General Business".
-- example_en: a clear, modern, natural TOEIC business English sentence (8 to 16 words) using the exact word naturally. Never use archaic quotes, poetry, or fragments.
-- example_th: natural Thai translation of example_en, making sure the Thai translation of the target word is clearly present so it can be highlighted.`;
-
-      const payload = {
-        contents: [
-          {
-            role: "user",
-            parts: [{ text: `Generate TOEIC vocabulary data for these ${itemsBatch.length} words:\n${wordListPrompt}` }]
-          }
-        ],
-        systemInstruction: {
-          parts: [{ text: systemPrompt }]
-        },
-        generationConfig: {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: "ARRAY",
-            items: {
-              type: "OBJECT",
-              properties: {
-                word: { type: "STRING" },
-                meaning: { type: "STRING" },
-                pronunciation: { type: "STRING" },
-                pos: { type: "STRING" },
-                category: { type: "STRING" },
-                example_en: { type: "STRING" },
-                example_th: { type: "STRING" }
-              },
-              required: ["word", "meaning", "pronunciation", "pos", "category", "example_en", "example_th"]
-            }
-          }
-        }
-      };
-
-      const delays = [1000, 2000, 4000];
-      for (let attempt = 0; attempt <= delays.length; attempt++) {
-        try {
-          const response = await fetch(apiUrl, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-
-          if (!response.ok) {
-            if ((response.status === 429 || response.status >= 500) && attempt < delays.length) {
-              await new Promise(r => setTimeout(r, delays[attempt]));
-              continue;
-            }
-            return null;
-          }
-
-          const result = await response.json();
-          const jsonText = result?.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (!jsonText) return null;
-          const parsed = JSON.parse(jsonText);
-          return Array.isArray(parsed) ? parsed : null;
-        } catch (err) {
-          if (attempt < delays.length) {
-            await new Promise(r => setTimeout(r, delays[attempt]));
-          } else {
-            return null;
-          }
-        }
-      }
-      return null;
-    }
-
-    async function fetchWordDetailsFromAPI(word, meaning) {
-      let pos = "คำนาม (n.)";
-      let exampleEn = "";
-      let exampleTh = "";
-      let rawDefinitions = "";
-
-      try {
-        const res = await fetchWithTimeout(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word.toLowerCase())}`, 2500);
-        if (res.ok) {
-          const data = await res.json();
-          if (Array.isArray(data) && data.length > 0) {
-            const entry = data[0];
-            if (Array.isArray(entry.meanings) && entry.meanings.length > 0) {
-              pos = mapPosToThai(entry.meanings[0].partOfSpeech);
-
-              for (const m of entry.meanings) {
-                if (Array.isArray(m.definitions)) {
-                  rawDefinitions += " " + m.definitions.map(d => d.definition || "").join(" ");
-                    // กรองเฉพาะประโยคสมบูรณ์ (ขึ้นต้นตัวใหญ่ ลงท้ายด้วย . ! ? ยาว 25-110 ตัวอักษร) และไม่มีบทกวี/บทละคร
-                    const defWithEx = m.definitions.find(d => {
-                      if (!d.example) return false;
-                      const ex = d.example.trim();
-                      const isFullSentence = /^[A-Z].*[.!?]$/.test(ex);
-                      return isFullSentence && ex.length >= 25 && ex.length <= 110 && !ex.includes('/') && !ex.includes('Scene') && !ex.includes('Act ');
-                    });
-                    if (defWithEx) {
-                      pos = mapPosToThai(m.partOfSpeech);
-                      exampleEn = defWithEx.example.trim();
-                    }
-                }
-              }
-            }
-          }
-        }
-      } catch (e) {}
-
-      // จัดหมวดหมู่ TOEIC อัตโนมัติจากคำศัพท์ คำแปล และคำนิยาม
-      const detectedCategory = autoDetectCategory(word, meaning, rawDefinitions);
-      const finalPronunciation = estimateThaiPronunciation(word);
-
-      if (!exampleEn) {
-        if (pos.includes('กริยา')) {
-          exampleEn = `Our team needs to ${word} this task before the meeting.`;
-          exampleTh = `ทีมของเราจำเป็นต้อง${meaning}งานนี้ก่อนการประชุม`;
-        } else if (pos.includes('คุณศัพท์')) {
-          exampleEn = `Being ${word} is very important in a professional workplace.`;
-          exampleTh = `การ${meaning}เป็นสิ่งสำคัญมากในการทำงานอย่างมืออาชีพ`;
-        } else {
-          exampleEn = `Please review the ${word} carefully before sending it to the client.`;
-          exampleTh = `กรุณาตรวจสอบ${meaning}อย่างละเอียดก่อนส่งให้ลูกค้า`;
-        }
-      } else {
-        const translated = await translateEnToTh(exampleEn);
-        exampleTh = translated || `ตัวอย่างการใช้คำว่า "${word}" (${meaning}) ในประโยค`;
-      }
-
-      return {
-        pos,
-        pronunciation: finalPronunciation,
-        category: detectedCategory,
-        example_en: exampleEn,
-        example_th: exampleTh
-      };
-    }
-
-    async function processBulkAdd() {
-      const rawText = document.getElementById('bulk-input').value;
-      if (!rawText.trim()) {
-        showToast('กรุณาวางรายการคำศัพท์ก่อนกดบันทึก', 'error');
-        return;
-      }
-
-      const btn = document.getElementById('btn-process-bulk');
-      const statusEl = document.getElementById('bulk-add-status');
-
-      const existingWordsSet = new Set(vocabList.map(item => item.word));
-      const lines = rawText.split(/\r?\n/);
-
-      let candidates = [];
-      let duplicateCount = 0;
-
-      lines.forEach(line => {
-        if (!line.trim()) return;
-        let parts = [];
-        if (line.includes('|')) {
-          parts = line.split('|');
-        } else if (line.includes('\t')) {
-          parts = line.split('\t');
-        } else {
-          parts = line.split(',');
-        }
-
-        const cleanWord = cleanWordSpacing(parts[0] || '');
-        const rawMeaning = cleanWordSpacing(parts[1] || '');
-        const cleanMeaning = rawMeaning || 'กำลังแปลความหมาย...';
-        const customPron = cleanWordSpacing(parts[2] || '');
-        const customPos = cleanWordSpacing(parts[3] || '');
-        const customCat = cleanWordSpacing(parts[4] || '');
-        const customExEn = cleanWordSpacing(parts[5] || '');
-        const customExTh = cleanWordSpacing(parts[6] || '');
-
-        if (!cleanWord) return;
-        if (existingWordsSet.has(cleanWord)) {
-          duplicateCount++;
-          return;
-        }
-        existingWordsSet.add(cleanWord);
-        candidates.push({
-          word: cleanWord,
-          meaning: cleanMeaning,
-          hasUserMeaning: Boolean(rawMeaning),
-          customPron,
-          customPos,
-          customCat,
-          customExEn,
-          customExTh
-        });
-      });
-
-      if (candidates.length === 0) {
-        statusEl.innerText = `ไม่พบคำใหม่ (ซ้ำกับในคลัง ${duplicateCount.toLocaleString()} คำ)`;
-        showToast('คำศัพท์ทั้งหมดมีอยู่ในคลังแล้ว', 'info');
-        return;
-      }
-
-      // 1. บันทึกเข้าคลังศัพท์ทันทีภายใน 0.1 วินาที (ถ้ามีข้อมูลครบชุดจะใช้ทันทีโดยไม่เดา)
-      const newItems = candidates.map(item => {
-        const isComplete = Boolean(item.customPron && item.customExEn);
-        return {
-          word: item.word,
-          pos: item.customPos || "คำศัพท์ (vocab)",
-          pronunciation: item.customPron || estimateThaiPronunciation(item.word),
-          meaning: item.meaning,
-          hasUserMeaning: item.hasUserMeaning,
-          category: item.customCat || autoDetectCategory(item.word, item.meaning),
-          example_en: item.customExEn || `The ${item.word} is very important in business.`,
-          example_th: item.customExTh || `${item.meaning}มีความสำคัญมากในการทำธุรกิจ`,
-          _skipApi: isComplete
-        };
-      });
-
-      vocabList.push(...newItems.map(({ _skipApi, hasUserMeaning, ...rest }) => rest));
-      saveVocabToStorage();
-      updateCategoryDropdown();
-      updateWordCountBadge();
-      renderVocabTable();
-
-      document.getElementById('bulk-input').value = '';
-      currentIndex = vocabList.length - 1;
-      displayWordAtIndex(currentIndex, false);
-
-      const itemsToFetch = newItems.filter(item => !item._skipApi);
-      if (itemsToFetch.length === 0) {
-        statusEl.innerText = `เพิ่มสำเร็จครบ ${newItems.length.toLocaleString()} คำ (ข้อมูลครบชุดแม่นยำ 100%)`;
-        showToast(`เพิ่มคำศัพท์ครบชุด ${newItems.length.toLocaleString()} คำ เรียบร้อยแล้ว!`, 'success');
-        return;
-      }
-
-      showToast(`บันทึกทันที ${newItems.length.toLocaleString()} คำ! กำลังให้ Gemini AI ตรวจสอบ...`, 'success');
-
-      // 2. ใช้ Gemini AI ตรวจสอบและสร้างข้อมูลครบชุด (คำแปล, คำอ่าน, ชนิดคำ, หมวดหมู่, ประโยคตัวอย่าง)
-      btn.disabled = true;
-      btn.innerHTML = `<i class="fa-solid fa-wand-magic-sparkles fa-spin"></i> <span>Gemini AI กำลังตรวจสอบคำศัพท์...</span>`;
-
-      const batchSize = 15;
-      let aiSuccessTotal = 0;
-
-      for (let i = 0; i < itemsToFetch.length; i += batchSize) {
-        const batch = itemsToFetch.slice(i, i + batchSize);
-        statusEl.innerText = `บันทึกแล้ว ${newItems.length.toLocaleString()} คำ | Gemini AI กำลังตรวจสอบ ${Math.min(i + batchSize, itemsToFetch.length)}/${itemsToFetch.length}...`;
-
-        const aiResults = await fetchBatchWithGeminiAI(batch);
-
-        if (aiResults && aiResults.length > 0) {
-          const aiMap = new Map(aiResults.map(r => [cleanWordSpacing(r.word || ''), r]));
-          batch.forEach(tempObj => {
-            const targetObj = vocabList.find(v => v.word === tempObj.word);
-            const aiData = aiMap.get(tempObj.word) || aiResults.find(r => (r.word || '').toLowerCase() === tempObj.word.toLowerCase());
-            if (targetObj && aiData) {
-              aiSuccessTotal++;
-              if (!tempObj.hasUserMeaning && aiData.meaning) targetObj.meaning = cleanWordSpacing(aiData.meaning);
-              if (!tempObj.customPos && aiData.pos) targetObj.pos = cleanWordSpacing(aiData.pos);
-              if (!tempObj.customPron && aiData.pronunciation) targetObj.pronunciation = cleanWordSpacing(aiData.pronunciation);
-              if (!tempObj.customCat && aiData.category) targetObj.category = cleanWordSpacing(aiData.category);
-              if (!tempObj.customExEn && aiData.example_en) targetObj.example_en = cleanWordSpacing(aiData.example_en);
-              if (!tempObj.customExTh && aiData.example_th) targetObj.example_th = cleanWordSpacing(aiData.example_th);
-            }
-          });
-        } else {
-          // Fallback กรณีไม่ได้ใส่ API Key บน GitHub หรือ API ไม่ตอบสนอง
-          await Promise.all(
-            batch.map(async (tempObj) => {
-              const targetObj = vocabList.find(v => v.word === tempObj.word);
-              if (!targetObj) return;
-              const details = await fetchWordDetailsFromAPI(targetObj.word, targetObj.meaning);
-              if (!tempObj.hasUserMeaning) targetObj.meaning = tempObj.word;
-              if (!tempObj.customPos) targetObj.pos = details.pos;
-              if (!tempObj.customPron) targetObj.pronunciation = details.pronunciation;
-              if (!tempObj.customCat) targetObj.category = details.category;
-              if (!tempObj.customExEn) targetObj.example_en = details.example_en;
-              if (!tempObj.customExTh) targetObj.example_th = details.example_th;
-            })
-          );
-        }
-
-        saveVocabToStorage();
-        updateCategoryDropdown();
-        renderVocabTable();
-        if (vocabList[currentIndex] && batch.some(b => b.word === vocabList[currentIndex].word)) {
-          displayWordAtIndex(currentIndex, false);
-        }
-      }
-
-      btn.disabled = false;
-      btn.innerHTML = `<i class="fa-solid fa-plus-circle"></i> <span>บันทึกเข้าคลังศัพท์</span>`;
-      const cloudNote = customGithubToken ? ' และซิงค์ขึ้น GitHub Cloud แล้ว' : '';
-      if (aiSuccessTotal > 0) {
-        statusEl.innerText = `Gemini AI ตรวจสอบสำเร็จ ${aiSuccessTotal}/${itemsToFetch.length} คำ${cloudNote}`;
-        showToast(`Gemini AI ตรวจสอบสำเร็จ ${aiSuccessTotal} คำ${cloudNote}!`, 'success');
-      } else {
-        statusEl.innerText = `เพิ่มสำเร็จ ${newItems.length.toLocaleString()} คำ${cloudNote}`;
-      }
-    }
-
-    function copyVocabAsCode() {
-      const codeStr = `const DEFAULT_TOEIC_VOCAB = ${JSON.stringify(vocabList, null, 2)};`;
-      const tempTextarea = document.createElement('textarea');
-      tempTextarea.value = codeStr;
-      document.body.appendChild(tempTextarea);
-      tempTextarea.select();
-      try {
-        document.execCommand('copy');
-        showToast(`คัดลอกโค้ดคำศัพท์ ${vocabList.length} คำ เรียบร้อย! นำไปวางแทนที่ DEFAULT_TOEIC_VOCAB ในไฟล์ index.html ได้เลย`, 'success');
-      } catch (e) {
-        showToast('ไม่สามารถคัดลอกอัตโนมัติได้', 'error');
-      }
-      document.body.removeChild(tempTextarea);
-    }
-
-    /* ==========================================================================
        7. MODAL & TABLE MANAGEMENT
        ========================================================================== */
     function openDonateModal() {
@@ -1535,60 +776,14 @@
       document.getElementById('typing-input').focus();
     }
 
-    function openAdminAddModal() {
-      isAdminMode = true;
-      document.getElementById('tab-btn-add').style.display = 'flex';
-      document.getElementById('btn-export-code').style.display = 'flex';
-      document.getElementById('btn-reset-vocab').style.display = 'flex';
-      document.getElementById('th-vocab-action').style.display = 'table-cell';
-      openVocabManager();
-      switchModalTab('add');
-      showToast('เปิดโหมดเพิ่มคำศัพท์สำหรับผู้ดูแลระบบแล้ว', 'info');
-    }
-
     function openVocabManager() {
-      if (!isAdminMode) {
-        document.getElementById('tab-btn-add').style.display = 'none';
-        document.getElementById('btn-export-code').style.display = 'none';
-        document.getElementById('btn-reset-vocab').style.display = 'none';
-        document.getElementById('th-vocab-action').style.display = 'none';
-        switchModalTab('list');
-      }
       document.getElementById('vocab-modal').classList.remove('hidden');
       renderVocabTable();
     }
 
     function closeVocabManager() {
-      isAdminMode = false;
       document.getElementById('vocab-modal').classList.add('hidden');
-      document.getElementById('tab-btn-add').style.display = 'none';
-      document.getElementById('btn-export-code').style.display = 'none';
-      document.getElementById('btn-reset-vocab').style.display = 'none';
-      document.getElementById('th-vocab-action').style.display = 'none';
       document.getElementById('typing-input').focus();
-    }
-
-    function switchModalTab(tabName) {
-      if (tabName === 'add' && !isAdminMode) {
-        tabName = 'list';
-      }
-      const addTab = document.getElementById('tab-content-add');
-      const listTab = document.getElementById('tab-content-list');
-      const btnAdd = document.getElementById('tab-btn-add');
-      const btnList = document.getElementById('tab-btn-list');
-
-      if (tabName === 'add') {
-        addTab.classList.remove('hidden');
-        listTab.classList.add('hidden');
-        btnAdd.className = "py-3 px-4 text-sky-400 border-b-2 border-sky-400 flex items-center gap-2";
-        btnList.className = "py-3 px-4 text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2";
-      } else {
-        addTab.classList.add('hidden');
-        listTab.classList.remove('hidden');
-        btnAdd.className = "py-3 px-4 text-slate-400 hover:text-slate-200 border-b-2 border-transparent flex items-center gap-2";
-        btnList.className = "py-3 px-4 text-sky-400 border-b-2 border-sky-400 flex items-center gap-2";
-        renderVocabTable();
-      }
     }
 
     function renderVocabTable() {
@@ -1603,26 +798,14 @@
       });
 
       if (filtered.length === 0) {
-        const colSpan = isAdminMode ? 5 : 4;
-        tbody.innerHTML = `<tr><td colspan="${colSpan}" class="p-4 text-center text-slate-500">ไม่พบคำศัพท์ที่ค้นหา</td></tr>`;
+        tbody.innerHTML = `<tr><td colspan="4" class="p-4 text-center text-slate-500">ไม่พบคำศัพท์ในคลัง</td></tr>`;
         return;
       }
 
-      // แสดงสูงสุด 300 รายการล่าสุดในตารางเพื่อความลื่นไหลกรณีมีหลายพันคำ
       const displaySlice = filtered.slice(0, 300);
       displaySlice.forEach(item => {
         const row = document.createElement('tr');
         row.className = "hover:bg-slate-800/50 transition";
-        const actionCell = isAdminMode ? `
-          <td class="p-2.5 text-center whitespace-nowrap">
-            <button onclick="openEditPanel('${escapeJsString(item.word)}')" class="p-1.5 hover:text-sky-400 text-slate-400 transition" title="แก้ไขคำนี้">
-              <i class="fa-solid fa-pen-to-square"></i>
-            </button>
-            <button onclick="deleteSingleWord('${escapeJsString(item.word)}')" class="p-1.5 hover:text-rose-400 text-slate-500 transition" title="ลบคำนี้">
-              <i class="fa-solid fa-trash-can"></i>
-            </button>
-          </td>` : '';
-
         row.innerHTML = `
           <td class="p-2.5 font-mono font-bold text-sky-300">${escapeHtml(item.word)}</td>
           <td class="p-2.5 text-slate-400 text-[11px]">${escapeHtml(item.pos || '-')}</td>
@@ -1631,81 +814,15 @@
             <span class="text-slate-500 text-[11px] block">${escapeHtml(item.pronunciation || '')}</span>
           </td>
           <td class="p-2.5 text-slate-400 text-[11px]">${escapeHtml(item.category || 'General')}</td>
-          ${actionCell}
         `;
         tbody.appendChild(row);
       });
 
       if (filtered.length > 300) {
-        const colSpan = isAdminMode ? 5 : 4;
         const infoRow = document.createElement('tr');
-        infoRow.innerHTML = `<td colspan="${colSpan}" class="p-2.5 text-center text-slate-500 text-[11px]">แสดง 300 รายการแรกจากทั้งหมด ${filtered.length.toLocaleString()} คำ (ใช้ช่องค้นหาด้านบนเพื่อกรองคำเฉพาะเจาะจง)</td>`;
+        infoRow.innerHTML = `<td colspan="4" class="p-2.5 text-center text-slate-500 text-[11px]">แสดง 300 รายการแรกจากทั้งหมด ${filtered.length.toLocaleString()} คำ</td>`;
         tbody.appendChild(infoRow);
       }
-    }
-
-    function deleteSingleWord(wordTarget) {
-      vocabList = vocabList.filter(item => item.word !== wordTarget);
-      saveVocabToStorage();
-      updateCategoryDropdown();
-      updateWordCountBadge();
-      renderVocabTable();
-      if (vocabList.length === 0) {
-        renderEmptyState();
-      } else if (currentIndex >= vocabList.length) {
-        pickNextRandomWord(false);
-      }
-      showToast(`ลบคำว่า "${wordTarget}" เรียบร้อยแล้ว`, 'info');
-    }
-
-    function clearAllVocab() {
-      vocabList = [];
-      saveVocabToStorage();
-      updateCategoryDropdown();
-      updateWordCountBadge();
-      renderVocabTable();
-      renderEmptyState();
-      showToast('ล้างคลังคำศัพท์ทั้งหมดเหลือ 0 คำเรียบร้อยแล้ว', 'info');
-    }
-
-    function openEditPanel(wordTarget) {
-      const item = vocabList.find(v => v.word === wordTarget);
-      if (!item) return;
-      document.getElementById('edit-original-word').value = item.word;
-      document.getElementById('edit-word-label').innerText = item.word;
-      document.getElementById('edit-meaning').value = item.meaning || '';
-      document.getElementById('edit-pronunciation').value = item.pronunciation || '';
-      document.getElementById('edit-pos').value = item.pos || '';
-      document.getElementById('edit-category').value = item.category || '';
-      document.getElementById('edit-example-en').value = item.example_en || '';
-      document.getElementById('edit-example-th').value = item.example_th || '';
-      document.getElementById('edit-vocab-panel').classList.remove('hidden');
-    }
-
-    function closeEditPanel() {
-      document.getElementById('edit-vocab-panel').classList.add('hidden');
-    }
-
-    function saveEditedWord() {
-      const origWord = document.getElementById('edit-original-word').value;
-      const item = vocabList.find(v => v.word === origWord);
-      if (!item) return;
-
-      item.meaning = cleanWordSpacing(document.getElementById('edit-meaning').value) || item.meaning;
-      item.pronunciation = cleanWordSpacing(document.getElementById('edit-pronunciation').value) || item.pronunciation;
-      item.pos = cleanWordSpacing(document.getElementById('edit-pos').value) || item.pos;
-      item.category = cleanWordSpacing(document.getElementById('edit-category').value) || item.category;
-      item.example_en = cleanWordSpacing(document.getElementById('edit-example-en').value) || item.example_en;
-      item.example_th = cleanWordSpacing(document.getElementById('edit-example-th').value) || item.example_th;
-
-      saveVocabToStorage();
-      updateCategoryDropdown();
-      renderVocabTable();
-      if (vocabList[currentIndex] && vocabList[currentIndex].word === origWord) {
-        displayWordAtIndex(currentIndex, false);
-      }
-      closeEditPanel();
-      showToast(`บันทึกการแก้ไขคำว่า "${origWord}" เรียบร้อยแล้ว`, 'success');
     }
 
     /* ==========================================================================
@@ -1713,10 +830,6 @@
        ========================================================================== */
     function escapeHtml(str) {
       return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-    }
-
-    function escapeJsString(str) {
-      return String(str).replace(/\\/g, '\\\\').replace(/'/g, "\\'");
     }
 
     function escapeRegExp(str) {

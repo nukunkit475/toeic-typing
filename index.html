@@ -446,15 +446,18 @@
     function toggleHintMode() {
       isHintHidden = !isHintHidden;
       const wordEl = document.getElementById('target-word');
+      const exampleWordEls = document.querySelectorAll('.example-target-word');
       const hintIcon = document.getElementById('hint-icon');
       const hintText = document.getElementById('hint-text');
 
       if (isHintHidden) {
         wordEl.classList.add('blur-md');
+        exampleWordEls.forEach(el => el.classList.add('blur-sm'));
         hintIcon.className = "fa-solid fa-eye-slash text-rose-400";
         hintText.innerText = "โหมด: ทดสอบจำ (ซ่อนตัวสะกด)";
       } else {
         wordEl.classList.remove('blur-md');
+        exampleWordEls.forEach(el => el.classList.remove('blur-sm'));
         hintIcon.className = "fa-solid fa-eye text-amber-400";
         hintText.innerText = "โหมด: ปกติ (เห็นตัวสะกด)";
       }
@@ -563,7 +566,8 @@
 
       const sentence = currentItem.example_en || `The ${currentItem.word} is very important.`;
       const regex = new RegExp(`(${escapeRegExp(currentItem.word)})`, 'gi');
-      const highlightedSentence = sentence.replace(regex, `<span class="text-amber-400 font-bold underline underline-offset-4">$1</span>`);
+      const blurClass = isHintHidden ? ' blur-sm' : '';
+      const highlightedSentence = sentence.replace(regex, `<span class="example-target-word text-amber-400 font-bold underline underline-offset-4 transition-all duration-200${blurClass}">$1</span>`);
       
       document.getElementById('target-example-en').innerHTML = highlightedSentence;
 
